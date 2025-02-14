@@ -5,6 +5,7 @@ import theme from '../theme';
 import './global.css'
 
 import Header from '@/components/Header';
+import { Metadata } from 'next';
 
 
 const roboto = Roboto({
@@ -13,6 +14,11 @@ const roboto = Roboto({
   display: 'swap',
   variable: '--font-roboto',
 });
+
+export const metadata: Metadata = {
+  title: "Roomzy",
+  description: "Find your next room",
+};
 
 export default function RootLayout({
   children,
@@ -25,7 +31,6 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <Header/>
-            RootLayout
             {children}
           </ThemeProvider>
         </AppRouterCacheProvider>
