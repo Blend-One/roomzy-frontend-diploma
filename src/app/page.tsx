@@ -1,7 +1,6 @@
-import { Box } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
-  return <Box>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam provident voluptatem dignissimos laborum dolor suscipit odio omnis accusantium non, nihil molestias quae sed cum nulla fugit! Commodi repudiandae blanditiis distinctio?
-  </Box>;
+  const t = useTranslations("HomePage");
+  return <h1>{t("title")}</h1>;
 }
