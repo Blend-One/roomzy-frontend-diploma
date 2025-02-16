@@ -8,7 +8,6 @@ export interface IUser {
 export interface IUserData extends IUser {
   id: string;
   role: string;
-  permissions: string[];
 }
 
 export interface IAuthState {
