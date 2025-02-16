@@ -8,7 +8,6 @@ import { Metadata } from "next";
 import RouteGuardProvider from "@/providers/RouteGuardProvider";
 import Header from "@/components/Header";
 import theme from "../theme";
-import "./global.css";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { CssBaseline } from "@mui/material";
 
