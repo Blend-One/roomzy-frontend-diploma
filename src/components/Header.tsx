@@ -4,13 +4,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { hesader, Logo, Spacer } from "./HeaderStyles";
 import { useState } from "react";
-import { setLanguageValue } from "@/actions/set-language-action";
+import { setLanguageValue } from "@/actions/setLanguageAction";
+import { useLocale } from "next-intl";
 
 const Header = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("en");
-  document.documentElement.lang = selectedLanguage;
-
-  // Function to handle language change
+  const locale = useLocale();
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(locale ?? "ru");
+  
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedLanguage(e.target.value);
     setLanguageValue(e.target.value);
@@ -22,7 +22,7 @@ const Header = () => {
       <Spacer />
       <select value={selectedLanguage} onChange={handleLanguageChange}>
         <option value="en">English</option>
-        <option value="ru">Russian</option>
+        <option value="ru">Русский</option>
       </select>
       <Stack direction="row" spacing={2} alignItems="center">
         <AccountCircleIcon fontSize="large" />

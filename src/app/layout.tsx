@@ -3,12 +3,11 @@ import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-
-import theme from "../theme";
-import "./global.css";
+import { Metadata } from "next";
 
 import Header from "@/components/Header";
-import { Metadata } from "next";
+import theme from "../theme";
+import "./global.css";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -20,6 +19,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Roomzy",
   description: "Find your next room",
+  icons: "favicon.svg",
 };
 
 export default async function RootLayout({
@@ -27,10 +27,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const locale = await getLocale();
-
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
