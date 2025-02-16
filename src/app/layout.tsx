@@ -5,9 +5,12 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Metadata } from "next";
 
+import RouteGuardProvider from "@/providers/RouteGuardProvider";
 import Header from "@/components/Header";
 import theme from "../theme";
 import "./global.css";
+import ReduxProvider from "@/providers/ReduxProvider";
+import { CssBaseline } from "@mui/material";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -32,14 +35,19 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <NextIntlClientProvider messages={messages}>
+        <ReduxProvider>
+        <RouteGuardProvider>
+          <NextIntlClientProvider messages={messages}>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
+              <CssBaseline/>
               <Header />
               {children}
             </ThemeProvider>
           </AppRouterCacheProvider>
         </NextIntlClientProvider>
+        </RouteGuardProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

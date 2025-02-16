@@ -1,3 +1,4 @@
+"use client";
 import { IAuthState } from "@/types/user";
 import { getTokenData } from "./utils";
 

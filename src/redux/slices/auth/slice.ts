@@ -25,12 +25,17 @@ const writeTokenReducer = (
   }
 };
 
+// const setRedirectPathReducer = (state: IAuthState, action: PayloadAction<string | null>) => {
+//   state.redirectPath = action.payload;
+// }
+
 export const slice = createSlice({
   name: "token",
   initialState,
   reducers: {
     clearTokenState: clearTokenStateReducer,
     writeToken: writeTokenReducer,
+    // setRedirectPath: setRedirectPathReducer,
   },
   extraReducers: (builder) => {
     builder
@@ -42,7 +47,3 @@ export const slice = createSlice({
       );
   },
 });
-
-const authReducer = slice.reducer;
-
-export { authReducer };
