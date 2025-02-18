@@ -3,13 +3,14 @@ import App from "../App";
 import LazyNotFound from "../pages/Services/NotFound";
 import AppConfig from "../config";
 import { IRoute } from "./pathes";
+import { getTokenData } from "../redux/slices/auth/utils";
 
 const getAvailableRoutes = (): RouteObject[] => {
-    const accessToken = localStorage.getItem("accessToken");
-    const data = accessToken ? getTokenData(accessToken) : undefined;
-    const routeObjects: Array<RouteObject> = [];
+  const accessToken = localStorage.getItem("accessToken");
+  const data = accessToken ? getTokenData(accessToken) : undefined;
+  const routeObjects: Array<RouteObject> = [];
 
-    const routes: IRoute[] = [
+  const routes: IRoute[] = [
     {
       path: "/qwerty",
       role: AppConfig.Roles.ADMIN,
