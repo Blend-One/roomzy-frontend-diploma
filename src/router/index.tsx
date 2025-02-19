@@ -1,29 +1,44 @@
 import { createBrowserRouter, RouteObject } from "react-router";
 import App from "../App";
 import LazyNotFound from "../pages/Services/NotFound";
-import AppConfig from "../config";
-import { IRoute } from "./pathes";
 import { getTokenData } from "../redux/slices/auth/utils";
+import PATHES, { IRoute } from "./pathes";
 
 const getAvailableRoutes = (): RouteObject[] => {
   const accessToken = localStorage.getItem("accessToken");
   const data = accessToken ? getTokenData(accessToken) : undefined;
   const routeObjects: Array<RouteObject> = [];
 
-  const routes: IRoute[] = [
-    {
-      path: "/qwerty",
-      role: AppConfig.Roles.ADMIN,
-      element: App,
-    },
-  ];
+  PATHES.forEach((route) => {
+    if (
+      route.allowedRoles?.some((role) => data?.role === role) ||
+      !route.allowedRoles
+    ) {
+      routeObjects.push(getRouteObject(route));
 
-  return [
-    {
-      path: "/qwerty",
-      element: <App />,
-    },
-  ];
+      if (route.children) {
+        route.children.forEach((child) => {
+          if (
+            child.allowedRoles?.some((role) => data?.role === role) ||
+            !child.allowedRoles
+          ) {
+            routeObjects.push(getRouteObject(child));
+          }
+        });
+      }
+    }
+  });
+
+  return routeObjects;
+};
+
+const getRouteObject = (route: IRoute): RouteObject => {
+  const Component = route.element;
+  const entry: RouteObject = {
+    path: route.path,
+    element: <Component />,
+  };
+  return entry;
 };
 
 const router = createBrowserRouter([

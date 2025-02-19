@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IToken } from "../types/token";
 import { ILoginData, IRegistrationData } from "../types/user";
 
-const ENDPOINT = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const ENDPOINT = `${import.meta.env.REACT_APP_BACKEND_URL}/api`;
 
 export const tokenApi = createApi({
   reducerPath: "tokenApi",

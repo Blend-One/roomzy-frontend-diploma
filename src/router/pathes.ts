@@ -6,8 +6,12 @@ import { ERoles } from "../config/user";
 export interface IRoute {
   element: React.FunctionComponent<object>;
   path: string;
-  role?: ERoles;
-  children?: Array<IRoute>;
+  allowedRoles?: Array<ERoles>;
+  children?: Array<{
+    element: React.FunctionComponent<object>;
+    path: string;
+    allowedRoles?: Array<ERoles>;
+  }>;
 }
 
 const PATHES: Array<IRoute> = [
@@ -16,8 +20,14 @@ const PATHES: Array<IRoute> = [
     element: LazyHome,
   },
   {
-    path: "publication",
+    path: "/publication",
     element: LazyPublication,
+    children: [
+      {
+        path: "/publication/create",
+        element: LazyPublication,
+      },
+    ],
   },
 ];
 

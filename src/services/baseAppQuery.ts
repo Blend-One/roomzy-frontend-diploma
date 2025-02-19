@@ -8,7 +8,7 @@ import { injectAccessToken } from "../utils/injectTokens";
 import { clearTokenState, writeToken } from "../redux/slices/auth";
 import { IToken } from "../types/token";
 
-const ENDPOINT = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const ENDPOINT = `${import.meta.env.REACT_APP_BACKEND_URL}/api`;
 
 const baseAppQuery = fetchBaseQuery({
   baseUrl: ENDPOINT,
