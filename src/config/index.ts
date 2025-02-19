@@ -1,11 +1,11 @@
 import { ERoles } from "./user";
 
-type AppConfigType = {
-  Roles: typeof ERoles;
+interface AppConfigType {
+  roles: typeof ERoles;
 };
 
 const AppConfig: AppConfigType = {
-  Roles: ERoles,
+  roles: ERoles,
 };
 
 export default AppConfig;

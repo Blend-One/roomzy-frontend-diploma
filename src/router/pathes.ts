@@ -3,18 +3,17 @@ import LazyPublication from "../pages/Publication";
 
 import { ERoles } from "../config/user";
 
-export interface IRoute {
+interface IBaseRoute {
   element: React.FunctionComponent<object>;
   path: string;
   allowedRoles?: Array<ERoles>;
-  children?: Array<{
-    element: React.FunctionComponent<object>;
-    path: string;
-    allowedRoles?: Array<ERoles>;
-  }>;
 }
 
-const PATHES: Array<IRoute> = [
+export interface IRoute extends IBaseRoute {
+  children?: Array<IBaseRoute>;
+}
+
+const PATHS: Array<IRoute> = [
   {
     path: "home",
     element: LazyHome,
@@ -31,4 +30,4 @@ const PATHES: Array<IRoute> = [
   },
 ];
 
-export default PATHES;
+export default PATHS;

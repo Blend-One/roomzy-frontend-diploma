@@ -2,14 +2,14 @@ import { createBrowserRouter, RouteObject } from "react-router";
 import App from "../App";
 import LazyNotFound from "../pages/Services/NotFound";
 import { getTokenData } from "../redux/slices/auth/utils";
-import PATHES, { IRoute } from "./pathes";
+import PATHS, { IRoute } from "./pathes";
 
 const getAvailableRoutes = (): RouteObject[] => {
   const accessToken = localStorage.getItem("accessToken");
   const data = accessToken ? getTokenData(accessToken) : undefined;
   const routeObjects: Array<RouteObject> = [];
 
-  PATHES.forEach((route) => {
+  PATHS.forEach((route) => {
     if (
       route.allowedRoles?.some((role) => data?.role === role) ||
       !route.allowedRoles

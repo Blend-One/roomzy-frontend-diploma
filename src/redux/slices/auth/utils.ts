@@ -3,6 +3,6 @@ import { ITokenData } from "../../../types/token";
 
 export const getTokenData = (token: string): ITokenData | null => {
   const data = jwtDecode<ITokenData>(token);
-  if (data == null) return null;
+  if (!data) return null;
   return data;
 };
