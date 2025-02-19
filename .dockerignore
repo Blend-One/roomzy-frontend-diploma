@@ -1,0 +1,16 @@
+node_modules
+build
+
+*.env
+*.log
+
+.DS_Store
+*.swp
+*.tmp
+
+coverage
+*.spec.*
+*.test.*
+
+.vscode/
+.idea/
