@@ -12,6 +12,7 @@ import "@fontsource/roboto/700.css";
 import router from "./router";
 import theme from "./theme";
 import { store } from "./redux/store";
+import "./i18n";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
