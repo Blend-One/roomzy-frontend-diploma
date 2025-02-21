@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useLoginMutation } from "../../../services/token";
 import { IResponseError } from "../../../types/common";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { useNavigate } from "react-router";
 
 const AuthContainer = styled(Stack)(() => ({
   flexGrow: 1,
@@ -25,12 +26,13 @@ const AuthBox = styled(Stack)(({ theme }) => ({
 
 const Login = () => {
   const { t } = useTranslation("users");
-
+  const navigate = useNavigate();
   const formMethods = useForm<ILoginData>();
   const { handleSubmit } = formMethods;
 
-  const [login, { isLoading, error }] = useLoginMutation();
+  const handleRegister = () => navigate("/registration");
 
+  const [login, { isLoading, error }] = useLoginMutation();
   const onSubmit: SubmitHandler<ILoginData> = (data) => login(data);
 
   return (
@@ -58,14 +60,7 @@ const Login = () => {
               type={"password"}
               required
             />
-            <Button
-              onClick={handleSubmit(onSubmit)}
-              loading={isLoading}
-              variant="contained"
-            >
-              {t("I18N_LOGIN")}
-            </Button>
-            {error && (
+                        {error && (
               <Alert
                 icon={<ErrorOutlineIcon fontSize="inherit" />}
                 severity="error"
@@ -73,6 +68,19 @@ const Login = () => {
                 {(error as IResponseError).data.message}
               </Alert>
             )}
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              loading={isLoading}
+              variant="contained"
+            >
+              {t("I18N_LOGIN")}
+            </Button>
+            <Button
+              onClick={handleRegister}
+              variant="text"
+            >
+              {t("I18N_USER_SIGNUP")}
+            </Button>
           </AuthBox>
         </AuthContainer>
       </FormProvider>

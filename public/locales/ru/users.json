@@ -3,5 +3,6 @@
   "I18N_USER_PASSWORD": "Пароль",
   "I18N_USER_LOGIN": "Вход",
   "I18N_USER_LOGIN_INFO": "Войдите, чтобы продолжить",
+  "I18N_USER_SIGNUP": "Регистрация",
   "I18N_LOGIN": "Войти"
 }
