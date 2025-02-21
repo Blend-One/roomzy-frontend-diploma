@@ -1,10 +1,12 @@
-import { Button, Stack, styled, Typography } from "@mui/material";
+import { Alert, Button, Stack, styled, Typography } from "@mui/material";
 import Page from "../../../components/Page";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { ILoginData } from "../../../types/user";
 import TextFieldCustom from "../../../components/Forms/Inputs/TextFieldCustom";
 import { useTranslation } from "react-i18next";
 import { useLoginMutation } from "../../../services/token";
+import { IResponseError } from "../../../types/common";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 const AuthContainer = styled(Stack)(() => ({
   flexGrow: 1,
@@ -15,10 +17,10 @@ const AuthContainer = styled(Stack)(() => ({
 const AuthBox = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   width: 400,
-  padding: theme.spacing(2),
-  borderRadius: theme.spacing(1),
+  padding: theme.spacing(4),
+  borderRadius: theme.shape.borderRadius,
   border: `1px solid ${theme.palette.divider}`,
-  boxShadow: theme.shadows[1],
+  boxShadow: theme.shadows[2],
 }));
 
 const Login = () => {
@@ -27,7 +29,7 @@ const Login = () => {
   const formMethods = useForm<ILoginData>();
   const { handleSubmit } = formMethods;
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading, error }] = useLoginMutation();
 
   const onSubmit: SubmitHandler<ILoginData> = (data) => login(data);
 
@@ -36,9 +38,14 @@ const Login = () => {
       <FormProvider {...formMethods}>
         <AuthContainer>
           <AuthBox spacing={3} direction="column">
-            <Typography textAlign={"center"} fontSize={"1.5rem"}>
-              {t("I18N_USER_LOGIN")}
-            </Typography>
+            <Stack spacing={1}>
+              <Typography textAlign={"center"} fontSize={"1.5rem"}>
+                {t("I18N_USER_LOGIN")}
+              </Typography>
+              <Typography textAlign={"center"} fontSize={"0.875rem"}>
+                {t("I18N_USER_LOGIN_INFO")}
+              </Typography>
+            </Stack>
             <TextFieldCustom
               name={"email"}
               label={t("I18N_USER_EMAIL")}
@@ -58,6 +65,14 @@ const Login = () => {
             >
               {t("I18N_LOGIN")}
             </Button>
+            {error && (
+              <Alert
+                icon={<ErrorOutlineIcon fontSize="inherit" />}
+                severity="error"
+              >
+                {(error as IResponseError).data.message}
+              </Alert>
+            )}
           </AuthBox>
         </AuthContainer>
       </FormProvider>
