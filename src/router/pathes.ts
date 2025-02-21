@@ -1,7 +1,9 @@
-import LazyHome from "../pages/Home";
-import LazyPublication from "../pages/Publication";
-
 import { ERoles } from "../config/user";
+
+import LazyMain from "../pages/Main";
+import LazyPublication from "../pages/Publication";
+import LazyLogin from "../pages/Services/Login";
+import LazyRegistration from "../pages/Services/Registration";
 
 interface IBaseRoute {
   element: React.FunctionComponent<object>;
@@ -15,8 +17,16 @@ export interface IRoute extends IBaseRoute {
 
 const PATHS: Array<IRoute> = [
   {
-    path: "home",
-    element: LazyHome,
+    path: "/",
+    element: LazyMain,
+  },
+  {
+    path: "/login",
+    element: LazyLogin,
+  },
+  {
+    path: "/registration",
+    element: LazyRegistration,
   },
   {
     path: "/publication",

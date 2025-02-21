@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-const Home = () => {
+const Main = () => {
   const { t } = useTranslation("common");
-  return <>{t("title")}</>
+  return <>{t("title")}</>;
 };
 
-export default Home;
+export default Main;

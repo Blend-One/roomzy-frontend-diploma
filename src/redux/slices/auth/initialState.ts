@@ -14,6 +14,7 @@ const getInitialState = (): IAuthState => {
     if (tokenData && tokenData.exp * 1000 > Date.now()) {
       return {
         isAuthenticated: true,
+        redirectPath: null,
         data: tokenData,
       };
     }
@@ -24,6 +25,7 @@ const getInitialState = (): IAuthState => {
 
   return {
     isAuthenticated: false,
+    redirectPath: null,
     data: null,
   };
 };
