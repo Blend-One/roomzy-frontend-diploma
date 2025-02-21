@@ -45,6 +45,10 @@ export const slice = createSlice({
       .addMatcher(tokenApi.endpoints.login.matchFulfilled, writeTokenReducer)
       .addMatcher(tokenApi.endpoints.refresh.matchFulfilled, writeTokenReducer)
       .addMatcher(
+        tokenApi.endpoints.registration.matchFulfilled,
+        writeTokenReducer
+      )
+      .addMatcher(
         tokenApi.endpoints.logout.matchFulfilled,
         clearTokenStateReducer
       );

@@ -20,13 +20,13 @@ export const tokenApi = createApi({
     }),
     logout: builder.mutation<undefined, undefined>({
       query: () => ({
-        url: "/logout",
+        url: `${ENDPOINT}/logout`,
         method: "POST",
       }),
     }),
     refresh: builder.mutation<IToken, undefined>({
       query: () => ({
-        url: "/refresh",
+        url: `${ENDPOINT}/refresh`,
         method: "POST",
         body: {
           refreshToken: localStorage.getItem("refreshToken") ?? "",
@@ -36,7 +36,7 @@ export const tokenApi = createApi({
     registration: builder.mutation<IToken, IRegistrationData>({
       query: (userData: IRegistrationData) => {
         return {
-          url: "/registration",
+          url: `${ENDPOINT}/registration`,
           method: "POST",
           body: userData,
         };

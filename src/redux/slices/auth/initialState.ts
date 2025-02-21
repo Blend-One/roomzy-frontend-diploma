@@ -5,10 +5,10 @@ const getInitialState = (): IAuthState => {
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
 
-  const isAccessTokenValid = accessToken && accessToken !== "undefined";
-  const isRefreshTokenValid = refreshToken && refreshToken !== "undefined";
+  const isAccessTokenExist = accessToken && accessToken !== "undefined";
+  const isRefreshTokenExist = refreshToken && refreshToken !== "undefined";
 
-  if (isAccessTokenValid && isRefreshTokenValid) {
+  if (isAccessTokenExist && isRefreshTokenExist) {
     const tokenData = getTokenData(accessToken);
 
     if (tokenData && tokenData.exp * 1000 > Date.now()) {
@@ -21,7 +21,6 @@ const getInitialState = (): IAuthState => {
   }
 
   localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
 
   return {
     isAuthenticated: false,

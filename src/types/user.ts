@@ -5,6 +5,9 @@ export type TUserRoles = "ADMIN" | "USER";
 export interface IUser {
   firstName: string;
   lastName: string;
+  avatarImageUrl: null;
+  email: string;
+  phone: string;
 }
 
 export interface IUserData extends IUser {
@@ -24,8 +27,6 @@ export interface ILoginData {
 }
 
 export interface IRegistrationData {
-  firstName: string;
-  lastName: string;
-  phone: string;
+  email: string;
   password: string;
 }

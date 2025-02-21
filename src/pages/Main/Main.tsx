@@ -1,8 +1,9 @@
-import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../redux/hooks";
 
 const Main = () => {
-  const { t } = useTranslation("common");
-  return <>{t("title")}</>;
+  const userData = useAppSelector((state) => state.auth.data);
+  console.table(userData);
+  return <>hi</>;
 };
 
 export default Main;

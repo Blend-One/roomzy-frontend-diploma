@@ -8,14 +8,16 @@ import { useLoginMutation } from "../../../services/token";
 import { IResponseError } from "../../../types/common";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import { isLoginFormValid } from "../../../utils/validator/auth";
 
-const AuthContainer = styled(Stack)(() => ({
+export const AuthContainer = styled(Stack)(() => ({
   flexGrow: 1,
   alignItems: "center",
   justifyContent: "center",
 }));
 
-const AuthBox = styled(Stack)(({ theme }) => ({
+export const AuthBox = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   width: 400,
   padding: theme.spacing(4),
@@ -28,12 +30,22 @@ const Login = () => {
   const { t } = useTranslation("users");
   const navigate = useNavigate();
   const formMethods = useForm<ILoginData>();
-  const { handleSubmit } = formMethods;
+  const { handleSubmit, setError } = formMethods;
 
   const handleRegister = () => navigate("/registration");
 
-  const [login, { isLoading, error }] = useLoginMutation();
-  const onSubmit: SubmitHandler<ILoginData> = (data) => login(data);
+  const [login, { isLoading, error, isSuccess }] = useLoginMutation();
+
+  const onSubmit: SubmitHandler<ILoginData> = (data) => {
+    const isValid = isLoginFormValid({ ...data, setError });
+    if (isValid) {
+      login(data);
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) navigate("/");
+  }, [isSuccess, navigate]);
 
   return (
     <Page>
@@ -60,7 +72,7 @@ const Login = () => {
               type={"password"}
               required
             />
-                        {error && (
+            {error && (
               <Alert
                 icon={<ErrorOutlineIcon fontSize="inherit" />}
                 severity="error"
@@ -75,10 +87,7 @@ const Login = () => {
             >
               {t("I18N_LOGIN")}
             </Button>
-            <Button
-              onClick={handleRegister}
-              variant="text"
-            >
+            <Button onClick={handleRegister} variant="text">
               {t("I18N_USER_SIGNUP")}
             </Button>
           </AuthBox>
