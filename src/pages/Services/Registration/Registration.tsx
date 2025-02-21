@@ -10,16 +10,19 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useNavigate } from "react-router";
 import { AuthBox, AuthContainer } from "../Login/Login";
 import { validateRegisterForm } from "../../../utils/validator/auth";
+import { useEffect } from "react";
+import { useAppSelector } from "../../../redux/hooks";
 
 const Registration = () => {
-  const { t } = useTranslation(["users", "components"]);
+  const { t } = useTranslation("users");
   const navigate = useNavigate();
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
   const formMethods = useForm<ILoginData>();
   const { handleSubmit, setError } = formMethods;
+  const [register, { isLoading, error, isSuccess }] = useRegistrationMutation();
 
   const handleLogin = () => navigate("/login");
-
-  const [register, { isLoading, error }] = useRegistrationMutation();
 
   const onSubmit: SubmitHandler<ILoginData> = (data) => {
     const isValid = validateRegisterForm({ ...data, setError });
@@ -27,6 +30,14 @@ const Registration = () => {
       register(data);
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) navigate("/");
+  }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (isAuthenticated) navigate(-1);
+  }, [isAuthenticated, navigate]);
 
   return (
     <Page>

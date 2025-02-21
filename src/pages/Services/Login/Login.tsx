@@ -10,6 +10,7 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { isLoginFormValid } from "../../../utils/validator/auth";
+import { useAppSelector } from "../../../redux/hooks";
 
 export const AuthContainer = styled(Stack)(() => ({
   flexGrow: 1,
@@ -31,10 +32,10 @@ const Login = () => {
   const navigate = useNavigate();
   const formMethods = useForm<ILoginData>();
   const { handleSubmit, setError } = formMethods;
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const [login, { isLoading, error, isSuccess }] = useLoginMutation();
 
   const handleRegister = () => navigate("/registration");
-
-  const [login, { isLoading, error, isSuccess }] = useLoginMutation();
 
   const onSubmit: SubmitHandler<ILoginData> = (data) => {
     const isValid = isLoginFormValid({ ...data, setError });
@@ -46,6 +47,10 @@ const Login = () => {
   useEffect(() => {
     if (isSuccess) navigate("/");
   }, [isSuccess, navigate]);
+
+  useEffect(() => {
+    if (isAuthenticated) navigate(-1);
+  }, [isAuthenticated, navigate]);
 
   return (
     <Page>
