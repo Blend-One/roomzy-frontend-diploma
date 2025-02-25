@@ -7,6 +7,8 @@ import LoginIcon from "@mui/icons-material/Login";
 import { useNavigate } from "react-router";
 import { getUserFullNameOrEmail } from "../../utils/user";
 
+const iconStyle = { color: "white", width: "30px", height: "30px" };
+
 const UserBlock = () => {
   const [logout] = useLogoutMutation();
   const { t } = useTranslation("users");
@@ -24,9 +26,7 @@ const UserBlock = () => {
           </Typography>
           <Tooltip title={t("I18N_USER_LOGOUT")}>
             <IconButton aria-label="singout" onClick={handleLogout}>
-              <LogoutIcon
-                style={{ color: "white", width: "30px", height: "30px" }}
-              />
+              <LogoutIcon style={iconStyle} />
             </IconButton>
           </Tooltip>
         </>
@@ -34,9 +34,7 @@ const UserBlock = () => {
       {!isAuthenticated && (
         <Tooltip title={t("I18N_USER_LOGIN")}>
           <IconButton aria-label="singout" onClick={handleLoginNavigate}>
-            <LoginIcon
-              style={{ color: "white", width: "30px", height: "30px" }}
-            />
+            <LoginIcon style={iconStyle} />
           </IconButton>
         </Tooltip>
       )}
