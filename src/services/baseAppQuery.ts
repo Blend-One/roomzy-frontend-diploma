@@ -4,15 +4,23 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { injectAccessToken } from "../utils/injectTokens";
+import { injectAccessToken, injectRefreshToken } from "../utils/injectTokens";
 import { clearTokenState, writeToken } from "../redux/slices/auth";
 import { IToken } from "../types/token";
 
-const ENDPOINT = `${import.meta.env.REACT_APP_BACKEND_URL}/api`;
+const ENDPOINT = `${import.meta.env.VITE_APP_BACKEND_URL}/api`;
 
-const baseAppQuery = fetchBaseQuery({
+export const baseAppQuery = fetchBaseQuery({
   baseUrl: ENDPOINT,
   prepareHeaders: injectAccessToken,
+});
+
+export const baseAuthQuery = fetchBaseQuery({
+  baseUrl: ENDPOINT,
+  prepareHeaders: (headers) => {
+    injectAccessToken(headers);
+    injectRefreshToken(headers);
+  },
 });
 
 const baseAppQueryWithReauth: BaseQueryFn<
