@@ -12,9 +12,10 @@ import { AuthBox, AuthContainer } from "../Login/Login";
 import { validateRegisterForm } from "../../../utils/validator/auth";
 import { useEffect } from "react";
 import { useAppSelector } from "../../../redux/hooks";
+import { getResponseCompare } from "../../../utils/compare";
 
 const Registration = () => {
-  const { t } = useTranslation("users");
+  const { t } = useTranslation(["users", "service"]);
   const navigate = useNavigate();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
@@ -64,7 +65,7 @@ const Registration = () => {
                 icon={<ErrorOutlineIcon fontSize="inherit" />}
                 severity="error"
               >
-                {(error as IResponseError).data.message}
+                {getResponseCompare((error as IResponseError).data.message)}
               </Alert>
             )}
             <Button

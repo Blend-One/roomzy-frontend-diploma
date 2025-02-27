@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { isLoginFormValid } from "../../../utils/validator/auth";
 import { useAppSelector } from "../../../redux/hooks";
+import { getResponseCompare } from "../../../utils/compare";
 
 export const AuthContainer = styled(Stack)(() => ({
   flexGrow: 1,
@@ -28,7 +29,7 @@ export const AuthBox = styled(Stack)(({ theme }) => ({
 }));
 
 const Login = () => {
-  const { t } = useTranslation("users");
+  const { t } = useTranslation(["users", "service"]);
   const navigate = useNavigate();
   const formMethods = useForm<ILoginData>();
   const { handleSubmit, setError } = formMethods;
@@ -82,7 +83,7 @@ const Login = () => {
                 icon={<ErrorOutlineIcon fontSize="inherit" />}
                 severity="error"
               >
-                {(error as IResponseError).data.message}
+                {getResponseCompare((error as IResponseError).data.message)}
               </Alert>
             )}
             <Button
