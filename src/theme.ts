@@ -12,6 +12,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          padding: "6px",
+        },
+      },
+    },
   },
   cssVariables: true,
 });

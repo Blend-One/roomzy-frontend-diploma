@@ -7,8 +7,9 @@ const Spacer = styled(Stack)(() => ({
   flexGrow: 1,
 }));
 
-const headerStyle = {
+const headerStyle: React.CSSProperties = {
   backgroundColor: theme.palette.primary.light,
+  alignItems: "center",
   padding: theme.spacing(2, 8),
 };
 

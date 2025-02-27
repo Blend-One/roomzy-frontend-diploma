@@ -1,13 +1,13 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { IToken } from "../types/token";
 import { ILoginData, IRegistrationData } from "../types/user";
-import { baseAppQuery } from "./baseAppQuery";
+import { baseAuthQuery } from "./baseAppQuery";
 
 const ENDPOINT = `/users`;
 
 export const tokenApi = createApi({
   reducerPath: "tokenApi",
-  baseQuery: baseAppQuery,
+  baseQuery: baseAuthQuery,
   endpoints: (builder) => ({
     login: builder.mutation<IToken, ILoginData>({
       query: (credentials: ILoginData) => {
@@ -28,9 +28,6 @@ export const tokenApi = createApi({
       query: () => ({
         url: `${ENDPOINT}/refresh`,
         method: "POST",
-        body: {
-          refreshToken: localStorage.getItem("refreshToken") ?? "",
-        },
       }),
     }),
     registration: builder.mutation<IToken, IRegistrationData>({
