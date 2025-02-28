@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) navigate("/");
+    if (isSuccess) navigate(-1);
   }, [isSuccess, navigate]);
 
   useEffect(() => {
