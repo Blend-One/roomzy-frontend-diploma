@@ -1,8 +1,7 @@
 import { Stack, styled, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
-import theme from "../../theme";
 
-const Logo = styled(Typography)(() => ({
+const Logo = styled(Typography)(({theme}) => ({
   fontSize: "2.5rem",
   fontWeight: "bold",
   color: theme.palette.primary.contrastText,

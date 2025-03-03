@@ -14,8 +14,8 @@ interface INumberFieldCustomProps {
 const NumberFieldCustom: React.FC<INumberFieldCustomProps> = ({
   name,
   label,
-  required = false,
-  autoFocus = false,
+  required,
+  autoFocus,
   min,
   max,
 }) => {
@@ -31,7 +31,7 @@ const NumberFieldCustom: React.FC<INumberFieldCustomProps> = ({
       control={control}
       rules={{
         required: {
-          value: required,
+          value: Boolean(required),
           message: t("I18N_REQUIRED_FIELD"),
         },
         validate: (value) => parseFloat(value) > 0 || "invalidText",

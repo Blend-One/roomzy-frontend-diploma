@@ -14,7 +14,7 @@ const UserBlock = () => {
   const [logout] = useLogoutMutation();
   const { t } = useTranslation("users");
   const navigate = useNavigate();
-  const handleLogout = () => logout(undefined);
+  const handleLogout = () => logout();
   const handleLoginNavigate = () => navigate("/login");
   const { isAuthenticated, data } = useUserData();
 

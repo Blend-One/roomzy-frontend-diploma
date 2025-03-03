@@ -18,13 +18,13 @@ export const tokenApi = createApi({
         };
       },
     }),
-    logout: builder.mutation<undefined, undefined>({
+    logout: builder.mutation<void, void>({
       query: () => ({
         url: `${ENDPOINT}/logout`,
         method: "POST",
       }),
     }),
-    refresh: builder.mutation<IToken, undefined>({
+    refresh: builder.mutation<IToken, void>({
       query: () => ({
         url: `${ENDPOINT}/refresh`,
         method: "POST",

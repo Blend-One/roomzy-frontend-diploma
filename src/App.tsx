@@ -2,12 +2,12 @@ import { Outlet } from "react-router";
 import Header from "./components/Header";
 import { Stack, styled } from "@mui/material";
 
-const Container = styled(Stack)(() => ({
+const Container = styled(Stack)({
   margin: 0,
   flexGrow: 1,
   flexShrink: 1,
   height: "100vh",
-}));
+});
 
 const App = () => {
   return (
