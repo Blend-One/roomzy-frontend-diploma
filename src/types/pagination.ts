@@ -11,5 +11,4 @@ export type TPaginationData = {
   page: number;
   onPageChange: (event: unknown, newPage: number) => void;
   onRowPerPageChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  resetPagination: () => void;
 };

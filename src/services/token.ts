@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { IToken } from "../types/token";
 import { ILoginData, IRegistrationData } from "../types/user";
-import { baseAuthQuery } from "./baseAppQuery";
+import { baseAuthQuery } from "./tools/baseAppQuery";
 
 const ENDPOINT = `/users`;
 

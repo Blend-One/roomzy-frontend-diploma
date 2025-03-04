@@ -46,11 +46,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) navigate(-1);
+    if (isSuccess) navigate("/");
   }, [isSuccess, navigate]);
 
   useEffect(() => {
-    if (isAuthenticated) navigate(-1);
+    if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
   return (

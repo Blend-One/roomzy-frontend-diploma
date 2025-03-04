@@ -11,16 +11,15 @@ const getInitialState = (): IAuthState => {
   if (isAccessTokenExist && isRefreshTokenExist) {
     const tokenData = getTokenData(accessToken);
 
-    if (tokenData && tokenData.exp * 1000 > Date.now()) {
-      return {
-        isAuthenticated: true,
-        redirectPath: null,
-        data: tokenData,
-      };
-    }
+    return {
+      isAuthenticated: true,
+      redirectPath: null,
+      data: tokenData,
+    };
   }
 
   localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
 
   return {
     isAuthenticated: false,

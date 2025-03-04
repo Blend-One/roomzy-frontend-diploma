@@ -1,0 +1,16 @@
+import { TranslationMap } from "../utils/compare";
+
+export const userAuth: TranslationMap = {
+  PASSWORDS_ARE_NOT_EQUAL: "I18N_PASSWORDS_ARE_NOT_EQUAL",
+  USER_NOT_FOUND: "I18N_USER_NOT_FOUND",
+  USER_ALREADY_EXISTS: "I18N_USER_ALREADY_EXISTS",
+  UNAUTHORIZED: "I18N_UNAUTHORIZED",
+  INVALID_EMAIL: "I18N_INVALID_EMAIL",
+  INVALID_PASSWORD: "I18N_INVALID_PASSWORD",
+};
+
+export const paymentType: TranslationMap = {
+  HOUR: "I18N_SPACE_HOUR",
+  DAY: "I18N_SPACE_DAY",
+  MONTH: "I18N_SPACE_MONTH",
+};

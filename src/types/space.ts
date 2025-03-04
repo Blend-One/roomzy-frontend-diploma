@@ -1,22 +1,23 @@
 export interface ISpace {
-    id: string;
-    image: string;
-    title: string;
-    price: number;
-    location: string;
-  }
+  id: string;
+  image: string;
+  title: string;
+  price: number;
+  paymentType: EPaymentType;
+  street: string;
+  building: string;
+  isCommercial: boolean;
+  hasDeposit: boolean;
+}
 
 export interface IRentalData extends ISpace {
-    onMoreDetails: () => void;
-  }
-  
-  
+  onMoreDetails: () => void;
+}
+
 export interface TSpacesSearchParams {
-    rentType?: ERentType;
-    priceFrom?: number;
-    priceTo?: number;
-};
+  rentType?: EPaymentType;
+  priceFrom?: number;
+  priceTo?: number;
+}
 
-type ERentType = "DAY" |"MONTH" | "HOUR"
-
-  
+export type EPaymentType = "DAY" | "MONTH" | "HOUR";
