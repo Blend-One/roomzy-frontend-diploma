@@ -1,43 +1,39 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { IToken } from "../types/token";
 import { ILoginData, IRegistrationData } from "../types/user";
+import { baseAuthQuery } from "./baseAppQuery";
 
-const ENDPOINT = `${import.meta.env.REACT_APP_BACKEND_URL}/api`;
+const ENDPOINT = `/users`;
 
 export const tokenApi = createApi({
   reducerPath: "tokenApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: ENDPOINT,
-  }),
+  baseQuery: baseAuthQuery,
   endpoints: (builder) => ({
     login: builder.mutation<IToken, ILoginData>({
       query: (credentials: ILoginData) => {
         return {
-          url: "/login",
+          url: `${ENDPOINT}/login`,
           method: "POST",
           body: credentials,
         };
       },
     }),
-    logout: builder.mutation<undefined, undefined>({
+    logout: builder.mutation<void, void>({
       query: () => ({
-        url: "/logout",
+        url: `${ENDPOINT}/logout`,
         method: "POST",
       }),
     }),
-    refresh: builder.mutation<IToken, undefined>({
+    refresh: builder.mutation<IToken, void>({
       query: () => ({
-        url: "/refresh",
+        url: `${ENDPOINT}/refresh`,
         method: "POST",
-        body: {
-          refreshToken: localStorage.getItem("refreshToken") ?? "",
-        },
       }),
     }),
     registration: builder.mutation<IToken, IRegistrationData>({
       query: (userData: IRegistrationData) => {
         return {
-          url: "/registration",
+          url: `${ENDPOINT}/registration`,
           method: "POST",
           body: userData,
         };

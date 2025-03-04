@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import initialState from "./initialState";
 import { getTokenData } from "./utils";
 import { IAuthState } from "../../../types/user";
@@ -25,9 +25,12 @@ const writeTokenReducer = (
   }
 };
 
-// const setRedirectPathReducer = (state: IAuthState, action: PayloadAction<string | null>) => {
-//   state.redirectPath = action.payload;
-// }
+const setRedirectPathReducer = (
+  state: IAuthState,
+  action: PayloadAction<string | null>
+) => {
+  state.redirectPath = action.payload;
+};
 
 export const slice = createSlice({
   name: "token",
@@ -35,12 +38,16 @@ export const slice = createSlice({
   reducers: {
     clearTokenState: clearTokenStateReducer,
     writeToken: writeTokenReducer,
-    // setRedirectPath: setRedirectPathReducer,
+    setRedirectPath: setRedirectPathReducer,
   },
   extraReducers: (builder) => {
     builder
       .addMatcher(tokenApi.endpoints.login.matchFulfilled, writeTokenReducer)
       .addMatcher(tokenApi.endpoints.refresh.matchFulfilled, writeTokenReducer)
+      .addMatcher(
+        tokenApi.endpoints.registration.matchFulfilled,
+        writeTokenReducer
+      )
       .addMatcher(
         tokenApi.endpoints.logout.matchFulfilled,
         clearTokenStateReducer
