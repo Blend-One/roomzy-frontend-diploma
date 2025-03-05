@@ -15,6 +15,6 @@ export const spaceListMock: ISpace[] = Array.from(
     hasDeposit: Math.random() > 0.5,
     isCommercial: Math.random() > 0.5,
     square: Math.floor(Math.random() * 100) + 20,
-    floor: Math.floor(Math.random() * 10) + 1,
+    floors: Math.floor(Math.random() * 10) + 1,
   })
 );

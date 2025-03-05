@@ -8,5 +8,8 @@
   "I18N_USER_ALREADY_EXISTS": "Пользователь уже существует",
   "I18N_UNAUTHORIZED": "Неавторизованный пользователь",
   "I18N_INVALID_EMAIL": "Неверный email",
+  "I18N_SPACE_HOUR": "час",
+  "I18N_SPACE_DAY": "день",
+  "I18N_SPACE_MONTH": "месяц",
   "I18N_INVALID_PASSWORD": "Неверный пароль"
 }

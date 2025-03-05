@@ -8,7 +8,7 @@ export interface ISpace {
   building: string;
   isCommercial: boolean;
   square: number;
-  floor: number;
+  floors: number;
   hasDeposit: boolean;
 }
 
