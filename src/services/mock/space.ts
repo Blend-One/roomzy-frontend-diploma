@@ -21,7 +21,18 @@ export const spaceListMock: ISpace[] = Array.from(
 
 export const spaceMock: IViewSpace = {
   id: "1",
-  images: ["https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp", "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp","https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp","https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp","https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp","https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",],
+  images: [
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+    "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
+  ],
   title: "Офис в центре города",
   price: 250000,
   paymentType: "MONTH",
@@ -31,4 +42,4 @@ export const spaceMock: IViewSpace = {
   square: 120,
   floors: 3,
   hasDeposit: true,
-}
+};
