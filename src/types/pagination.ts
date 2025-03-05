@@ -12,3 +12,12 @@ export type TPaginationData = {
   onPageChange: (event: unknown, newPage: number) => void;
   onRowPerPageChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
+
+export interface IBaseSearchParams {
+  pageNo?: number;
+  pageSize?: number;
+  search?: string;
+  searchBy?: string;
+  orderBy?: string;
+  order?: string;
+}

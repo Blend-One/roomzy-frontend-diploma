@@ -1,12 +1,14 @@
 export interface ISpace {
   id: string;
-  image: string;
+  imageUrl: string;
   title: string;
   price: number;
   paymentType: EPaymentType;
   street: string;
   building: string;
   isCommercial: boolean;
+  square: number;
+  floor: number;
   hasDeposit: boolean;
 }
 

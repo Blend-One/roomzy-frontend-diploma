@@ -6,7 +6,6 @@ import { spaceListMock } from "./mock/space";
 
 const ENDPOINT = `/space`;
 
-
 export const spaceApi = createApi({
   reducerPath: "spaceApi",
   baseQuery: baseAppQuery,
@@ -25,12 +24,14 @@ export const spaceApi = createApi({
 
 // export const { useGetSpacesListQuery } = spaceApi;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const useGetSpacesListQuery = (_data: TSpacesSearchParams): IPaginatedList<ISpace> => {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export const useGetSpacesListQuery = (
+  _data: TSpacesSearchParams
+): IPaginatedList<ISpace> => {
   return {
     pages: 1,
     data: spaceListMock,
-  }
-}
+  };
+};
 
 export default spaceApi;

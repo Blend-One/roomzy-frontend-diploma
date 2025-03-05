@@ -42,7 +42,7 @@ const SpaceCard: FC<{ data: ISpace }> = ({ data }) => {
           borderTopLeftRadius: 2,
           borderTopRightRadius: 2,
         }}
-        image={data.image}
+        image={data.imageUrl}
         alt={data.title}
       />
       <CardContent
