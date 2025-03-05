@@ -1,8 +1,8 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
 import { IPaginatedList } from "../types/pagination";
-import { ISpace, TSpacesSearchParams } from "../types/space";
-import { spaceListMock } from "./mock/space";
+import { ISpace, IViewSpace, TSpacesSearchParams } from "../types/space";
+import { spaceListMock, spaceMock } from "./mock/space";
 
 const ENDPOINT = `/space`;
 
@@ -19,10 +19,18 @@ export const spaceApi = createApi({
         };
       },
     }),
+    getSpaceById: builder.query<IViewSpace, string>({
+      query: (id: string) => {
+        return {
+          url: `${ENDPOINT}/spaces/${id}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
-// export const { useGetSpacesListQuery } = spaceApi;
+// export const { useGetSpacesListQuery, useGetSpaceByIdQuery } = spaceApi;
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const useGetSpacesListQuery = (
@@ -31,6 +39,13 @@ export const useGetSpacesListQuery = (
   return {
     pages: 1,
     data: spaceListMock,
+  };
+};
+
+export const useGetSpaceByIdQuery = (_params: string) => {
+  return {
+    data: spaceMock,
+    refetch: () => {},
   };
 };
 

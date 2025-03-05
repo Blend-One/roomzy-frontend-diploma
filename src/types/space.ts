@@ -12,6 +12,20 @@ export interface ISpace {
   hasDeposit: boolean;
 }
 
+export interface IViewSpace {
+  id: string;
+  images: string[];
+  title: string;
+  price: number;
+  paymentType: EPaymentType;
+  street: string;
+  building: string;
+  isCommercial: boolean;
+  square: number;
+  floors: number;
+  hasDeposit: boolean;
+}
+
 export interface IRentalData extends ISpace {
   onMoreDetails: () => void;
 }

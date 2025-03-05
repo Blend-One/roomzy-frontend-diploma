@@ -2,6 +2,7 @@ import { ERoles } from "../config/user";
 
 import LazyMain from "../pages/Main";
 import LazyPublication from "../pages/Publication";
+import LazyViewPublication from "../pages/Publication/ViewPublication";
 import LazyLogin from "../pages/Services/Login";
 import LazyRegistration from "../pages/Services/Registration";
 
@@ -35,6 +36,10 @@ const PATHS: Array<IRoute> = [
       {
         path: "/publication/create",
         element: LazyPublication,
+      },
+      {
+        path: "/publication/:id",
+        element: LazyViewPublication,
       },
     ],
   },

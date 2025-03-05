@@ -60,7 +60,7 @@ const StyledButton = styled(Button)({
 const SpaceCard: FC<{ data: ISpace }> = ({ data }) => {
   const navigate = useNavigate();
   const { t } = useTranslation(["space", "components"]);
-  const handleNavigate = () => navigate(`space/${data.id}`);
+  const handleNavigate = () => navigate(`publication/${data.id}`);
 
   return (
     <StyledCard>
