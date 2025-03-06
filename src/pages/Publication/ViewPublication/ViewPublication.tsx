@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import Page from "../../../components/Page";
 import { useGetSpaceByIdQuery } from "../../../services/space";
-import { Button, Grid2 as Grid, Stack, Typography } from "@mui/material";
+import { Button, Grid2 as Grid, Paper, Stack, Typography } from "@mui/material";
 import ImgGallery from "../../../components/ImgGallery";
 import { useMemo } from "react";
 
@@ -29,17 +29,23 @@ const ViewPublication = () => {
             <ImgGallery images={images} />
           </Grid>
           <Grid size={{ sm: 4 }}>
-            <Typography>Price: {data.price}</Typography>
-            <Typography>Payment Type: {data.paymentType}</Typography>
-            <Typography>Street: {data.street}</Typography>
-            <Typography>Building: {data.building}</Typography>
-            <Typography>
-              Commercial: {data.isCommercial ? "Yes" : "No"}
-            </Typography>
-            <Typography>Square: {data.square} m²</Typography>
-            <Typography>Floors: {data.floors}</Typography>
-            <Typography>Deposit: {data.hasDeposit ? "Yes" : "No"}</Typography>
-            <Button variant="contained">Арендовать</Button>
+            <Paper elevation={5} sx={{ padding: 4 }}>
+              <Stack spacing={1}>
+                <Typography>Price: {data.price}</Typography>
+                <Typography>Payment Type: {data.paymentType}</Typography>
+                <Typography>Street: {data.street}</Typography>
+                <Typography>Building: {data.building}</Typography>
+                <Typography>
+                  Commercial: {data.isCommercial ? "Yes" : "No"}
+                </Typography>
+                <Typography>Square: {data.square} m²</Typography>
+                <Typography>Floors: {data.floors}</Typography>
+                <Typography>
+                  Deposit: {data.hasDeposit ? "Yes" : "No"}
+                </Typography>
+                <Button variant="contained">Арендовать</Button>
+              </Stack>
+            </Paper>
           </Grid>
         </Grid>
         <Typography sx={{ background: "rgb(255,0,0, 0.5)" }}>
