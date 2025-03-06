@@ -8,7 +8,7 @@ interface ImgGalleryProps {
 }
 
 const GalleryWrapper = styled(Stack)(() => ({
-  maxWidth: "920px",
+  maxWidth: "1040px",
   margin: "0 auto",
 }));
 

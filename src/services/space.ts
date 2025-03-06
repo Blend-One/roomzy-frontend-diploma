@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
 import { IPaginatedList } from "../types/pagination";
 import { ISpace, IViewSpace, TSpacesSearchParams } from "../types/space";
-import { spaceListMock, spaceMock } from "./mock/space";
+import { spaceDetailsMock, spaceListMock, spaceMock } from "./mock/space";
 
 const ENDPOINT = `/space`;
 
@@ -45,6 +45,13 @@ export const useGetSpacesListQuery = (
 export const useGetSpaceByIdQuery = (_params: string) => {
   return {
     data: spaceMock,
+    refetch: () => {},
+  };
+};
+
+export const useGetSpaceDetailsByIdQuery = (_params: string) => {
+  return {
+    data: spaceDetailsMock,
     refetch: () => {},
   };
 };

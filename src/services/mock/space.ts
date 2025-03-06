@@ -1,4 +1,4 @@
-import { ISpace, IViewSpace } from "../../types/space";
+import { ISpace, ISpaceDetails, IViewSpace } from "../../types/space";
 
 const paymentTypes = ["DAY", "MONTH", "HOUR"] as const;
 
@@ -43,3 +43,90 @@ export const spaceMock: IViewSpace = {
   floors: 3,
   hasDeposit: true,
 };
+
+export const spaceDetailsMock: ISpaceDetails[] = [
+  {
+    floor: 1,
+    data: [
+      {
+        name: "Помещение",
+        details: [
+          { id: "location", name: "Локация" },
+          { id: "area", name: "Площадь и планировка" },
+          { id: "communications", name: "Коммуникации" },
+        ],
+      },
+      {
+        name: "Охрана",
+        details: [
+          { id: "condition", name: "Состояние и ремонт" },
+          { id: "security", name: "Безопасность" },
+          { id: "video_surveillance", name: "Система видеонаблюдения" },
+        ],
+      },
+      {
+        name: "Тип помещения",
+        details: [
+          { id: "access_control", name: "Охрана и контроль доступа" },
+          { id: "fire_alarm", name: "Пожарная сигнализация" },
+        ],
+      },
+    ],
+  },
+  {
+    floor: 2,
+    data: [
+      {
+        name: "Помещение",
+        details: [
+          { id: "location", name: "Локация" },
+          { id: "area", name: "Площадь и планировка" },
+          { id: "communications", name: "Коммуникации" },
+        ],
+      },
+      {
+        name: "Охрана",
+        details: [
+          { id: "condition", name: "Состояние и ремонт" },
+          { id: "security", name: "Безопасность" },
+          { id: "video_surveillance", name: "Система видеонаблюдения" },
+        ],
+      },
+      {
+        name: "Тип помещения",
+        details: [
+          { id: "access_control", name: "Охрана и контроль доступа" },
+          { id: "fire_alarm", name: "Пожарная сигнализация" },
+        ],
+      },
+    ],
+  },
+  {
+    floor: 3,
+    data: [
+      {
+        name: "Помещение",
+        details: [
+          { id: "location", name: "Локация" },
+          { id: "area", name: "Площадь и планировка" },
+          { id: "communications", name: "Коммуникации" },
+        ],
+      },
+      {
+        name: "Охрана",
+        details: [
+          { id: "condition", name: "Состояние и ремонт" },
+          { id: "security", name: "Безопасность" },
+          { id: "video_surveillance", name: "Система видеонаблюдения" },
+        ],
+      },
+      {
+        name: "Тип помещения",
+        details: [
+          { id: "access_control", name: "Охрана и контроль доступа" },
+          { id: "fire_alarm", name: "Пожарная сигнализация" },
+        ],
+      },
+    ],
+  },
+];

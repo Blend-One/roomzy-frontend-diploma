@@ -1,13 +1,24 @@
 import { useParams } from "react-router";
 import Page from "../../../components/Page";
-import { useGetSpaceByIdQuery } from "../../../services/space";
-import { Button, Grid2 as Grid, Paper, Stack, Typography } from "@mui/material";
+import {
+  useGetSpaceByIdQuery,
+  useGetSpaceDetailsByIdQuery,
+} from "../../../services/space";
+import {
+  Button,
+  Chip,
+  Grid2 as Grid,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
 import ImgGallery from "../../../components/ImgGallery";
 import { useMemo } from "react";
 
 const ViewPublication = () => {
   const { id } = useParams();
   const { data } = useGetSpaceByIdQuery(id ?? "");
+  const { data: details } = useGetSpaceDetailsByIdQuery(data.id ?? "");
 
   const images = useMemo(
     () =>
@@ -48,9 +59,34 @@ const ViewPublication = () => {
             </Paper>
           </Grid>
         </Grid>
-        <Typography sx={{ background: "rgb(255,0,0, 0.5)" }}>
-          {data.title}
-        </Typography>
+        <Grid container spacing={2}>
+          {details &&
+            details.map((row) => (
+              <>
+                <Grid size={{ sm: 3 }}>
+                  <Paper elevation={5} sx={{ padding: 2 }}>
+                    {row.floor} этаж
+                  </Paper>
+                </Grid>
+                <Grid size={{ sm: 9 }}>
+                  <Paper elevation={5} sx={{ padding: 5 }}>
+                    <Stack spacing={2}>
+                      {row.data.map((dit) => (
+                        <Stack spacing={2}>
+                          <Stack>{dit.name}</Stack>
+                          <Stack direction="row">
+                            {dit.details.map((tye) => (
+                              <Chip label={tye.name} />
+                            ))}
+                          </Stack>
+                        </Stack>
+                      ))}
+                    </Stack>
+                  </Paper>
+                </Grid>
+              </>
+            ))}
+        </Grid>
       </Stack>
     </Page>
   );
