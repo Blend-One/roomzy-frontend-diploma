@@ -84,7 +84,7 @@ const SpaceCard: FC<{ data: ISpace }> = ({ data }) => {
             <AttachMoneyIcon sx={{ color: "green" }} />
             {t("I18N_SPACE_PRICE", {
               price: data.price,
-              type: getRentTypeCompare(data.paymentType),
+              type: getRentTypeCompare(data.priceUnit),
             })}
           </StyledTypography>
           <StyledTypography variant="body2" color="text.secondary">

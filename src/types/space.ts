@@ -3,7 +3,7 @@ export interface ISpace {
   imageUrl: string;
   title: string;
   price: number;
-  paymentType: EPaymentType;
+  priceUnit: EPaymentType;
   street: string;
   building: string;
   isCommercial: boolean;
@@ -17,9 +17,9 @@ export interface IRentalData extends ISpace {
 }
 
 export interface TSpacesSearchParams {
-  rentType?: EPaymentType;
+  priceUnit?: EPaymentType;
   priceFrom?: number;
   priceTo?: number;
 }
 
-export type EPaymentType = "DAY" | "MONTH" | "HOUR";
+export type EPaymentType = "PER_DAY" | "PER_MONTH" | "PER_HOUR";

@@ -7,7 +7,7 @@ const Main = () => {
   const { data } = useGetSpacesListQuery({
     priceFrom: 0,
     priceTo: 50000,
-    rentType: "MONTH",
+    priceUnit: "PER_MONTH",
   });
 
   return (

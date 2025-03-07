@@ -1,5 +1,5 @@
 import { t } from "i18next";
-import { paymentType, userAuth } from "../config/dictionaries";
+import { priceUnit, userAuth } from "../config/dictionaries";
 
 export type TranslationMap = Record<string, string>;
 
@@ -11,6 +11,6 @@ export function getResponseCompare(label: keyof typeof userAuth): string {
   return getCompare(userAuth, label);
 }
 
-export function getRentTypeCompare(label: keyof typeof paymentType): string {
-  return getCompare(paymentType, label);
+export function getRentTypeCompare(label: keyof typeof priceUnit): string {
+  return getCompare(priceUnit, label);
 }
