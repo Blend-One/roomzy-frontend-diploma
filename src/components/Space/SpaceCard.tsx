@@ -32,7 +32,7 @@ const StyledCard = styled(Card)({
   height: "100%",
 });
 
-const сardMediaSx: SxProps<Theme> = () => ({
+const сardMediaSx: SxProps<Theme> = ({
   width: "100%",
   height: 200,
   borderTopLeftRadius: 2,
