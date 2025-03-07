@@ -4,13 +4,13 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { injectAccessToken, injectRefreshToken } from "../utils/injectTokens";
-import { clearTokenState, writeToken } from "../redux/slices/auth";
-import { IToken } from "../types/token";
+import { injectAccessToken, injectRefreshToken } from "./injectTokens";
+import { clearTokenState, writeToken } from "../../redux/slices/auth";
+import { IToken } from "../../types/token";
 
 const ENDPOINT = `${import.meta.env.VITE_APP_BACKEND_URL}/api`;
 
-export const baseAppQuery = fetchBaseQuery({
+const baseAppQuery = fetchBaseQuery({
   baseUrl: ENDPOINT,
   prepareHeaders: injectAccessToken,
 });
@@ -31,7 +31,7 @@ const baseAppQueryWithReauth: BaseQueryFn<
   let result = await baseAppQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    const refreshResult = await baseAppQuery(
+    const refreshResult = await baseAuthQuery(
       {
         url: "/refresh",
         method: "POST",

@@ -37,7 +37,7 @@ const Registration = () => {
   }, [isSuccess, navigate]);
 
   useEffect(() => {
-    if (isAuthenticated) navigate(-1);
+    if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
   return (

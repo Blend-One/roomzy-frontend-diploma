@@ -1,0 +1,11 @@
+{
+  "I18N_SPACE_PRICE": "Цена {{price}} / {{type}}",
+  "I18N_SPACE_ADDRESS": "Адрес",
+  "I18N_SPACE_NEED_DEPOSIT": "Нужен депозит",
+  "I18N_SPACE_FLOORS": "Этажи {{floors}}",
+  "I18N_SPACE_SQUARE": "Площадь: {{square}} м²",
+  "I18N_SPACE_LIVING": "Жилое помещение",
+  "I18N_SPACE_COMMERCE": "Коммерческое помещение",
+  "I18N_SPACE_ADD_WIHSLIST": "Добавить в избранное",
+  "I18N_SPACE_MORE": "Подробнее"
+}
