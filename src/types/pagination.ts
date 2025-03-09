@@ -4,7 +4,7 @@ export interface IPaginatedList<T> {
   data: Array<T>;
 }
 
-export type TPaginationData = {
+export interface IPaginationData {
   pageNo: number;
   pageSize: number;
   pages: number;

@@ -1,25 +1,23 @@
 import { styled, Stack } from "@mui/material";
 import { PropsWithChildren } from "react";
-import cn from "classnames";
 
-const PageContainer = styled(Stack)(() => ({
+type TPageProps = {
+  withPadding?: boolean;
+};
+
+const PageContainer = styled(Stack, {
+  shouldForwardProp: (prop) => prop !== "withPadding",
+})<{ withPadding?: boolean }>((props) => ({
   margin: 0,
   flexGrow: 1,
   flexShrink: 1,
   overflowY: "auto",
   maxHeight: "100vh",
-
-  "&.withPadding": {
-    padding: "0 10%",
-  },
+  padding: props.withPadding ? "0 10%" : undefined,
 }));
 
-type TPageProps = {
-  withPadding?: boolean | string;
-};
-
 const Page = ({ withPadding, children }: PropsWithChildren<TPageProps>) => (
-  <PageContainer className={cn({ withPadding })}>{children}</PageContainer>
+  <PageContainer withPadding={withPadding}>{children}</PageContainer>
 );
 
 export default Page;

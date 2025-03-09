@@ -32,7 +32,7 @@ const StyledCard = styled(Card)({
   height: "100%",
 });
 
-const сardMediaSx: SxProps<Theme> = () => ({
+const сardMediaSx: SxProps<Theme> = ({
   width: "100%",
   height: 200,
   borderTopLeftRadius: 2,
@@ -84,7 +84,7 @@ const SpaceCard: FC<{ data: ISpace }> = ({ data }) => {
             <AttachMoneyIcon sx={{ color: "green" }} />
             {t("I18N_SPACE_PRICE", {
               price: data.price,
-              type: getRentTypeCompare(data.paymentType),
+              type: getRentTypeCompare(data.priceUnit),
             })}
           </StyledTypography>
           <StyledTypography variant="body2" color="text.secondary">

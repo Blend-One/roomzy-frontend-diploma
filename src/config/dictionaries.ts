@@ -9,8 +9,8 @@ export const userAuth: TranslationMap = {
   INVALID_PASSWORD: "I18N_INVALID_PASSWORD",
 };
 
-export const paymentType: TranslationMap = {
-  HOUR: "I18N_SPACE_HOUR",
-  DAY: "I18N_SPACE_DAY",
-  MONTH: "I18N_SPACE_MONTH",
+export const priceUnit: TranslationMap = {
+   PER_HOUR: "I18N_SPACE_HOUR",
+   PER_DAY: "I18N_SPACE_DAY",
+   PER_MONTH: "I18N_SPACE_MONTH",
 };
