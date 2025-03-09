@@ -35,7 +35,7 @@ export const spaceMock: IViewSpace = {
   ],
   title: "Офис в центре города",
   price: 250000,
-  paymentType: "MONTH",
+  paymentType: "PER_MONTH",
   street: "ул. Абая",
   building: "15A",
   isCommercial: true,

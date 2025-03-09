@@ -1,3 +1,5 @@
+import { IDictionary } from "./dictionaries";
+
 export interface ISpace {
   id: string;
   imageUrl: string;
@@ -34,6 +36,16 @@ export interface TSpacesSearchParams {
   priceUnit?: EPaymentType;
   priceFrom?: number;
   priceTo?: number;
+}
+
+export interface ISpaceDetails {
+  floor: number;
+  data: ISpaceFloorDetails[];
+}
+
+export interface ISpaceFloorDetails {
+  name: string;
+  details: IDictionary[];
 }
 
 export type EPaymentType = "PER_DAY" | "PER_MONTH" | "PER_HOUR";

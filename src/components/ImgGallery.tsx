@@ -7,10 +7,10 @@ interface ImgGalleryProps {
   images: Array<{ original: string; thumbnail: string }>;
 }
 
-const GalleryWrapper = styled(Stack)(() => ({
+const GalleryWrapper = styled(Stack)({
   maxWidth: "1040px",
   margin: "0 auto",
-}));
+});
 
 const ImgGallery: React.FC<ImgGalleryProps> = ({ images }) => {
   return (
