@@ -41,6 +41,8 @@ export const spaceMock: IViewSpace = {
   isCommercial: true,
   square: 120,
   floors: 3,
+  lat: "55.751574",
+  long: "37.573856",
   hasDeposit: true,
 };
 

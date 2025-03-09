@@ -25,6 +25,8 @@ export interface IViewSpace {
   isCommercial: boolean;
   square: number;
   floors: number;
+  lat: string;
+  long: string;
   hasDeposit: boolean;
 }
 

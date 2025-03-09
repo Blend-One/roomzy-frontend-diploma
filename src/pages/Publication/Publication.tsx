@@ -18,6 +18,7 @@ import { useMemo } from "react";
 import { ISpaceDetails } from "../../types/space";
 import { useTranslation } from "react-i18next";
 import { getRentTypeCompare } from "../../utils/compare";
+import ViewMap from "../../components/Map/ViewMap";
 
 const PublicationTitle = styled(Paper)(({ theme }) => ({
   fontSize: "1.5rem",
@@ -69,7 +70,7 @@ const Publication = () => {
 
   return (
     <Page withPadding>
-      <Stack spacing={2} mt={4}>
+      <Stack spacing={3} mt={4}>
         <PublicationTitle elevation={2}>{data.title}</PublicationTitle>
         <Grid container spacing={2}>
           <Grid size={{ sm: 8 }}>
@@ -107,6 +108,9 @@ const Publication = () => {
             </Paper>
           </Grid>
         </Grid>
+        <Paper elevation={5}>
+          {data && <ViewMap coords={[Number(data.lat), Number(data.long)]} />}
+        </Paper>
         <Grid container spacing={2}>
           {details &&
             details.map((row, index) => (
