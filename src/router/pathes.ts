@@ -29,7 +29,7 @@ const PATHS: Array<IRoute> = [
     element: LazyRegistration,
   },
   {
-    path: "/publication",
+    path: "/publication/:id",
     element: LazyPublication,
     children: [
       {
