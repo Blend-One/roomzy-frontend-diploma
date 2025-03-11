@@ -27,7 +27,7 @@ export const tokenApi = createApi({
     refresh: builder.mutation<IToken, void>({
       query: () => ({
         url: `${ENDPOINT}/refresh`,
-        method: "POST",
+        method: "GET",
       }),
     }),
     registration: builder.mutation<IToken, IRegistrationData>({

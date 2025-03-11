@@ -23,6 +23,7 @@ const UserBlock = () => {
     <Stack direction="row" spacing={2} alignItems="center">
       {data && isAuthenticated && (
         <CustomTitle
+          link="/account"
           text={t("I18N_USER_HELLO", { name: getUserFullNameOrEmail(data) })}
         />
       )}

@@ -29,7 +29,7 @@ const baseAppQueryWithReauth: BaseQueryFn<
     const refreshResult = await baseAppQuery(
       {
         url: "/users/refresh",
-        method: "POST",
+        method: "GET",
         body: {
           refreshToken: localStorage.getItem("refreshToken") ?? "",
         },
@@ -37,6 +37,11 @@ const baseAppQueryWithReauth: BaseQueryFn<
       api,
       extraOptions
     );
+
+    if (refreshResult.error && result.error.status === 401) {
+      api.dispatch(clearTokenState());
+      return refreshResult;
+    }
 
     if (refreshResult.data) {
       const data = refreshResult.data as IToken;
