@@ -26,7 +26,7 @@ export interface IViewSpace {
   square: number;
   floors: number;
   lat: string;
-  long: string;
+  lon: string;
   hasDeposit: boolean;
 }
 

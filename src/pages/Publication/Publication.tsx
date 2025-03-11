@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import ImgGallery from "../../components/ImgGallery";
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 import { ISpaceDetails } from "../../types/space";
 import { useTranslation } from "react-i18next";
 import { getRentTypeCompare } from "../../utils/compare";
@@ -25,7 +25,7 @@ const PublicationTitle = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-const DetailsComponent = ({ data }: { data: ISpaceDetails }) => {
+const DetailsComponent: FC<{ data: ISpaceDetails }> = ({ data }) => {
   return (
     <>
       <Grid size={{ sm: 3 }}>
@@ -109,7 +109,7 @@ const Publication = () => {
           </Grid>
         </Grid>
         <Paper elevation={5}>
-          {data && <ViewMap coords={[Number(data.lat), Number(data.long)]} />}
+          {data && <ViewMap coords={[Number(data.lat), Number(data.lon)]} />}
         </Paper>
         <Grid container spacing={2}>
           {details &&

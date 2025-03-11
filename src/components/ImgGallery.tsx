@@ -1,5 +1,5 @@
 import { Stack, styled } from "@mui/material";
-import React from "react";
+import { FC } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
@@ -12,7 +12,7 @@ const GalleryWrapper = styled(Stack)({
   margin: "0 auto",
 });
 
-const ImgGallery: React.FC<ImgGalleryProps> = ({ images }) => {
+const ImgGallery: FC<ImgGalleryProps> = ({ images }) => {
   return (
     <GalleryWrapper>
       <ImageGallery
