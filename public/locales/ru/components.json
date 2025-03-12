@@ -11,5 +11,6 @@
   "I18N_SPACE_HOUR": "час",
   "I18N_SPACE_DAY": "день",
   "I18N_SPACE_MONTH": "месяц",
+  "I18N_NO_DATA": "Нет данных для отображения!",
   "I18N_INVALID_PASSWORD": "Неверный пароль"
 }
