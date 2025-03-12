@@ -1,0 +1,28 @@
+name: "Auto Assign and Label Issues"
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  automate_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Set Assignee, Milestone, and Labels"
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issueNumber = context.payload.issue.number;
+            const repo = context.repo.repo;
+            const owner = context.repo.owner;
+            
+            await github.rest.issues.update({
+              owner,
+              repo,
+              issue_number: issueNumber,
+              assignees: [context.actor],
+              milestone: (await github.rest.issues.listMilestones({ owner, repo })).data.find(m => m.title === "Preview I")?.number,
+              labels: ["enhancement"]
+            });
