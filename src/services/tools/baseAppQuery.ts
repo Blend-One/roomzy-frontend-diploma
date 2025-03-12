@@ -30,9 +30,6 @@ const baseAppQueryWithReauth: BaseQueryFn<
       {
         url: "/users/refresh",
         method: "GET",
-        body: {
-          refreshToken: localStorage.getItem("refreshToken") ?? "",
-        },
       },
       api,
       extraOptions

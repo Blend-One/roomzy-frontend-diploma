@@ -22,13 +22,11 @@ const RouteAuthProvider = () => {
 
   useEffect(() => {
     const routsList = getAllProtectedRoutes();
-
-    if (
+    const isAllowedRout =
       !isAuthenticated &&
-      routsList.some((r) => r === router.state.location.pathname)
-    ) {
-      router.navigate("/login");
-    }
+      routsList.some((r) => r === router.state.location.pathname);
+
+    if (isAllowedRout) router.navigate("/login");
   }, [isAuthenticated, router]);
 
   return <RouterProvider router={router} />;
