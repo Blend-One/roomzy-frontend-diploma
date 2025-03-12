@@ -17,7 +17,7 @@ const BasicBreadcrumbs: FC = () => {
 
   return (
     <Breadcrumbs aria-label="breadcrumb">
-      <Link color="inherit" href="/" onClick={handleClick}>
+      <Link color="inherit"  onClick={handleClick}>
         Home
       </Link>
       {pathnames.map((value, index) => {
@@ -29,7 +29,7 @@ const BasicBreadcrumbs: FC = () => {
             {value}
           </Typography>
         ) : (
-          <Link color="inherit" href={to} onClick={() => navigate(to)} key={to}>
+          <Link color="inherit" onClick={() => navigate(to)} key={to}>
             {value}
           </Link>
         );
