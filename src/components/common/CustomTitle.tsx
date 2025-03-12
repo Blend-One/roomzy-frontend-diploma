@@ -27,7 +27,7 @@ const CustomTitle: FC<ICustomTitleProps> = ({ text, link }) => {
   };
 
   return (
-    <StyledLink variant="h6" href={link} link={link} onClick={handleClick}>
+    <StyledLink variant="h6" link={link} onClick={handleClick}>
       {text}
     </StyledLink>
   );
