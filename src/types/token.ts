@@ -6,8 +6,9 @@ export interface IToken {
 }
 
 export interface IBaseTokenData {
-  iss: string;
+  iat: number;
   exp: number;
+  jwtid: string;
 }
 
 export interface ITokenData extends IBaseTokenData, IUserData {}

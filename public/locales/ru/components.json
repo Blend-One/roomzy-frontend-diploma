@@ -1,0 +1,15 @@
+{
+  "I18N_REQUIRED_FIELD": "Поле обязательно для заполнения",
+  "I18N_USER_EMAIL_INVALID": "Некорректный адрес электронной почты",
+  "I18N_USER_PASSWORD_SHORT": "Пароль должен содержать не менее 8 символов",
+  "I18N_USER_PASSWORD_LONG": "Пароль должен содержать не более 64 символов",
+  "I18N_PASSWORDS_ARE_NOT_EQUAL": "Пароли не совпадают",
+  "I18N_USER_NOT_FOUND": "Пользователь не найден",
+  "I18N_USER_ALREADY_EXISTS": "Пользователь уже существует",
+  "I18N_UNAUTHORIZED": "Неавторизованный пользователь",
+  "I18N_INVALID_EMAIL": "Неверный email",
+  "I18N_SPACE_HOUR": "час",
+  "I18N_SPACE_DAY": "день",
+  "I18N_SPACE_MONTH": "месяц",
+  "I18N_INVALID_PASSWORD": "Неверный пароль"
+}
