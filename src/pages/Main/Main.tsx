@@ -28,7 +28,7 @@ const Main = () => {
       <Grid container spacing={2}>
         {data &&
           data.map((row) => (
-            <Grid key={row.id} size={{ xs: 4 }}>
+            <Grid key={row.id} size={{ xs: 12, md: 6, lg: 4, xl: 3 }}>
               <SpaceCard data={row} />
             </Grid>
           ))}
