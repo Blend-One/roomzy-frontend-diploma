@@ -1,53 +1,44 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
+import {
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  styled,
+} from "@mui/material";
+import { FC } from "react";
+import { ITable } from "./types";
 
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-  ) {
-    return { name, calories, fat, carbs, protein };
-  }
-  
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
+const StyledTableContainer = styled(TableContainer)(() => ({
+  height: 800,
+  flexGrow: 1,
+  flexShrink: 1,
+}));
 
-export default function BasicTable() {
-    return (
-      <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell>Calories</TableCell>
-              <TableCell>Fat&nbsp;(g)</TableCell>
-              <TableCell>Carbs&nbsp;(g)</TableCell>
-              <TableCell>Protein&nbsp;(g)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell>{row.calories}</TableCell>
-                <TableCell>{row.fat}</TableCell>
-                <TableCell>{row.carbs}</TableCell>
-                <TableCell>{row.protein}</TableCell>
-              </TableRow>
+const BasicTable: FC<{ data: ITable }> = ({ data }) => {
+  return (
+    <StyledTableContainer>
+      <Table stickyHeader>
+        <TableHead>
+          <TableRow>
+            {data.header.map((head, index) => (
+              <TableCell key={index}>{head.name}</TableCell>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.body.map((row, index) => (
+            <TableRow key={index}>
+              {row.data.map((cell, i) => (
+                <TableCell key={i}>{cell.name}</TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </StyledTableContainer>
+  );
+};
+
+export default BasicTable;
