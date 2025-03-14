@@ -10,8 +10,9 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { isLoginFormValid } from "../../../utils/validator/auth";
-import { useAppSelector } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { getResponseCompare } from "../../../utils/compare";
+import { setRedirectPath } from "../../../redux/slices/auth";
 
 export const AuthContainer = styled(Stack)(() => ({
   flexGrow: 1,
@@ -33,8 +34,9 @@ const Login = () => {
   const navigate = useNavigate();
   const formMethods = useForm<ILoginData>();
   const { handleSubmit, setError } = formMethods;
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const [login, { isLoading, error, isSuccess }] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const redirectPath = useAppSelector((state) => state.auth.redirectPath);
 
   const handleRegister = () => navigate("/registration");
 
@@ -46,12 +48,18 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) navigate("/");
-  }, [isSuccess, navigate]);
+    if (isSuccess) {
+      if (redirectPath) {
+        navigate(redirectPath);
+        console.log(redirectPath);
 
-  useEffect(() => {
-    if (isAuthenticated) navigate("/");
-  }, [isAuthenticated, navigate]);
+        dispatch(setRedirectPath(null));
+        return;
+      }
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isSuccess, navigate]);
 
   return (
     <Page>
