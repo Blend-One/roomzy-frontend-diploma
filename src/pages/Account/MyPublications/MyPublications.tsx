@@ -3,13 +3,17 @@ import AccountWrapperWidget from "../../../widgets/AccountWrapperWidget";
 import BasicTable from "../../../components/Table";
 import { Button, Stack, TablePagination, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
-import React from "react";
-import { mockTableData } from "../../../components/Table/types";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+import { mockSpaceTableData } from "../../../services/mock/space";
 
 const MyPublications = () => {
-  const [page, setPage] = React.useState(2);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const { t } = useTranslation("space");
+  const navigate = useNavigate();
+
+  const [page, setPage] = useState(2);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
@@ -25,20 +29,23 @@ const MyPublications = () => {
     setPage(0);
   };
 
+  const handleCreatePublication = () => navigate("/publications/create");
+
   return (
     <Page withPadding>
       <AccountWrapperWidget>
         <Stack spacing={3}>
           <Stack direction="row" spacing={2}>
             <TextField size="small" sx={{ flexGrow: 1 }} label="Search" />
-            <Button startIcon={<SearchIcon />} variant="contained">
-              Search
-            </Button>
-            <Button startIcon={<AddIcon />} variant="contained">
-              Create Publication
+            <Button
+              onClick={handleCreatePublication}
+              startIcon={<AddIcon />}
+              variant="contained"
+            >
+              {t("I18N_SPACE_CREATE_PUBLICATION")}
             </Button>
           </Stack>
-          <BasicTable data={mockTableData} />
+          <BasicTable data={mockSpaceTableData} />
           <TablePagination
             component="div"
             count={100}

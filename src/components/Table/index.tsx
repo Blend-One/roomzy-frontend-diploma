@@ -14,7 +14,19 @@ const StyledTableContainer = styled(TableContainer)(() => ({
   height: 800,
   flexGrow: 1,
   flexShrink: 1,
+  overflowY: "auto",
 }));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  backgroundColor: theme.palette.action.hover,
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.selected,
+  },
+}));
+
+const StyledTableCell = styled(TableCell)({
+  flexGrow: 1,
+});
 
 const BasicTable: FC<{ data: ITable }> = ({ data }) => {
   return (
@@ -29,11 +41,11 @@ const BasicTable: FC<{ data: ITable }> = ({ data }) => {
         </TableHead>
         <TableBody>
           {data.body.map((row, index) => (
-            <TableRow key={index}>
+            <StyledTableRow key={index}>
               {row.data.map((cell, i) => (
-                <TableCell key={i}>{cell.name}</TableCell>
+                <StyledTableCell key={i}>{cell.name}</StyledTableCell>
               ))}
-            </TableRow>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>

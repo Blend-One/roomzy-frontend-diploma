@@ -32,12 +32,12 @@ const StyledCard = styled(Card)({
   height: "100%",
 });
 
-const сardMediaSx: SxProps<Theme> = ({
+const сardMediaSx: SxProps<Theme> = {
   width: "100%",
   height: 200,
   borderTopLeftRadius: 2,
   borderTopRightRadius: 2,
-});
+};
 
 const StyledCardContent = styled(CardContent)({
   flex: 1,
@@ -60,7 +60,7 @@ const StyledButton = styled(Button)({
 const SpaceCard: FC<{ data: ISpace }> = ({ data }) => {
   const navigate = useNavigate();
   const { t } = useTranslation(["space", "components"]);
-  const handleNavigate = () => navigate(`publication/${data.id}`);
+  const handleNavigate = () => navigate(`publications/${data.id}`);
 
   return (
     <StyledCard>
@@ -88,9 +88,8 @@ const SpaceCard: FC<{ data: ISpace }> = ({ data }) => {
             })}
           </StyledTypography>
           <StyledTypography variant="body2" color="text.secondary">
-            <LocationOnIcon sx={{ color: "red" }} /> 
-            {data.street},
-            {data.building}
+            <LocationOnIcon sx={{ color: "red" }} />
+            {data.street},{data.building}
           </StyledTypography>
           <StyledTypography variant="body2" color="text.primary">
             {data.isCommercial ? (

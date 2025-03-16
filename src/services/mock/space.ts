@@ -132,3 +132,24 @@ export const spaceDetailsMock: ISpaceDetails[] = [
     ],
   },
 ];
+
+export const mockSpaceTableData = {
+  header: [
+    { name: "Название" },
+    { name: "Цена" },
+    { name: "Улица" },
+    { name: "Здание" },
+    { name: "Площадь" },
+    { name: "Этажи" },
+  ],
+  body: spaceListMock.map((space) => ({
+    data: [
+      { name: space.title },
+      { name: `${space.price} ₸` },
+      { name: space.street },
+      { name: space.building },
+      { name: `${space.square} м²` },
+      { name: space.floors.toString() },
+    ],
+  })),
+};
