@@ -23,17 +23,20 @@ export interface IRoom {
   title: string;
   price: string;
   priceUnit: string;
-  physControlInstructions: null;
-  accessInstructions: null;
+  physControlInstructions: string | null;
+  accessInstructions: string | null;
   street: string;
   building: number;
   appartment: string;
   isCommercial: boolean;
   hasDeposit: boolean;
   square: number;
-  lat: number;
-  lon: number;
+  lat: string;
+  lon: string;
   id: string;
+  roomTypeId: string;
+  cityId: string;
+  districtId: string;
   userId: string;
   status: string;
   physControl: boolean;
@@ -41,7 +44,8 @@ export interface IRoom {
   roomImages: RoomImage[];
   district: City;
   city: City;
-  roomSections: RoomSection[];
+  files: string[];
+  sections: RoomSection[];
 }
 
 export interface City {

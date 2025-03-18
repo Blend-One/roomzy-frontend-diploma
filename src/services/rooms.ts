@@ -5,8 +5,8 @@ import { spaceDetailsMock, spaceMock } from "./mock/space";
 
 const ENDPOINT = `/rooms`;
 
-export const spaceApi = createApi({
-  reducerPath: "spaceApi",
+export const roomsApi = createApi({
+  reducerPath: "roomsApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
     getRoomsList: builder.query<IRoom[], TRoomsSearchParams>({
@@ -15,6 +15,15 @@ export const spaceApi = createApi({
         return {
           url: `${ENDPOINT}?${queryParams.toString()}`,
           method: "GET",
+        };
+      },
+    }),
+    createRoom: builder.mutation<IRoom, IRoom>({
+      query: (data: IRoom) => {
+        return {
+          url: `${ENDPOINT}`,
+          method: "POST",
+          body: data,
         };
       },
     }),
@@ -31,8 +40,9 @@ export const spaceApi = createApi({
 
 export const {
   useGetRoomsListQuery,
+  useCreateRoomMutation,
   // useGetSpaceByIdQuery
-} = spaceApi;
+} = roomsApi;
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
@@ -50,4 +60,4 @@ export const useGetSpaceDetailsByIdQuery = (_params: string) => {
   };
 };
 
-export default spaceApi;
+export default roomsApi;

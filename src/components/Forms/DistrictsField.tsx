@@ -4,7 +4,7 @@ import SelectFieldCustom from "./Inputs/SelectFieldCustom";
 import { useEffect, useMemo } from "react";
 
 const DistrictsField = () => {
-  const city = useWatch({ name: "city" });
+  const city = useWatch({ name: "cityId" });
   const methods = useFormContext();
 
   const { data } = useGetDistrictsByCityIdListQuery(
@@ -17,7 +17,7 @@ const DistrictsField = () => {
   );
 
   useEffect(() => {
-    methods.setValue("districts", "");
+    methods.setValue("districtId", "");
   }, [city, methods]);
 
   const districts = useMemo(
@@ -28,7 +28,7 @@ const DistrictsField = () => {
   return (
     <SelectFieldCustom
       disabled={!city}
-      name={"districts"}
+      name={"districtId"}
       options={districts ?? []}
       label={"Районы"}
     />

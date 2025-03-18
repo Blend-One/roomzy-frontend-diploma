@@ -9,7 +9,11 @@ const CitiesField = () => {
   const cities = data?.map((item) => ({ value: item.id, title: item.name }));
 
   return (
-    <SelectFieldCustom name={"city"} options={cities ?? []} label={"Города"} />
+    <SelectFieldCustom
+      name={"cityId"}
+      options={cities ?? []}
+      label={"Города"}
+    />
   );
 };
 export default CitiesField;
