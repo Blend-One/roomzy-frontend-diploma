@@ -4,7 +4,11 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { injectAccessToken, injectRefreshToken } from "./injectTokens";
+import {
+  injectAccessToken,
+  injectLanguage,
+  injectRefreshToken,
+} from "./injectTokens";
 import { clearTokenState, writeToken } from "../../redux/slices/auth";
 import { IToken } from "../../types/token";
 
@@ -15,6 +19,7 @@ const baseAppQuery = fetchBaseQuery({
   prepareHeaders: (headers) => {
     injectAccessToken(headers);
     injectRefreshToken(headers);
+    injectLanguage(headers);
   },
 });
 

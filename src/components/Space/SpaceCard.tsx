@@ -19,7 +19,7 @@ import SecurityIcon from "@mui/icons-material/Security";
 import LayersIcon from "@mui/icons-material/Layers";
 import SquareFootIcon from "@mui/icons-material/SquareFoot";
 import { useNavigate } from "react-router";
-import { ISpace } from "../../types/space";
+import { IRoom } from "../../types/rooms";
 import { getRentTypeCompare } from "../../utils/compare";
 import { useTranslation } from "react-i18next";
 
@@ -57,7 +57,7 @@ const StyledButton = styled(Button)({
   width: "100%",
 });
 
-const SpaceCard: FC<{ data: ISpace }> = ({ data }) => {
+const SpaceCard: FC<{ data: IRoom }> = ({ data }) => {
   const navigate = useNavigate();
   const { t } = useTranslation(["space", "components"]);
   const handleNavigate = () => navigate(`publications/${data.id}`);

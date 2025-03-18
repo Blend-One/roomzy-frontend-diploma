@@ -2,39 +2,33 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
 import { IPaginatedList, IBaseSearchParams } from "../types/pagination";
 import { IDictionary, IDictionaryListWithId } from "../types/dictionaries";
-import {
-  dictionariesIdListMock,
-  dictionariesListMock,
-} from "./mock/dictionaries";
+import { dictionariesIdListMock } from "./mock/dictionaries";
 
-const ENDPOINT = `/dictionaries`;
+const ENDPOINT = "/dictionaries";
 
 export const dictionariesApi = createApi({
   reducerPath: "dictionariesApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getDictionariesList: builder.query<
-      IPaginatedList<IDictionary>,
-      IBaseSearchParams
-    >({
+    getCitiesList: builder.query<IDictionary[], IBaseSearchParams>({
       query: (data: IBaseSearchParams) => {
         const queryParams = new URLSearchParams(Object.entries(data));
         return {
-          url: `${ENDPOINT}?${queryParams.toString()}`,
+          url: `${ENDPOINT}/cities?${queryParams.toString()}`,
           method: "GET",
         };
       },
     }),
-    getDictionariesByIdList: builder.query<
-      IPaginatedList<IDictionary>,
+    getDistrictsByCityIdList: builder.query<
+      IDictionary[],
       IDictionaryListWithId
     >({
-      query: ({ dictionaryId, ...data }: IDictionaryListWithId) => {
+      query: ({ cityId, ...data }: IDictionaryListWithId) => {
         const queryParams = new URLSearchParams(
           Object.entries(data) as string[][]
         );
         return {
-          url: `${ENDPOINT}/${dictionaryId}?${queryParams.toString()}`,
+          url: `${ENDPOINT}/districts/${cityId}?${queryParams.toString()}`,
           method: "GET",
         };
       },
@@ -42,17 +36,13 @@ export const dictionariesApi = createApi({
   }),
 });
 
-// export const { useGetDictionariesListQuery, useGetDictionariesByIdListQuery } = dictionariesApi;
+export const {
+  useGetCitiesListQuery,
+  useGetDistrictsByCityIdListQuery,
+  // useGetDictionariesByIdListQuery
+} = dictionariesApi;
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export const useGetDictionariesListQuery = (
-  _data: IBaseSearchParams
-): IPaginatedList<IDictionary> => {
-  return {
-    pages: 1,
-    data: dictionariesListMock,
-  };
-};
 export const useGetDictionariesByIdListQuery = (
   _data: IDictionaryListWithId
 ): IPaginatedList<IDictionary> => {

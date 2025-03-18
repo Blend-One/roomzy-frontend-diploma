@@ -1,25 +1,24 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
-import { IPaginatedList } from "../types/pagination";
-import { ISpace, IViewSpace, TSpacesSearchParams } from "../types/space";
-import { spaceDetailsMock, spaceListMock, spaceMock } from "./mock/space";
+import { IRoom, TRoomsSearchParams } from "../types/rooms";
+import { spaceDetailsMock, spaceMock } from "./mock/space";
 
-const ENDPOINT = `/space`;
+const ENDPOINT = `/rooms`;
 
 export const spaceApi = createApi({
   reducerPath: "spaceApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getSpacesList: builder.query<IPaginatedList<ISpace>, TSpacesSearchParams>({
-      query: (data: TSpacesSearchParams) => {
+    getRoomsList: builder.query<IRoom[], TRoomsSearchParams>({
+      query: (data: TRoomsSearchParams) => {
         const queryParams = new URLSearchParams(Object.entries(data));
         return {
-          url: `${ENDPOINT}/spaces?${queryParams.toString()}`,
+          url: `${ENDPOINT}?${queryParams.toString()}`,
           method: "GET",
         };
       },
     }),
-    getSpaceById: builder.query<IViewSpace, string>({
+    getSpaceById: builder.query<IRoom, string>({
       query: (id: string) => {
         return {
           url: `${ENDPOINT}/spaces/${id}`,
@@ -30,17 +29,12 @@ export const spaceApi = createApi({
   }),
 });
 
-// export const { useGetSpacesListQuery, useGetSpaceByIdQuery } = spaceApi;
+export const {
+  useGetRoomsListQuery,
+  // useGetSpaceByIdQuery
+} = spaceApi;
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export const useGetSpacesListQuery = (
-  _data: TSpacesSearchParams
-): IPaginatedList<ISpace> => {
-  return {
-    pages: 1,
-    data: spaceListMock,
-  };
-};
 
 export const useGetSpaceByIdQuery = (_params: string) => {
   return {

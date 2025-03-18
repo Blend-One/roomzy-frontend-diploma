@@ -1,8 +1,8 @@
-import { ISpace, ISpaceDetails, IViewSpace } from "../../types/space";
+import { IRoom, IRoomsDetails, IRoom } from "../../types/rooms";
 
 const paymentTypes = ["PER_DAY", "PER_MONTH", "PER_HOUR"] as const;
 
-export const spaceListMock: ISpace[] = Array.from(
+export const spaceListMock: IRoom[] = Array.from(
   { length: 25 },
   (_, index) => ({
     id: "id" + index,
@@ -19,7 +19,7 @@ export const spaceListMock: ISpace[] = Array.from(
   })
 );
 
-export const spaceMock: IViewSpace = {
+export const spaceMock: IRoom = {
   id: "1",
   images: [
     "https://alakt-photos-kr.kcdn.kz/webp/ef/ef331a98-b76d-45af-9e27-e270be950f13/1-750x470.webp",
@@ -46,7 +46,7 @@ export const spaceMock: IViewSpace = {
   hasDeposit: true,
 };
 
-export const spaceDetailsMock: ISpaceDetails[] = [
+export const spaceDetailsMock: IRoomsDetails[] = [
   {
     floor: 1,
     data: [

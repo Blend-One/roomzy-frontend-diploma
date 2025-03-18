@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./slices/auth";
 import tokenApi from "../services/token";
-import spaceApi from "../services/space";
+import spaceApi from "../services/rooms";
 import dictionariesApi from "../services/dictionaries";
 
 export const store = configureStore({

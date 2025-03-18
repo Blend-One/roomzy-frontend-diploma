@@ -3,7 +3,7 @@ import Page from "../../components/Page";
 import {
   useGetSpaceByIdQuery,
   useGetSpaceDetailsByIdQuery,
-} from "../../services/space";
+} from "../../services/rooms";
 import {
   Button,
   Chip,
@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import ImgGallery from "../../components/ImgGallery";
 import { FC, useMemo } from "react";
-import { ISpaceDetails } from "../../types/space";
+import { IRoomsDetails } from "../../types/rooms";
 import { useTranslation } from "react-i18next";
 import { getRentTypeCompare } from "../../utils/compare";
 import ViewMap from "../../components/Map/ViewMap";
@@ -25,7 +25,7 @@ const PublicationTitle = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-const DetailsComponent: FC<{ data: ISpaceDetails }> = ({ data }) => {
+const DetailsComponent: FC<{ data: IRoomsDetails }> = ({ data }) => {
   return (
     <>
       <Grid size={{ sm: 3 }}>
