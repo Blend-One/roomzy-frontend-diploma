@@ -18,7 +18,7 @@ const DistrictsField = () => {
 
   useEffect(() => {
     methods.setValue("districtId", "");
-  }, [city, methods]);
+  }, [city]);
 
   const districts = useMemo(
     () => data?.map((item) => ({ value: item.id, title: item.name })),

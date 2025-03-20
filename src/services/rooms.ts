@@ -18,11 +18,14 @@ export const roomsApi = createApi({
         };
       },
     }),
-    createRoom: builder.mutation<IRoom, IRoom>({
-      query: (data: IRoom) => {
+    createRoom: builder.mutation<IRoom, FormData>({
+      query: (data: FormData) => {
         return {
           url: `${ENDPOINT}`,
           method: "POST",
+          // headers: {
+          //   "Content-Type": "multipart/form-data",
+          // },
           body: data,
         };
       },

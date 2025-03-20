@@ -51,7 +51,6 @@ const Login = () => {
     if (isSuccess) {
       if (redirectPath) {
         navigate(redirectPath);
-        console.log(redirectPath);
 
         dispatch(setRedirectPath(null));
         return;

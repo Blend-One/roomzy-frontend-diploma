@@ -39,10 +39,10 @@ const FormContainer = ({
   const navigate = useNavigate();
   return (
     <>
-      <Stack overflow="auto" pt={3} spacing={3} flexGrow={1}>
+      <Stack sx={{ overflowY: "auto" }} pt={3} spacing={3} flexGrow={1}>
         {children}
       </Stack>
-      <Stack sx={{ pb: 1 }} spacing={2} direction="row">
+      <Stack sx={{ pb: 3 }} spacing={2} direction="row">
         <Button
           type="submit"
           form={formId}

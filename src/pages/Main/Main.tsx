@@ -15,8 +15,8 @@ const Main = () => {
 
   const formMethods = useForm({
     defaultValues: {
-      city: "",
-      districts: "",
+      cityId: "",
+      districtId: "",
     },
   });
 

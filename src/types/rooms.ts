@@ -26,13 +26,13 @@ export interface IRoom {
   physControlInstructions: string | null;
   accessInstructions: string | null;
   street: string;
-  building: number;
+  building: string;
   appartment: string;
   isCommercial: boolean;
   hasDeposit: boolean;
   square: number;
-  lat: string;
-  lon: string;
+  lat: number;
+  lon: number;
   id: string;
   roomTypeId: string;
   cityId: string;
@@ -44,7 +44,7 @@ export interface IRoom {
   roomImages: RoomImage[];
   district: City;
   city: City;
-  files: string[];
+  files: File;
   sections: RoomSection[];
 }
 
