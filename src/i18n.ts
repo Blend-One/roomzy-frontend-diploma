@@ -9,12 +9,12 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "ru",
-    supportedLngs: ["ru", "en"],
+    supportedLngs: ["ru", "en", "kz"],
     debug: false,
     interpolation: { escapeValue: false },
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",
     },
-  })
+  });
 
 export default i18n;

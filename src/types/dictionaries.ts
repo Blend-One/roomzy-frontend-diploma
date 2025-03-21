@@ -10,5 +10,5 @@ export interface IDictionary {
 }
 
 export interface IDictionaryListWithId extends IBaseSearchParams {
-  dictionaryId: string;
+  cityId: string;
 }

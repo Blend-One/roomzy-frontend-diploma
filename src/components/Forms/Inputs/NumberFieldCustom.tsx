@@ -34,7 +34,7 @@ const NumberFieldCustom: React.FC<INumberFieldCustomProps> = ({
           value: Boolean(required),
           message: t("I18N_REQUIRED_FIELD"),
         },
-        validate: (value) => parseFloat(value) > 0 || "invalidText",
+        // validate: (value) => parseFloat(value) > 0 || "invalidText",
       }}
       render={({ field }) => (
         <TextField

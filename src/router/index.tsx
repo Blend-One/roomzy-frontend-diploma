@@ -1,10 +1,8 @@
-import { createBrowserRouter, RouteObject } from "react-router";
-import App from "../App";
-import LazyNotFound from "../pages/Services/NotFound";
+import { RouteObject } from "react-router";
 import { getTokenData } from "../redux/slices/auth/utils";
 import PATHS, { IRoute } from "./pathes";
 
-const getAvailableRoutes = (): RouteObject[] => {
+export const getAvailableRoutes = (): RouteObject[] => {
   const accessToken = localStorage.getItem("accessToken");
   const data = accessToken ? getTokenData(accessToken) : undefined;
   const routeObjects: Array<RouteObject> = [];
@@ -32,6 +30,24 @@ const getAvailableRoutes = (): RouteObject[] => {
   return routeObjects;
 };
 
+export const getAllProtectedRoutes = (): string[] => {
+  const protectedRoutePaths: string[] = [];
+
+  const addProtectedRoutePaths = (routes: IRoute[]) => {
+    routes.forEach((route) => {
+      if (route.allowedRoles) {
+        protectedRoutePaths.push(route.path);
+      }
+      if (route.children) {
+        addProtectedRoutePaths(route.children);
+      }
+    });
+  };
+  addProtectedRoutePaths(PATHS);
+
+  return protectedRoutePaths;
+};
+
 const getRouteObject = (route: IRoute): RouteObject => {
   const Component = route.element;
   const entry: RouteObject = {
@@ -40,14 +56,3 @@ const getRouteObject = (route: IRoute): RouteObject => {
   };
   return entry;
 };
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <LazyNotFound />,
-    children: getAvailableRoutes(),
-  },
-]);
-
-export default router;

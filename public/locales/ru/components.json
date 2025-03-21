@@ -11,5 +11,11 @@
   "I18N_SPACE_HOUR": "час",
   "I18N_SPACE_DAY": "день",
   "I18N_SPACE_MONTH": "месяц",
+  "I18N_NO_DATA": "Нет данных для отображения!",
+  "I18N_ADD_CREATE": "Создать",
+  "I18N_CANCEL": "Отмена",
+  "I18N_SELECT_NONE": "Не выбрано",
+  "I18N_NO": "Нет",
+  "I18N_YES": "Да",
   "I18N_INVALID_PASSWORD": "Неверный пароль"
 }
