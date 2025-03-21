@@ -3,7 +3,15 @@ import { useGetDistrictsByCityIdListQuery } from "../../../services/dictionaries
 import SelectFieldCustom from "../Inputs/SelectFieldCustom";
 import { useEffect, useMemo } from "react";
 
-const DistrictsField = () => {
+interface IDistrictsFieldProps {
+  required?: boolean;
+  withEmpty?: boolean;
+}
+
+const DistrictsField: React.FC<IDistrictsFieldProps> = ({
+  required = false,
+  withEmpty = false,
+}) => {
   const city = useWatch({ name: "cityId" });
   const methods = useFormContext();
 
@@ -11,7 +19,7 @@ const DistrictsField = () => {
     {
       cityId: city,
       page: 1,
-      limit: 1000,
+      limit: 100,
     },
     { skip: !city }
   );
@@ -27,7 +35,8 @@ const DistrictsField = () => {
 
   return (
     <SelectFieldCustom
-      required
+      withEmpty={withEmpty}
+      required={required}
       disabled={!city}
       name={"districtId"}
       options={districts ?? []}

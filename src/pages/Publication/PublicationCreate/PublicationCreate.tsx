@@ -58,17 +58,14 @@ const PublicationCreate = () => {
     const formData = new FormData();
     console.log(data);
 
-    if (data.files instanceof FileList) {
-      Array.from(data.files).forEach((file) => {
-        formData.append("files", file);
-      });
-    }
-
     Object.keys(data).forEach((key) => {
       if (key === "files") {
-        return;
+        Array.from(data.files).forEach((file) => {
+          formData.append("files", file);
+        });
+      } else {
+        formData.append(key, data[key as keyof ICreateRoom] as string);
       }
-      formData.append(key, data[key as keyof ICreateRoom] as string);
     });
 
     postRoom(formData);

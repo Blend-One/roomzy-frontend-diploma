@@ -4,18 +4,21 @@ import SelectFieldCustom from "../Inputs/SelectFieldCustom";
 interface IPriceUnitProps {
   required?: boolean;
   withEmpty?: boolean;
+  label: string;
+  name: string;
 }
 
-const PriceUnit: React.FC<IPriceUnitProps> = ({
+const HasSelect: React.FC<IPriceUnitProps> = ({
   required = false,
   withEmpty = false,
+  label,
+  name,
 }) => {
   const { t } = useTranslation("components");
 
   const data = [
-    { value: "PER_HOUR", title: "I18N_SPACE_HOUR" },
-    { value: "PER_DAY", title: "I18N_SPACE_DAY" },
-    { value: "PER_MONTH", title: "I18N_SPACE_MONTH" },
+    { value: "YES", title: "I18N_YES" },
+    { value: "NO", title: "I18N_NO" },
   ];
 
   const priceUnit = data.map((item) => ({
@@ -27,10 +30,10 @@ const PriceUnit: React.FC<IPriceUnitProps> = ({
     <SelectFieldCustom
       withEmpty={withEmpty}
       required={required}
-      name={"priceUnit"}
+      name={name}
       options={priceUnit}
-      label={"Период оплаты"}
+      label={label}
     />
   );
 };
-export default PriceUnit;
+export default HasSelect;

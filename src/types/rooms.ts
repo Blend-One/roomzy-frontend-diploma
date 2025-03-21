@@ -3,8 +3,14 @@ import { IBaseSearchParams } from "./pagination";
 
 export interface TRoomsSearchParams extends IBaseSearchParams {
   priceUnit?: EPaymentType;
-  priceFrom?: number;
-  priceTo?: number;
+  cityId?: string;
+  districtIds?: string;
+  isCommercial?: string;
+  physControl?: string;
+  square?: string;
+  priceRange?: string;
+  title?: string;
+  hasDeposit?: string;
 }
 
 export interface IRoomsDetails {

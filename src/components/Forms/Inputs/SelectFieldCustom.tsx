@@ -17,6 +17,7 @@ export interface ISelectFieldCustomProps {
   label: string;
   required?: boolean;
   disabled?: boolean;
+  withEmpty?: boolean;
 }
 
 const SelectFieldCustom: React.FC<ISelectFieldCustomProps> = ({
@@ -25,6 +26,7 @@ const SelectFieldCustom: React.FC<ISelectFieldCustomProps> = ({
   label,
   required = false,
   disabled = false,
+  withEmpty = false,
 }) => {
   const {
     formState: { errors },
@@ -58,6 +60,11 @@ const SelectFieldCustom: React.FC<ISelectFieldCustomProps> = ({
             label={label}
             disabled={disabled || !optionsToRender}
           >
+            {withEmpty && (
+              <MenuItem value="">
+                <em>{t("I18N_SELECT_NONE")}</em>
+              </MenuItem>
+            )}
             {optionsToRender.map((option: TSelectOption) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.title}
