@@ -1,5 +1,5 @@
-import { useGetCitiesListQuery } from "../../services/dictionaries";
-import SelectFieldCustom from "./Inputs/SelectFieldCustom";
+import { useGetCitiesListQuery } from "../../../services/dictionaries";
+import SelectFieldCustom from "../Inputs/SelectFieldCustom";
 
 const CitiesField = () => {
   const { data } = useGetCitiesListQuery({
@@ -10,6 +10,7 @@ const CitiesField = () => {
 
   return (
     <SelectFieldCustom
+      required
       name={"cityId"}
       options={cities ?? []}
       label={"Города"}

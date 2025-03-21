@@ -8,5 +8,5 @@ interface ITableRow {
 }
 
 interface ITableCell {
-  name: string;
+  name: string | number;
 }

@@ -3,9 +3,9 @@ import Page from "../../components/Page";
 import { useGetRoomsListQuery } from "../../services/rooms";
 import SpaceCard from "../../components/Space/SpaceCard";
 import NoData from "../../components/NoData";
-import CitiesField from "../../components/Forms/CitiesField";
+import CitiesField from "../../components/Forms/Custom/CitiesField";
 import { FormProvider, useForm } from "react-hook-form";
-import DistrictsField from "../../components/Forms/DistrictsField";
+import DistrictsField from "../../components/Forms/Custom/DistrictsField";
 
 const Main = () => {
   const { data } = useGetRoomsListQuery({

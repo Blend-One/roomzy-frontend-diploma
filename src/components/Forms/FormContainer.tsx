@@ -34,15 +34,25 @@ const FormContainer = ({
   variant = "contained",
   actionSlot,
 }: PropsWithChildren<FormSectionProps>) => {
-  const { t } = useTranslation("forms");
+  const { t } = useTranslation("components");
   const { handleSubmit } = useFormContext();
   const navigate = useNavigate();
   return (
     <>
-      <Stack sx={{ overflowY: "auto" }} pt={3} spacing={3} flexGrow={1}>
+      <Stack
+        sx={{ overflowY: "auto", overflowX: "hidden" }}
+        pt={3}
+        mb={3}
+        spacing={3}
+        flexGrow={1}
+      >
         {children}
       </Stack>
-      <Stack sx={{ pb: 3 }} spacing={2} direction="row">
+      <Stack
+        sx={{ pb: 3, justifyContent: "flex-end" }}
+        spacing={2}
+        direction="row"
+      >
         <Button
           type="submit"
           form={formId}

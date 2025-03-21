@@ -19,7 +19,7 @@ export interface ISpaceFloorDetails {
 
 export type EPaymentType = "PER_DAY" | "PER_MONTH" | "PER_HOUR";
 
-export interface IRoom {
+export interface ICreateRoom {
   title: string;
   price: string;
   priceUnit: string;
@@ -46,6 +46,30 @@ export interface IRoom {
   city: City;
   files: File;
   sections: RoomSection[];
+}
+
+export interface IViewRoom {
+  title: string;
+  price: string;
+  priceUnit: string;
+  physControlInstructions: null;
+  accessInstructions: null;
+  street: string;
+  building: number;
+  appartment: string;
+  isCommercial: boolean;
+  hasDeposit: boolean;
+  square: number;
+  lat: number;
+  lon: number;
+  id: string;
+  userId: string;
+  status: string;
+  physControl: boolean;
+  roomType: City;
+  roomImages: RoomImage[];
+  district: City;
+  city: City;
 }
 
 export interface City {

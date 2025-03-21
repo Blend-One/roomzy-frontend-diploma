@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import SelectFieldCustom from "./SelectFieldCustom";
+import SelectFieldCustom from "../Inputs/SelectFieldCustom";
 
 const PriceUnit = () => {
   const { t } = useTranslation("components");
@@ -17,6 +17,7 @@ const PriceUnit = () => {
 
   return (
     <SelectFieldCustom
+      required
       name={"priceUnit"}
       options={priceUnit}
       label={"Период оплаты"}

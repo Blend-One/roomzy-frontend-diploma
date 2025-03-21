@@ -3,14 +3,27 @@ import AccountWrapperWidget from "../../../widgets/AccountWrapperWidget";
 import BasicTable from "../../../components/Table";
 import { Button, Stack, TablePagination, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { mockSpaceTableData } from "../../../services/mock/space";
+import { useGetRoomPersonalQuery } from "../../../services/rooms";
+import { getTableData } from "./getTableData";
+import NoData from "../../../components/NoData";
 
 const MyPublications = () => {
   const { t } = useTranslation("space");
   const navigate = useNavigate();
+  const { data } = useGetRoomPersonalQuery({
+    page: 1,
+    limit: 100,
+  });
+
+  const tableData = useMemo(() => {
+    if (data?.length) {
+      return getTableData(data);
+    }
+    return null;
+  }, [data]);
 
   const [page, setPage] = useState(2);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -34,7 +47,7 @@ const MyPublications = () => {
   return (
     <Page withPadding>
       <AccountWrapperWidget>
-        <Stack spacing={3}>
+        <Stack flexGrow={1} spacing={3}>
           <Stack direction="row" spacing={2}>
             <TextField size="small" sx={{ flexGrow: 1 }} label="Search" />
             <Button
@@ -45,15 +58,20 @@ const MyPublications = () => {
               {t("I18N_SPACE_CREATE_PUBLICATION")}
             </Button>
           </Stack>
-          <BasicTable data={mockSpaceTableData} />
-          <TablePagination
-            component="div"
-            count={100}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          {!tableData && <NoData />}
+          {tableData && (
+            <>
+              <BasicTable data={tableData} />
+              <TablePagination
+                component="div"
+                count={100}
+                page={page}
+                onPageChange={handleChangePage}
+                rowsPerPage={rowsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </>
+          )}
         </Stack>
       </AccountWrapperWidget>
     </Page>

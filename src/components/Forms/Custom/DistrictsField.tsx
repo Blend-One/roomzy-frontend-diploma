@@ -1,6 +1,6 @@
 import { useFormContext, useWatch } from "react-hook-form";
-import { useGetDistrictsByCityIdListQuery } from "../../services/dictionaries";
-import SelectFieldCustom from "./Inputs/SelectFieldCustom";
+import { useGetDistrictsByCityIdListQuery } from "../../../services/dictionaries";
+import SelectFieldCustom from "../Inputs/SelectFieldCustom";
 import { useEffect, useMemo } from "react";
 
 const DistrictsField = () => {
@@ -27,6 +27,7 @@ const DistrictsField = () => {
 
   return (
     <SelectFieldCustom
+      required
       disabled={!city}
       name={"districtId"}
       options={districts ?? []}

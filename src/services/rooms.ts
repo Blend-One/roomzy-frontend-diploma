@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
-import { IRoom, TRoomsSearchParams } from "../types/rooms";
-import { spaceDetailsMock, spaceMock } from "./mock/space";
+import { ICreateRoom, IViewRoom, TRoomsSearchParams } from "../types/rooms";
+import { IBaseSearchParams } from "../types/pagination";
 
 const ENDPOINT = `/rooms`;
 
@@ -9,7 +9,7 @@ export const roomsApi = createApi({
   reducerPath: "roomsApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getRoomsList: builder.query<IRoom[], TRoomsSearchParams>({
+    getRoomsList: builder.query<ICreateRoom[], TRoomsSearchParams>({
       query: (data: TRoomsSearchParams) => {
         const queryParams = new URLSearchParams(Object.entries(data));
         return {
@@ -18,7 +18,16 @@ export const roomsApi = createApi({
         };
       },
     }),
-    createRoom: builder.mutation<IRoom, FormData>({
+    getRoomPersonal: builder.query<IViewRoom[], IBaseSearchParams>({
+      query: (data: TRoomsSearchParams) => {
+        const queryParams = new URLSearchParams(Object.entries(data));
+        return {
+          url: `${ENDPOINT}/personal?${queryParams.toString()}`,
+          method: "GET",
+        };
+      },
+    }),
+    createRoom: builder.mutation<ICreateRoom, FormData>({
       query: (data: FormData) => {
         return {
           url: `${ENDPOINT}`,
@@ -30,7 +39,7 @@ export const roomsApi = createApi({
         };
       },
     }),
-    getSpaceById: builder.query<IRoom, string>({
+    getRoomById: builder.query<IViewRoom, string>({
       query: (id: string) => {
         return {
           url: `${ENDPOINT}/spaces/${id}`,
@@ -44,23 +53,8 @@ export const roomsApi = createApi({
 export const {
   useGetRoomsListQuery,
   useCreateRoomMutation,
-  // useGetSpaceByIdQuery
+  useGetRoomByIdQuery,
+  useGetRoomPersonalQuery,
 } = roomsApi;
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-export const useGetSpaceByIdQuery = (_params: string) => {
-  return {
-    data: spaceMock,
-    refetch: () => {},
-  };
-};
-
-export const useGetSpaceDetailsByIdQuery = (_params: string) => {
-  return {
-    data: spaceDetailsMock,
-    refetch: () => {},
-  };
-};
 
 export default roomsApi;

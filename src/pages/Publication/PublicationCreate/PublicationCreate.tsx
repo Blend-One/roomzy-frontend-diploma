@@ -1,15 +1,15 @@
-import { Grid2 as Grid, Stack } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 import Page from "../../../components/Page";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { IRoom } from "../../../types/rooms";
+import { ICreateRoom } from "../../../types/rooms";
 import TextFieldCustom from "../../../components/Forms/Inputs/TextFieldCustom";
 import NumberFieldCustom from "../../../components/Forms/Inputs/NumberFieldCustom";
 import SwitchFieldCustom from "../../../components/Forms/Inputs/SwitchFieldCustom";
 import FormContainer from "../../../components/Forms/FormContainer";
 import { useCreateRoomMutation } from "../../../services/rooms";
-import CitiesField from "../../../components/Forms/CitiesField";
-import DistrictsField from "../../../components/Forms/DistrictsField";
-import PriceUnit from "../../../components/Forms/Inputs/PriceUnit";
+import CitiesField from "../../../components/Forms/Custom/CitiesField";
+import DistrictsField from "../../../components/Forms/Custom/DistrictsField";
+import PriceUnit from "../../../components/Forms/Custom/PriceUnit";
 import DataMap, { IMapReturnData } from "../../../components/Map/DataMap";
 import FileFieldCustom from "../../../components/Forms/Inputs/FileFieldCustom";
 import { useCallback, useEffect, useState } from "react";
@@ -29,7 +29,7 @@ const PublicationCreate = () => {
     setMapData((prevData) => ({ ...prevData, ...newData }));
   }, []);
 
-  const formMethods = useForm<IRoom>({
+  const formMethods = useForm<ICreateRoom>({
     defaultValues: {
       title: "Название",
       price: "500000",
@@ -54,19 +54,21 @@ const PublicationCreate = () => {
 
   const { setValue } = formMethods;
 
-  const onSubmit: SubmitHandler<IRoom> = (data) => {
+  const onSubmit: SubmitHandler<ICreateRoom> = (data) => {
     const formData = new FormData();
     console.log(data);
 
-    if (data.files) {
-      formData.append("files", data.files);
+    if (data.files instanceof FileList) {
+      Array.from(data.files).forEach((file) => {
+        formData.append("files", file);
+      });
     }
 
     Object.keys(data).forEach((key) => {
       if (key === "files") {
         return;
       }
-      formData.append(key, data[key as keyof IRoom] as string);
+      formData.append(key, data[key as keyof ICreateRoom] as string);
     });
 
     postRoom(formData);
@@ -92,7 +94,7 @@ const PublicationCreate = () => {
             <Grid size={{ xs: 12, sm: 6 }}>
               <TextFieldCustom name={"title"} label={"Название"} required />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
               <TextFieldCustom name={"price"} label={"Цена"} required />
             </Grid>
             <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
@@ -118,15 +120,10 @@ const PublicationCreate = () => {
               <SwitchFieldCustom
                 name={"isCommercial"}
                 label={"Подходит для коммерции"}
-                required
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-              <SwitchFieldCustom
-                name={"hasDeposit"}
-                label={"Нужен депозит"}
-                required
-              />
+              <SwitchFieldCustom name={"hasDeposit"} label={"Нужен депозит"} />
             </Grid>
             {/* <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <TextFieldCustom
@@ -142,7 +139,7 @@ const PublicationCreate = () => {
               <DistrictsField />
             </Grid>
             {/* <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-              <TextFieldCustom name={"sections"} label={"Sections"} />
+              <SectionTypeField/>
             </Grid> */}
             <Grid size={{ xs: 12, sm: 6 }}>
               <TextFieldCustom
@@ -157,7 +154,7 @@ const PublicationCreate = () => {
               />
             </Grid>
             <Grid size={{ xs: 12 }}>
-              <FileFieldCustom />
+              <FileFieldCustom name="files" />
             </Grid>
             <Grid size={{ xs: 12 }}>
               <DataMap setCoords={updateMapData} coords={mapData.coords} />
