@@ -4,7 +4,7 @@ import i18n from "../i18n";
 import { useState } from "react";
 import { IconButton, Menu } from "@mui/material";
 
-type Languages = "ru" | "en";
+type Languages = "ru" | "en" | "kz";
 
 interface ILanguages {
   language: Languages;
@@ -15,6 +15,10 @@ const languages: Array<ILanguages> = [
   {
     language: "ru",
     name: "Русский",
+  },
+  {
+    language: "kz",
+    name: "Қазақша",
   },
   {
     language: "en",

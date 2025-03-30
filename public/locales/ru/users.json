@@ -8,5 +8,7 @@
   "I18N_USER_SIGNUP_INFO": "Зарегистрируйтесь, чтобы продолжить",
   "I18N_SIGNUP_BUTTON": "Зарегистрироваться",
   "I18N_USER_HELLO": "Привет, {{name}}",
+  "I18N_USER_MY_RENTALS": "Моя аренда",
+  "I18N_USER_MY_ADS": "Мои объявления",
   "I18N_LOGIN": "Войти"
 }

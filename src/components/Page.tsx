@@ -12,7 +12,6 @@ const PageContainer = styled(Stack, {
   flexGrow: 1,
   flexShrink: 1,
   overflowY: "auto",
-  maxHeight: "100vh",
   padding: props.withPadding ? "0 10%" : undefined,
 }));
 

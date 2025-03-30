@@ -11,13 +11,13 @@ export interface IPaginationData {
   page: number;
   onPageChange: (event: unknown, newPage: number) => void;
   onRowPerPageChange: (event: ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 export interface IBaseSearchParams {
-  pageNo?: number;
-  pageSize?: number;
-  search?: string;
-  searchBy?: string;
-  orderBy?: string;
-  order?: string;
+  page: number;
+  limit: number;
+}
+
+export interface INameSearchParams extends IBaseSearchParams {
+  name: string;
 }

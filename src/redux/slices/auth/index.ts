@@ -1,6 +1,6 @@
 import { slice } from "./slice";
 
-export const { clearTokenState, writeToken } = slice.actions;
+export const { clearTokenState, writeToken, setRedirectPath } = slice.actions;
 
 const authReducer = slice.reducer;
 const authSlice = slice;

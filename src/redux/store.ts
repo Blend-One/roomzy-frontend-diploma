@@ -1,20 +1,32 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./slices/auth";
 import tokenApi from "../services/token";
-import spaceApi from "../services/space";
+import roomsApi from "../services/rooms";
 import dictionariesApi from "../services/dictionaries";
+import sectionTypesApi from "../services/sectionTypes";
+import roomTypesApi from "../services/roomTypes";
+import attributesApi from "../services/attributes";
+import characteristicsApi from "../services/characteristics";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     [tokenApi.reducerPath]: tokenApi.reducer,
-    [spaceApi.reducerPath]: spaceApi.reducer,
+    [roomsApi.reducerPath]: roomsApi.reducer,
     [dictionariesApi.reducerPath]: dictionariesApi.reducer,
+    [sectionTypesApi.reducerPath]: sectionTypesApi.reducer,
+    [roomTypesApi.reducerPath]: roomTypesApi.reducer,
+    [attributesApi.reducerPath]: attributesApi.reducer,
+    [characteristicsApi.reducerPath]: characteristicsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       tokenApi.middleware,
-      spaceApi.middleware,
-      dictionariesApi.middleware
+      roomsApi.middleware,
+      dictionariesApi.middleware,
+      roomTypesApi.middleware,
+      attributesApi.middleware,
+      characteristicsApi.middleware,
+      sectionTypesApi.middleware
     ),
 });
