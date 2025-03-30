@@ -1,5 +1,6 @@
 import { IDictionary } from "./dictionaries";
 import { IBaseSearchParams } from "./pagination";
+import { ICreateSections } from "./sectionTypes";
 
 export interface TRoomsSearchParams extends IBaseSearchParams {
   priceUnit?: EPaymentType;
@@ -10,6 +11,7 @@ export interface TRoomsSearchParams extends IBaseSearchParams {
   square?: string;
   priceRange?: string;
   title?: string;
+  roomTypeId?: string;
   hasDeposit?: string;
 }
 
@@ -51,7 +53,7 @@ export interface ICreateRoom {
   district: City;
   city: City;
   files: File;
-  sections: RoomSection[];
+  sections: ICreateSections[];
 }
 
 export interface IViewRoom {
@@ -93,7 +95,7 @@ export interface RoomImage {
 export interface RoomSection {
   floorNumber: number;
   id: string;
-  roomSectionType: City;
+  roomSectionType: string;
   sectionAttributeValues: SectionAttributeValue[];
 }
 

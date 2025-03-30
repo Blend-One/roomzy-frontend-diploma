@@ -1,16 +1,16 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
-import { IBaseSearchParams } from "../types/pagination";
+import { INameSearchParams } from "../types/pagination";
 import { ISectionTypes } from "../types/sectionTypes";
 
-const ENDPOINT = `/section_types`;
+const ENDPOINT = `/attributes`;
 
-export const sectionTypesApi = createApi({
-  reducerPath: "sectionTypesApi",
+export const attributesApi = createApi({
+  reducerPath: "attributesApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getsectionTypesList: builder.query<ISectionTypes[], IBaseSearchParams>({
-      query: (data: IBaseSearchParams) => {
+    getAttributesList: builder.query<ISectionTypes[], INameSearchParams>({
+      query: (data: INameSearchParams) => {
         const queryParams = new URLSearchParams(Object.entries(data));
         return {
           url: `${ENDPOINT}?${queryParams.toString()}`,
@@ -21,6 +21,6 @@ export const sectionTypesApi = createApi({
   }),
 });
 
-export const { useGetsectionTypesListQuery } = sectionTypesApi;
+export const { useGetAttributesListQuery } = attributesApi;
 
-export default sectionTypesApi;
+export default attributesApi;

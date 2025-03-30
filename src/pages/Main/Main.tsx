@@ -12,6 +12,7 @@ import PriceUnit from "../../components/Forms/Custom/PriceUnit";
 import SquareField from "../../components/Forms/Custom/SquareField";
 import HasSelect from "../../components/Forms/Custom/HasSelect";
 import { useState } from "react";
+import RoomTypes from "../../components/Forms/Custom/RoomTypes";
 
 const Main = () => {
   const [params, setParams] = useState({});
@@ -37,6 +38,7 @@ const Main = () => {
       squareTo: "",
       title: "",
       hasDeposit: "",
+      roomTypeId: "",
     },
   });
 
@@ -48,9 +50,11 @@ const Main = () => {
       Object.entries(data).filter(([_, value]) => value !== "")
     );
     const PAYLOAD: typeof data = {};
-
     if (filteredData.title) {
       PAYLOAD.title = filteredData.title;
+    }
+    if (filteredData.roomTypeId) {
+      PAYLOAD.roomTypeId = filteredData.roomTypeId;
     }
     if (filteredData.cityId) {
       PAYLOAD.cityId = filteredData.cityId;
@@ -143,6 +147,9 @@ const Main = () => {
                 label={"Нужен депозит?"}
                 name={"hasDeposit"}
               />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6, lg: 4 }}>
+              <RoomTypes withEmpty />
             </Grid>
             <Grid size={{ xs: 12 }}>
               <Button

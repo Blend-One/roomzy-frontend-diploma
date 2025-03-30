@@ -1,15 +1,15 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
 import { IBaseSearchParams } from "../types/pagination";
-import { ISectionTypes } from "../types/sectionTypes";
+import { IRoomTypes } from "../types/roomTypes";
 
-const ENDPOINT = `/section_types`;
+const ENDPOINT = `/room_types`;
 
-export const sectionTypesApi = createApi({
-  reducerPath: "sectionTypesApi",
+const roomTypesApi = createApi({
+  reducerPath: "roomTypesApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getsectionTypesList: builder.query<ISectionTypes[], IBaseSearchParams>({
+    getRoomTypesList: builder.query<IRoomTypes[], IBaseSearchParams>({
       query: (data: IBaseSearchParams) => {
         const queryParams = new URLSearchParams(Object.entries(data));
         return {
@@ -21,6 +21,6 @@ export const sectionTypesApi = createApi({
   }),
 });
 
-export const { useGetsectionTypesListQuery } = sectionTypesApi;
+export const { useGetRoomTypesListQuery } = roomTypesApi;
 
-export default sectionTypesApi;
+export default roomTypesApi;

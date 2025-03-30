@@ -3,13 +3,13 @@ import baseAppQuery from "./tools/baseAppQuery";
 import { IBaseSearchParams } from "../types/pagination";
 import { ISectionTypes } from "../types/sectionTypes";
 
-const ENDPOINT = `/section_types`;
+const ENDPOINT = `/characteristics`;
 
-export const sectionTypesApi = createApi({
-  reducerPath: "sectionTypesApi",
+export const characteristicsApi = createApi({
+  reducerPath: "characteristicsApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getsectionTypesList: builder.query<ISectionTypes[], IBaseSearchParams>({
+    getCharacteristicsList: builder.query<ISectionTypes[], IBaseSearchParams>({
       query: (data: IBaseSearchParams) => {
         const queryParams = new URLSearchParams(Object.entries(data));
         return {
@@ -21,6 +21,6 @@ export const sectionTypesApi = createApi({
   }),
 });
 
-export const { useGetsectionTypesListQuery } = sectionTypesApi;
+export const { useGetCharacteristicsListQuery } = characteristicsApi;
 
-export default sectionTypesApi;
+export default characteristicsApi;

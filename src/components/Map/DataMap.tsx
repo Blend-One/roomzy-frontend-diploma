@@ -48,7 +48,7 @@ function parseAddress(
   };
 }
 
-const DataMap: FC<DataMapProps> = ({ coords, setCoords, height = "300px" }) => {
+const DataMap: FC<DataMapProps> = ({ coords, setCoords, height = "400px" }) => {
   const ymap = useYMaps(["geocode"]);
   const [coordsState, setCoordsState] = useState(coords);
 

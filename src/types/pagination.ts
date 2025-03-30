@@ -17,3 +17,7 @@ export interface IBaseSearchParams {
   page: number;
   limit: number;
 }
+
+export interface INameSearchParams extends IBaseSearchParams {
+  name: string;
+}
