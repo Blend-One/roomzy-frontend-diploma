@@ -56,7 +56,7 @@ const AutocompleteFieldCustom: React.FC<IAutocompleteFieldCustomProps> = ({
             disablePortal
             getOptionLabel={(option) => option.label || ""}
             value={field.value}
-            onChange={(event, value) => field.onChange(value)}
+            onChange={(_event, value) => field.onChange(value)}
             isOptionEqualToValue={(option, value) =>
               option.value === value.value
             }

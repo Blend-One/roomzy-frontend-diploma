@@ -21,11 +21,11 @@ export interface ICreateSections {
 }
 
 export interface SectionType {
-  sectionId: string;
+  sectionId: string | null;
   sectionData: SectionData[];
 }
 
 export interface SectionData {
-  characteristicId: string;
-  attributeId: string;
+  characteristicId: string | null;
+  attributeId: string | null;
 }

@@ -2,21 +2,19 @@ import { FC } from "react";
 import {
   Card,
   CardContent,
-  CardMedia,
   Typography,
   CardActions,
   Button,
   Stack,
   styled,
-  SxProps,
-  Theme,
+  // SxProps,
+  // Theme,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import BusinessIcon from "@mui/icons-material/Business";
 import HomeIcon from "@mui/icons-material/Home";
 import SecurityIcon from "@mui/icons-material/Security";
-import LayersIcon from "@mui/icons-material/Layers";
 import SquareFootIcon from "@mui/icons-material/SquareFoot";
 import { useNavigate } from "react-router";
 import { ICreateRoom } from "../../types/rooms";
@@ -32,12 +30,12 @@ const StyledCard = styled(Card)({
   height: "100%",
 });
 
-const сardMediaSx: SxProps<Theme> = {
-  width: "100%",
-  height: 200,
-  borderTopLeftRadius: 2,
-  borderTopRightRadius: 2,
-};
+// const сardMediaSx: SxProps<Theme> = {
+//   width: "100%",
+//   height: 200,
+//   borderTopLeftRadius: 2,
+//   borderTopRightRadius: 2,
+// };
 
 const StyledCardContent = styled(CardContent)({
   flex: 1,
@@ -64,12 +62,6 @@ const SpaceCard: FC<{ data: ICreateRoom }> = ({ data }) => {
 
   return (
     <StyledCard>
-      <CardMedia
-        sx={сardMediaSx}
-        component="img"
-        image={data.imageUrl}
-        alt={data.title}
-      />
       <StyledCardContent>
         <Stack spacing={1}>
           <Typography
@@ -107,10 +99,6 @@ const SpaceCard: FC<{ data: ICreateRoom }> = ({ data }) => {
           <StyledTypography variant="body2" color="text.primary">
             <SquareFootIcon sx={{ color: "purple" }} />
             {t("I18N_SPACE_SQUARE", { square: data.square })}
-          </StyledTypography>
-          <StyledTypography variant="body2" color="text.primary">
-            <LayersIcon sx={{ color: "brown" }} />
-            {t("I18N_SPACE_FLOORS", { floors: data.floors })}
           </StyledTypography>
           {data.hasDeposit && (
             <StyledTypography variant="body2" color="text.primary">

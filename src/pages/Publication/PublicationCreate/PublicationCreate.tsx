@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Grid2 as Grid, Stack } from "@mui/material";
 import Page from "../../../components/Page";
 import {
@@ -27,27 +28,38 @@ const DEFAULT_MAP_DATA: IMapReturnData = {
   building: "",
 };
 
-function transformData(data: any): any {
-  function traverse(obj: any[] | object | null): any {
+interface SectionData {
+  characteristicId: { value: string; label: string } | null;
+  attributeId: { value: string; label: string } | null;
+}
+
+interface Section {
+  sectionData: SectionData[];
+  sectionId: { value: string; label: string };
+}
+
+interface Floor {
+  sectionTypes: Section[];
+  floorNumber: number;
+}
+
+function transformData(data: Floor[]): any {
+  function traverse(obj: any): any {
     if (Array.isArray(obj)) {
-      return obj.map((item) => traverse(item));
+      return obj.map(item => traverse(item));
     } else if (typeof obj === "object" && obj !== null) {
-      const transformed: any = {};
+      const transformed: Record<string, any> = {};
 
       for (const key in obj) {
-        if (
-          key === "sectionId" &&
-          typeof obj[key] === "object" &&
-          obj[key]?.value
-        ) {
+        if (key === "sectionId" && obj[key] && typeof obj[key] === "object" && "value" in obj[key]) {
           transformed[key] = obj[key].value;
-        } else if (key === "characteristicId" || key === "attributeId") {
-          transformed[key] = obj[key].value;
+        } else if ((key === "characteristicId" || key === "attributeId") && obj[key] && typeof obj[key] === "object" && "value" in obj[key]) {
+          transformed[key] = obj[key]?.value ?? null;
         } else {
           transformed[key] = traverse(obj[key]);
         }
       }
-
+      
       return transformed;
     }
     return obj;
@@ -115,7 +127,7 @@ const PublicationCreate = () => {
     data.sections[0].floorNumber = 1;
     console.log(data);
 
-    data.sections = transformData(data.sections);
+    data.sections = transformData(data.sections as unknown as Floor[]);
 
     Object.keys(data).forEach((key) => {
       if (key === "files" && Array.isArray(data.files)) {
@@ -160,6 +172,7 @@ const PublicationCreate = () => {
     setValue("lon", mapData.coords[1]);
     if (mapData.street) setValue("street", mapData.street);
     if (mapData.building) setValue("building", mapData.building);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapData]);
 
   return (
