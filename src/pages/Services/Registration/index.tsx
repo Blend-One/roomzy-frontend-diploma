@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
+import Loader from "../../../components/Loader";
 
 const Registration = React.lazy(() => import("./Registration"));
 
 const LazyRegistration = () => (
-  <Suspense fallback={<div />}>
+  <Suspense fallback={<Loader />}>
     <Registration />
   </Suspense>
 );
