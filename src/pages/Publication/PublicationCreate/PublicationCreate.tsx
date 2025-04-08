@@ -88,8 +88,8 @@ const PublicationCreate = () => {
 
   const formMethods = useForm<ICreateRoom>({
     defaultValues: {
-      title: "Название",
-      price: "500000",
+      title: "",
+      price: "",
       priceUnit: "PER_MONTH",
       physControlInstructions: "",
       accessInstructions: "",
