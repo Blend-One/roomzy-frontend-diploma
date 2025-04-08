@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Grid2 as Grid, Stack } from "@mui/material";
-import Page from "../../../components/Page";
 import {
   FormProvider,
   SubmitHandler,
@@ -46,20 +45,30 @@ interface Floor {
 function transformData(data: Floor[]): any {
   function traverse(obj: any): any {
     if (Array.isArray(obj)) {
-      return obj.map(item => traverse(item));
+      return obj.map((item) => traverse(item));
     } else if (typeof obj === "object" && obj !== null) {
       const transformed: Record<string, any> = {};
 
       for (const key in obj) {
-        if (key === "sectionId" && obj[key] && typeof obj[key] === "object" && "value" in obj[key]) {
+        if (
+          key === "sectionId" &&
+          obj[key] &&
+          typeof obj[key] === "object" &&
+          "value" in obj[key]
+        ) {
           transformed[key] = obj[key].value;
-        } else if ((key === "characteristicId" || key === "attributeId") && obj[key] && typeof obj[key] === "object" && "value" in obj[key]) {
+        } else if (
+          (key === "characteristicId" || key === "attributeId") &&
+          obj[key] &&
+          typeof obj[key] === "object" &&
+          "value" in obj[key]
+        ) {
           transformed[key] = obj[key]?.value ?? null;
         } else {
           transformed[key] = traverse(obj[key]);
         }
       }
-      
+
       return transformed;
     }
     return obj;
@@ -124,7 +133,9 @@ const PublicationCreate = () => {
 
   const onSubmit: SubmitHandler<ICreateRoom> = (data) => {
     const formData = new FormData();
-    data.sections[0].floorNumber = 1;
+    if (data.sections.length !== 0) {
+      data.sections[0].floorNumber = 1;
+    }
     console.log(data);
 
     data.sections = transformData(data.sections as unknown as Floor[]);
@@ -163,26 +174,21 @@ const PublicationCreate = () => {
     remove(index);
   };
 
-  // useEffect(() => {
-  //   handleAddFloor()
-  // }, []);
-
   useEffect(() => {
     setValue("lat", mapData.coords[0]);
     setValue("lon", mapData.coords[1]);
     if (mapData.street) setValue("street", mapData.street);
     if (mapData.building) setValue("building", mapData.building);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapData]);
 
   return (
-    <Page withPadding>
+    <Stack sx={{ flexGrow: 1, px: 5 }}>
       <FormProvider {...formMethods}>
         <FormContainer
           onSubmit={onSubmit}
           isLoading={isLoading}
           formId={"create-worker-form"}
-          // btnDisabled={!isValid}
         >
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, sm: 6 }}>
@@ -263,15 +269,13 @@ const PublicationCreate = () => {
                       p="8px 8px 0px 8px"
                     >
                       Этаж {index + 1}
-                      {fields.length > 1 && (
-                        <Button
-                          variant="outlined"
-                          color="error"
-                          onClick={() => handleDeleteFloor(index)}
-                        >
-                          Удалить этаж
-                        </Button>
-                      )}
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        onClick={() => handleDeleteFloor(index)}
+                      >
+                        Удалить этаж
+                      </Button>
                     </Stack>
                     <Stack
                       spacing={2}
@@ -296,7 +300,7 @@ const PublicationCreate = () => {
           </Grid>
         </FormContainer>
       </FormProvider>
-    </Page>
+    </Stack>
   );
 };
 
