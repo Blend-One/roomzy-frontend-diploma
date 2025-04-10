@@ -100,14 +100,8 @@ export interface IViewRoom {
   lat: number;
   lon: number;
   roomType: City;
+  roomSections: RoomSection[];
   roomImages: RoomImage[];
   district: City;
   city: City;
-}
-
-export interface RoomImage {
-  id: string;
-  roomId: string;
-  hash: null;
-  name: string;
 }

@@ -42,7 +42,7 @@ export const roomsApi = createApi({
     getRoomById: builder.query<IViewRoom, string>({
       query: (id: string) => {
         return {
-          url: `${ENDPOINT}/spaces/${id}`,
+          url: `${ENDPOINT}/${id}`,
           method: "GET",
         };
       },

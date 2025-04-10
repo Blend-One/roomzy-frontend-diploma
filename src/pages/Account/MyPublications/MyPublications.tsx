@@ -23,7 +23,7 @@ const MyPublications = () => {
       return getTableData(data, navigate);
     }
     return null;
-  }, [data]);
+  }, [data, navigate]);
 
   const [page, setPage] = useState(2);
   const [rowsPerPage, setRowsPerPage] = useState(10);
