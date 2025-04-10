@@ -20,7 +20,7 @@ const MyPublications = () => {
 
   const tableData = useMemo(() => {
     if (data?.length) {
-      return getTableData(data);
+      return getTableData(data, navigate);
     }
     return null;
   }, [data]);

@@ -1,24 +1,25 @@
 import { IViewRoom } from "../../../types/rooms";
+import { getRoomStatusCompare } from "../../../utils/compare";
 
-export const getTableData = (data: IViewRoom[]) => {
+export const getTableData = (
+  data: IViewRoom[],
+  handleNavigate: (id: string) => void
+) => {
   return {
     header: [
-      { name: "Название" },
+      { name: "Адрес" },
       { name: "Цена" },
-      { name: "Улица" },
-      { name: "Здание" },
       { name: "Площадь" },
-      { name: "Этажи" },
+      { name: "Статус" },
     ],
     body: data.map((room) => ({
       data: [
-        { name: room.title },
+        { name: `${room.street}, ${room.building}` },
         { name: `${room.price} ₸` },
-        { name: room.street },
-        { name: room.building },
         { name: `${room.square} м²` },
-        { name: room.status },
+        { name: getRoomStatusCompare(room.status) },
       ],
+      clickAction: () => handleNavigate(`/publications/${room.id}`),
     })),
   };
 };

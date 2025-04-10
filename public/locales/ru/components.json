@@ -17,5 +17,8 @@
   "I18N_SELECT_NONE": "Не выбрано",
   "I18N_NO": "Нет",
   "I18N_YES": "Да",
+  "I18N_ROOM_IN_MODERATION": "Модерация",
+  "I18N_ROOM_OPENED": "Активно",
+  "I18N_ROOM_ARCHIVED": "Архив",
   "I18N_INVALID_PASSWORD": "Неверный пароль"
 }

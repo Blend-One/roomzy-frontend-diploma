@@ -18,28 +18,24 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 
 const StyledTable = styled(Table)(() => ({
   flexGrow: 1,
-  display: "flex",
-  flexDirection: "column",
 }));
 
 const StyledTableBody = styled(TableBody)(() => ({
   flexGrow: 1,
   overflowY: "auto",
-  display: "block",
 }));
 
-const StyledTableHead = styled(TableHead)(() => ({
-  display: "table",
-  tableLayout: "fixed",
-}));
+const StyledTableHead = styled(TableHead)(() => ({}));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   backgroundColor: theme.palette.action.hover,
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.selected,
   },
-  display: "table",
-  tableLayout: "fixed",
+  "&:hover": {
+    backgroundColor: theme.palette.primary.light,
+    cursor: "pointer",
+  },
   width: "100%",
 }));
 
@@ -63,7 +59,7 @@ const BasicTable: FC<{ data: ITable }> = ({ data }) => {
         </StyledTableHead>
         <StyledTableBody>
           {data.body.map((row, index) => (
-            <StyledTableRow key={index}>
+            <StyledTableRow onClick={row.clickAction} key={index}>
               {row.data.map((cell, i) => (
                 <StyledTableCell key={i}>{cell.name}</StyledTableCell>
               ))}
