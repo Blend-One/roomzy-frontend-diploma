@@ -26,20 +26,20 @@ const AccountMenu = () => {
           <ListItemText>{t("I18N_NAV_ACCOUNT")}</ListItemText>
         </MenuItem>
         {!hasRole && (
-          <>
-            <MenuItem onClick={() => navigate("/account/rentals")}>
-              <ListItemIcon>
-                <RentalsIcon />
-              </ListItemIcon>
-              <ListItemText>{t("I18N_NAV_RENTALS")}</ListItemText>
-            </MenuItem>
-            <MenuItem onClick={() => navigate("/account/publications")}>
-              <ListItemIcon>
-                <PublicationsIcon />
-              </ListItemIcon>
-              <ListItemText>{t("I18N_NAV_PUBLICATIONS")}</ListItemText>
-            </MenuItem>
-          </>
+          <MenuItem onClick={() => navigate("/account/rentals")}>
+            <ListItemIcon>
+              <RentalsIcon />
+            </ListItemIcon>
+            <ListItemText>{t("I18N_NAV_RENTALS")}</ListItemText>
+          </MenuItem>
+        )}
+        {!hasRole && (
+          <MenuItem onClick={() => navigate("/account/publications")}>
+            <ListItemIcon>
+              <PublicationsIcon />
+            </ListItemIcon>
+            <ListItemText>{t("I18N_NAV_PUBLICATIONS")}</ListItemText>
+          </MenuItem>
         )}
         {hasRole && (
           <MenuItem onClick={() => navigate("/account/moderations")}>
