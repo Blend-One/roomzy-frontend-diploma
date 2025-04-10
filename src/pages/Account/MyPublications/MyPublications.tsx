@@ -58,20 +58,22 @@ const MyPublications = () => {
               {t("I18N_SPACE_CREATE_PUBLICATION")}
             </Button>
           </Stack>
-          {!tableData && <NoData />}
-          {tableData && (
-            <>
-              <BasicTable data={tableData} />
-              <TablePagination
-                component="div"
-                count={100}
-                page={page}
-                onPageChange={handleChangePage}
-                rowsPerPage={rowsPerPage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </>
-          )}
+          <Stack flexGrow={1} spacing={2}>
+            {!tableData && <NoData />}
+            {tableData && (
+              <>
+                <BasicTable data={tableData} />
+                <TablePagination
+                  component="div"
+                  count={100}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  rowsPerPage={rowsPerPage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </>
+            )}
+          </Stack>
         </Stack>
       </AccountWrapperWidget>
     </Page>

@@ -10,11 +10,27 @@ import {
 import { FC } from "react";
 import { ITable } from "./types";
 
-const StyledTableContainer = styled(TableContainer)(() => ({
-  height: 800,
+const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+  minHeight: 500,
   flexGrow: 1,
-  flexShrink: 1,
+  border: `1px solid ${theme.palette.divider}`,
+}));
+
+const StyledTable = styled(Table)(() => ({
+  flexGrow: 1,
+  display: "flex",
+  flexDirection: "column",
+}));
+
+const StyledTableBody = styled(TableBody)(() => ({
+  flexGrow: 1,
   overflowY: "auto",
+  display: "block",
+}));
+
+const StyledTableHead = styled(TableHead)(() => ({
+  display: "table",
+  tableLayout: "fixed",
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -22,24 +38,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.selected,
   },
+  display: "table",
+  tableLayout: "fixed",
+  width: "100%",
 }));
 
 const StyledTableCell = styled(TableCell)({
   flexGrow: 1,
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 });
 
 const BasicTable: FC<{ data: ITable }> = ({ data }) => {
   return (
     <StyledTableContainer>
-      <Table stickyHeader>
-        <TableHead>
+      <StyledTable stickyHeader>
+        <StyledTableHead>
           <TableRow>
             {data.header.map((head, index) => (
-              <TableCell key={index}>{head.name}</TableCell>
+              <StyledTableCell key={index}>{head.name}</StyledTableCell>
             ))}
           </TableRow>
-        </TableHead>
-        <TableBody>
+        </StyledTableHead>
+        <StyledTableBody>
           {data.body.map((row, index) => (
             <StyledTableRow key={index}>
               {row.data.map((cell, i) => (
@@ -47,8 +69,8 @@ const BasicTable: FC<{ data: ITable }> = ({ data }) => {
               ))}
             </StyledTableRow>
           ))}
-        </TableBody>
-      </Table>
+        </StyledTableBody>
+      </StyledTable>
     </StyledTableContainer>
   );
 };
