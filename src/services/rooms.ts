@@ -27,6 +27,15 @@ export const roomsApi = createApi({
         };
       },
     }),
+    getRoomModerations: builder.query<IViewRoom[], IBaseSearchParams>({
+      query: (data: TRoomsSearchParams) => {
+        const queryParams = new URLSearchParams(Object.entries(data));
+        return {
+          url: `${ENDPOINT}/moderation?${queryParams.toString()}`,
+          method: "GET",
+        };
+      },
+    }),
     createRoom: builder.mutation<ICreateRoom, FormData>({
       query: (data: FormData) => {
         return {
@@ -54,6 +63,7 @@ export const {
   useGetRoomsListQuery,
   useCreateRoomMutation,
   useGetRoomByIdQuery,
+  useGetRoomModerationsQuery,
   useGetRoomPersonalQuery,
 } = roomsApi;
 
