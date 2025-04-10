@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import Page from "../../components/Page";
 import {
   Button,
-  Chip,
+  // Chip,
   Grid2 as Grid,
   Paper,
   Stack,
@@ -17,6 +17,8 @@ import { getRentTypeCompare, getRoomStatusCompare } from "../../utils/compare";
 import ViewMap from "../../components/Map/ViewMap";
 import { useGetRoomByIdQuery } from "../../services/rooms";
 import { getRoomImageLink } from "../../utils/images";
+import AppConfig from "../../config";
+import useHasRole from "../../hooks/useHasRole";
 
 const PublicationTitle = styled(Paper)(({ theme }) => ({
   fontSize: "1.5rem",
@@ -56,6 +58,7 @@ const Publication = () => {
   const { data, isError } = useGetRoomByIdQuery(id ?? "");
   const { t } = useTranslation(["space", "components"]);
   const nanigate = useNavigate();
+  const hasRole = useHasRole(AppConfig.ROLES.MANAGER);
 
   const images = data?.roomImages.map((row) => ({
     original: getRoomImageLink(row.id),
@@ -66,6 +69,7 @@ const Publication = () => {
     if (isError) {
       nanigate("/account/publications");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError]);
 
   return (
@@ -99,6 +103,7 @@ const Publication = () => {
                 <Typography>
                   {t("I18N_SPACE_SQUARE", { square: data?.square })}
                 </Typography>
+                {/* TODO: GET floors number */}
                 {/* <Typography>
                   {t("I18N_SPACE_FLOORS", { floors: data?. })}
                 </Typography> */}
@@ -115,12 +120,34 @@ const Publication = () => {
                       fontSize: "1.2rem",
                       textAlign: "center",
                       border: "2px solid",
+                      padding: 1,
                     }}
                   >
                     {getRoomStatusCompare(data?.status ?? "")}
                   </Typography>
                 )}
-                <Button variant="contained">{t("I18N_SPACE_RENT")}</Button>
+                {data?.status === AppConfig.ROOM_STATUS.ACTIVE && (
+                  <Button variant="contained">{t("I18N_SPACE_RENT")}</Button>
+                )}
+                {data?.status === AppConfig.ROOM_STATUS.IN_MODERATION &&
+                  hasRole && (
+                    <Stack pt={2} direction={"row"} spacing={1}>
+                      <Button
+                        sx={{ flexGrow: 1 }}
+                        variant="contained"
+                        color="success"
+                      >
+                        Одобрить
+                      </Button>
+                      <Button
+                        sx={{ flexGrow: 1 }}
+                        variant="outlined"
+                        color="error"
+                      >
+                        Отклонить
+                      </Button>
+                    </Stack>
+                  )}
               </Stack>
             </Paper>
           </Grid>

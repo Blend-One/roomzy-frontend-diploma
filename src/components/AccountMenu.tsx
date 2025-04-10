@@ -15,7 +15,7 @@ import AppConfig from "../config";
 const AccountMenu = () => {
   const { t } = useTranslation("nav");
   const navigate = useNavigate();
-  const hasRole = useHasRole(AppConfig.roles.MANAGER);
+  const hasRole = useHasRole(AppConfig.ROLES.MANAGER);
   return (
     <Paper>
       <MenuList>
