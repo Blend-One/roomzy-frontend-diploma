@@ -64,14 +64,24 @@ const Main = () => {
     }
     if (filteredData.priceFrom || filteredData.priceTo) {
       PAYLOAD.priceRange = JSON.stringify({
-        min: filteredData.priceFrom ?? "",
-        max: filteredData.priceTo ?? "",
+        min: filteredData.priceFrom ?? 0,
+        max: filteredData.priceTo ?? 0,
       });
     }
-    if (filteredData.squareFrom || filteredData.squareTo) {
+    if (filteredData.squareFrom) {
       PAYLOAD.square = JSON.stringify({
-        min: filteredData.squareFrom ?? "",
-        max: filteredData.squareTo ?? "",
+        min: Number(filteredData.squareFrom),
+      });
+    }
+    if (filteredData.squareTo) {
+      PAYLOAD.square = JSON.stringify({
+        max: Number(filteredData.squareTo),
+      });
+    }
+    if (filteredData.squareFrom && filteredData.squareTo) {
+      PAYLOAD.square = JSON.stringify({
+        min: Number(filteredData.squareFrom),
+        max: Number(filteredData.squareTo),
       });
     }
     if (filteredData.isCommercial === "YES") {
