@@ -12,7 +12,7 @@ const ViewMap: FC<ViewMapProps> = ({ coords, height = "300px" }) => {
       height={height}
       defaultState={{
         center: coords,
-        zoom: 14,
+        zoom: 17,
         controls: ["zoomControl", "fullscreenControl"],
       }}
       modules={["control.ZoomControl", "control.FullscreenControl"]}

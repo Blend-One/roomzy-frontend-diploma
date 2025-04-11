@@ -10,7 +10,13 @@ export const userAuth: TranslationMap = {
 };
 
 export const priceUnit: TranslationMap = {
-   PER_HOUR: "I18N_SPACE_HOUR",
-   PER_DAY: "I18N_SPACE_DAY",
-   PER_MONTH: "I18N_SPACE_MONTH",
+  PER_HOUR: "I18N_SPACE_HOUR",
+  PER_DAY: "I18N_SPACE_DAY",
+  PER_MONTH: "I18N_SPACE_MONTH",
+};
+
+export const roomStatus: TranslationMap = {
+  IN_MODERATION: "I18N_ROOM_IN_MODERATION",
+  OPENED: "I18N_ROOM_OPENED",
+  REJECTED: "I18N_ROOM_REJECTED",
 };

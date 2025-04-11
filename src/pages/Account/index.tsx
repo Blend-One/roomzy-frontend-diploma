@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
+import Loader from "../../components/Loader";
 
 const Account = React.lazy(() => import("./Account"));
 
 const LazyAccount = () => (
-  <Suspense fallback={<div />}>
+  <Suspense fallback={<Loader />}>
     <Account />
   </Suspense>
 );

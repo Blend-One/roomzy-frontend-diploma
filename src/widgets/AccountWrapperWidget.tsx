@@ -7,13 +7,18 @@ import NoData from "../components/NoData";
 
 const AccountWrapperWidget: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Stack spacing={3} mt={4} mb={4} flexGrow={1}>
+    <Stack spacing={3} mt={4} mb={4} flexGrow={1} minHeight={0}>
       <BasicBreadcrumbs />
-      <Grid container spacing={2} flexGrow={1}>
+      <Grid container spacing={2} flexGrow={1} minHeight={0}>
         <Grid size={{ sm: 3 }}>
           <AccountMenu />
         </Grid>
-        <Grid size={{ sm: 9 }}>{children || <NoData />}</Grid>
+        <Grid
+          size={{ sm: 9 }}
+          sx={{ display: "flex", flexDirection: "column", minHeight: 0 }}
+        >
+          {children || <NoData />}
+        </Grid>
       </Grid>
     </Stack>
   );

@@ -66,13 +66,6 @@ const SectionData: FC<ISectionDataProps> = ({
               `sections.${indexFirst}.sectionTypes.${indexSecond}.sectionData.${index}.attributeId` as const
             }
           />
-          {/* <AutocompleteFieldCustom
-            name={
-              `sections.${indexFirst}.sectionTypes.${indexSecond}.sectionData.${index}.attributeId` as const
-            }
-            options={attributesData ?? []}
-            label={"Значение"}
-          /> */}
           {fields.length > 1 && (
             <Button
               sx={{ width: 150 }}

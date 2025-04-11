@@ -1,3 +1,4 @@
+import { ERoomStatus } from "../config/room";
 import { IDictionary } from "./dictionaries";
 import { IBaseSearchParams } from "./pagination";
 import { ICreateSections } from "./sectionTypes";
@@ -56,30 +57,6 @@ export interface ICreateRoom {
   sections: ICreateSections[];
 }
 
-export interface IViewRoom {
-  title: string;
-  price: string;
-  priceUnit: string;
-  physControlInstructions: null;
-  accessInstructions: null;
-  street: string;
-  building: number;
-  appartment: string;
-  isCommercial: boolean;
-  hasDeposit: boolean;
-  square: number;
-  lat: number;
-  lon: number;
-  id: string;
-  userId: string;
-  status: string;
-  physControl: boolean;
-  roomType: City;
-  roomImages: RoomImage[];
-  district: City;
-  city: City;
-}
-
 export interface City {
   id: string;
   name: string;
@@ -103,4 +80,34 @@ export interface SectionAttributeValue {
   id: string;
   characteristic: City;
   attribute: City;
+}
+
+export interface IViewRoom {
+  id: string;
+  title: string;
+  userId: string;
+  status: string;
+  price: string;
+  priceUnit: string;
+  physControl: boolean;
+  physControlInstructions: string;
+  accessInstructions: string;
+  street: string;
+  building: string;
+  appartment: string;
+  isCommercial: boolean;
+  hasDeposit: boolean;
+  square: number;
+  lat: number;
+  lon: number;
+  roomType: City;
+  roomSections: RoomSection[];
+  roomImages: RoomImage[];
+  district: City;
+  city: City;
+}
+
+export interface IUpdateRoomStatus {
+  roomId: string;
+  status: ERoomStatus;
 }

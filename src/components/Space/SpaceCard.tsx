@@ -7,8 +7,9 @@ import {
   Button,
   Stack,
   styled,
-  // SxProps,
-  // Theme,
+  CardMedia,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
@@ -20,6 +21,7 @@ import { useNavigate } from "react-router";
 import { ICreateRoom } from "../../types/rooms";
 import { getRentTypeCompare } from "../../utils/compare";
 import { useTranslation } from "react-i18next";
+import { getRoomImageLink } from "../../utils/images";
 
 const StyledCard = styled(Card)({
   transition: "0.3s",
@@ -30,12 +32,12 @@ const StyledCard = styled(Card)({
   height: "100%",
 });
 
-// const сardMediaSx: SxProps<Theme> = {
-//   width: "100%",
-//   height: 200,
-//   borderTopLeftRadius: 2,
-//   borderTopRightRadius: 2,
-// };
+const сardMediaSx: SxProps<Theme> = {
+  width: "100%",
+  height: 200,
+  borderTopLeftRadius: 2,
+  borderTopRightRadius: 2,
+};
 
 const StyledCardContent = styled(CardContent)({
   flex: 1,
@@ -55,13 +57,19 @@ const StyledButton = styled(Button)({
   width: "100%",
 });
 
-const SpaceCard: FC<{ data: ICreateRoom }> = ({ data }) => {
+const RoomCard: FC<{ data: ICreateRoom }> = ({ data }) => {
   const navigate = useNavigate();
   const { t } = useTranslation(["space", "components"]);
   const handleNavigate = () => navigate(`publications/${data.id}`);
 
   return (
     <StyledCard>
+      <CardMedia
+         sx={сardMediaSx}
+         component="img"
+         image={getRoomImageLink(data.roomImages[0].id ?? "") }
+         alt={data.title}
+       />
       <StyledCardContent>
         <Stack spacing={1}>
           <Typography
@@ -117,12 +125,9 @@ const SpaceCard: FC<{ data: ICreateRoom }> = ({ data }) => {
         >
           {t("I18N_SPACE_MORE")}
         </StyledButton>
-        <StyledButton size="small" variant="outlined" color="warning">
-          {t("I18N_SPACE_ADD_WIHSLIST")}
-        </StyledButton>
       </CardActions>
     </StyledCard>
   );
 };
 
-export default SpaceCard;
+export default RoomCard;
