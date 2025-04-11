@@ -46,7 +46,7 @@ const AccountMenu = () => {
             <ListItemIcon>
               <GavelIcon />
             </ListItemIcon>
-            <ListItemText>{t("I18N_NAV_PUBLICATIONS")}</ListItemText>
+            <ListItemText>{t("I18N_NAV_MODERATIONS")}</ListItemText>
           </MenuItem>
         )}
       </MenuList>
