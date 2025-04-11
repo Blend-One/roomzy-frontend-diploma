@@ -1,6 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
-import { ICreateRoom, IViewRoom, TRoomsSearchParams } from "../types/rooms";
+import {
+  ICreateRoom,
+  IUpdateRoomStatus,
+  IViewRoom,
+  TRoomsSearchParams,
+} from "../types/rooms";
 import { IBaseSearchParams } from "../types/pagination";
 
 const ENDPOINT = `/rooms`;
@@ -36,14 +41,22 @@ export const roomsApi = createApi({
         };
       },
     }),
+    updateRoomStatus: builder.mutation<void, IUpdateRoomStatus>({
+      query: (data: IUpdateRoomStatus) => {
+        return {
+          url: `${ENDPOINT}/in_moderation_ad_status/${data.roomId}`,
+          method: "PATCH",
+          body: {
+            status: data.status,
+          },
+        };
+      },
+    }),
     createRoom: builder.mutation<ICreateRoom, FormData>({
       query: (data: FormData) => {
         return {
           url: `${ENDPOINT}`,
           method: "POST",
-          // headers: {
-          //   "Content-Type": "multipart/form-data",
-          // },
           body: data,
         };
       },
@@ -64,6 +77,7 @@ export const {
   useCreateRoomMutation,
   useGetRoomByIdQuery,
   useGetRoomModerationsQuery,
+  useUpdateRoomStatusMutation,
   useGetRoomPersonalQuery,
 } = roomsApi;
 

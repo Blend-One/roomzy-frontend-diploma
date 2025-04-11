@@ -1,5 +1,6 @@
 export enum ERoomStatus {
-  ACTIVE = "ACTIVE",
+  OPENED = "OPENED",
   IN_MODERATION = "IN_MODERATION",
   ARCHIVED = "ARCHIVED",
+  REJECTED = "REJECTED",
 }

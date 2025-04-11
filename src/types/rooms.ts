@@ -1,3 +1,4 @@
+import { ERoomStatus } from "../config/room";
 import { IDictionary } from "./dictionaries";
 import { IBaseSearchParams } from "./pagination";
 import { ICreateSections } from "./sectionTypes";
@@ -104,4 +105,9 @@ export interface IViewRoom {
   roomImages: RoomImage[];
   district: City;
   city: City;
+}
+
+export interface IUpdateRoomStatus {
+  roomId: string;
+  status: ERoomStatus;
 }

@@ -18,5 +18,5 @@ export const priceUnit: TranslationMap = {
 export const roomStatus: TranslationMap = {
   IN_MODERATION: "I18N_ROOM_IN_MODERATION",
   OPENED: "I18N_ROOM_OPENED",
-  ARCHIVED: "I18N_ROOM_ARCHIVED",
+  REJECTED: "I18N_ROOM_REJECTED",
 };

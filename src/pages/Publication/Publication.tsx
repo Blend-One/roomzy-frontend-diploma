@@ -15,7 +15,10 @@ import { RoomSection } from "../../types/rooms";
 import { useTranslation } from "react-i18next";
 import { getRentTypeCompare, getRoomStatusCompare } from "../../utils/compare";
 import ViewMap from "../../components/Map/ViewMap";
-import { useGetRoomByIdQuery } from "../../services/rooms";
+import {
+  useGetRoomByIdQuery,
+  useUpdateRoomStatusMutation,
+} from "../../services/rooms";
 import { getRoomImageLink } from "../../utils/images";
 import AppConfig from "../../config";
 import useHasRole from "../../hooks/useHasRole";
@@ -59,6 +62,22 @@ const Publication = () => {
   const { t } = useTranslation(["space", "components"]);
   const nanigate = useNavigate();
   const hasRole = useHasRole(AppConfig.ROLES.MANAGER);
+  const [updateRoomStatus, { isSuccess }] = useUpdateRoomStatusMutation();
+  const handleApprove = () =>
+    updateRoomStatus({
+      roomId: data?.id ?? "",
+      status: AppConfig.ROOM_STATUS.OPENED,
+    });
+  const handleReject = () =>
+    updateRoomStatus({
+      roomId: data?.id ?? "",
+      status: AppConfig.ROOM_STATUS.REJECTED,
+    });
+  const handleModeration = () =>
+    updateRoomStatus({
+      roomId: data?.id ?? "",
+      status: AppConfig.ROOM_STATUS.IN_MODERATION,
+    });
 
   const images = data?.roomImages.map((row) => ({
     original: getRoomImageLink(row.id),
@@ -71,6 +90,13 @@ const Publication = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      nanigate(0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <Page withPadding>
@@ -112,7 +138,7 @@ const Publication = () => {
                   {t("I18N_SPACE_NEED_DEPOSIT")}:{" "}
                   {data?.hasDeposit ? "Да" : "Нет"}
                 </Typography>
-                {data?.status === "IN_MODERATION" && (
+                {data?.status !== AppConfig.ROOM_STATUS.OPENED && (
                   <Typography
                     sx={{
                       fontWeight: "bold",
@@ -126,7 +152,7 @@ const Publication = () => {
                     {getRoomStatusCompare(data?.status ?? "")}
                   </Typography>
                 )}
-                {data?.status === AppConfig.ROOM_STATUS.ACTIVE && (
+                {data?.status === AppConfig.ROOM_STATUS.OPENED && (
                   <Button variant="contained">{t("I18N_SPACE_RENT")}</Button>
                 )}
                 {data?.status === AppConfig.ROOM_STATUS.IN_MODERATION &&
@@ -136,6 +162,7 @@ const Publication = () => {
                         sx={{ flexGrow: 1 }}
                         variant="contained"
                         color="success"
+                        onClick={handleApprove}
                       >
                         Одобрить
                       </Button>
@@ -143,8 +170,23 @@ const Publication = () => {
                         sx={{ flexGrow: 1 }}
                         variant="outlined"
                         color="error"
+                        onClick={handleReject}
                       >
                         Отклонить
+                      </Button>
+                    </Stack>
+                  )}
+                {(data?.status === AppConfig.ROOM_STATUS.OPENED ||
+                  data?.status === AppConfig.ROOM_STATUS.REJECTED) &&
+                  hasRole && (
+                    <Stack pt={2} direction={"row"} spacing={1}>
+                      <Button
+                        sx={{ flexGrow: 1 }}
+                        variant="outlined"
+                        color="warning"
+                        onClick={handleModeration}
+                      >
+                        В модерацию
                       </Button>
                     </Stack>
                   )}
