@@ -1,7 +1,7 @@
 import { Button, Grid2 as Grid, Paper } from "@mui/material";
 import Page from "../../components/Page";
 import { useGetRoomsListQuery } from "../../services/rooms";
-import SpaceCard from "../../components/Space/SpaceCard";
+import RoomCard from "../../components/Space/SpaceCard";
 import NoData from "../../components/NoData";
 import CitiesField from "../../components/Forms/Custom/CitiesField";
 import { FormProvider, useForm } from "react-hook-form";
@@ -182,7 +182,7 @@ const Main = () => {
         {data &&
           data.map((row) => (
             <Grid key={row.id} size={{ xs: 12, md: 6, lg: 4, xl: 3 }}>
-              <SpaceCard data={row} />
+              <RoomCard data={row} />
             </Grid>
           ))}
       </Grid>
