@@ -6,7 +6,6 @@ import AppConfig from "../../config";
 
 const Account = () => {
   const userData = useUserData();
-  console.log(userData);
 
   return (
     <Page withPadding>
