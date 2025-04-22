@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import Page from "../../components/Page";
 import {
   Button,
+  Chip,
   // Chip,
   Grid2 as Grid,
   Paper,
@@ -10,8 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import ImgGallery from "../../components/ImgGallery";
-import { FC, useEffect } from "react";
-import { RoomSection } from "../../types/rooms";
+import { FC, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { getRentTypeCompare, getRoomStatusCompare } from "../../utils/compare";
 import ViewMap from "../../components/Map/ViewMap";
@@ -22,13 +22,14 @@ import {
 import { getRoomImageLink } from "../../utils/images";
 import AppConfig from "../../config";
 import useHasRole from "../../hooks/useHasRole";
+import { getSections, OutputSectionsView } from "./tools/getSections";
 
 const PublicationTitle = styled(Paper)(({ theme }) => ({
   fontSize: "1.5rem",
   padding: theme.spacing(2),
 }));
 
-const DetailsComponent: FC<{ data: RoomSection }> = ({ data }) => {
+const DetailsComponent: FC<{ data: OutputSectionsView }> = ({ data }) => {
   return (
     <>
       <Grid size={{ sm: 3 }}>
@@ -39,16 +40,20 @@ const DetailsComponent: FC<{ data: RoomSection }> = ({ data }) => {
       <Grid size={{ sm: 9 }}>
         <Paper elevation={5} sx={{ padding: 5 }}>
           <Stack spacing={2}>
-            {/* {data.data.map((dit, index) => (
+            {data.sectionTypes.map((dit, index) => (
               <Stack key={index}>
-                <Stack>{dit.name}</Stack>
+                <Stack>{dit.sectionName}</Stack>
                 <Stack direction="row">
-                  {dit.details.map((tye) => (
-                    <Chip sx={{ mt: 1, mr: 1 }} key={tye.id} label={tye.name} />
+                  {dit.sectionData.map((tye) => (
+                    <Chip
+                      sx={{ mt: 1, mr: 1 }}
+                      key={`${tye.characteristicId} - ${tye.attributeId}`}
+                      label={`${tye.characteristicId} - ${tye.attributeId}`}
+                    />
                   ))}
                 </Stack>
               </Stack>
-            ))} */}
+            ))}
           </Stack>
         </Paper>
       </Grid>
@@ -98,9 +103,14 @@ const Publication = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
+  const sections = useMemo(() => {
+    if (!data) return null;
+    return getSections(data.roomSections);
+  }, [data]);
+
   return (
     <Page withPadding>
-      <Stack spacing={3} mt={4}>
+      <Stack spacing={3} mt={4} mb={6}>
         <PublicationTitle elevation={2}>{data?.title}</PublicationTitle>
         <Grid container spacing={2}>
           <Grid size={{ sm: 8 }}>
@@ -198,8 +208,8 @@ const Publication = () => {
           {data && <ViewMap coords={[Number(data.lat), Number(data.lon)]} />}
         </Paper>
         <Grid container spacing={2}>
-          {data &&
-            data.roomSections.map((row, index) => (
+          {sections &&
+            sections.map((row, index) => (
               <DetailsComponent key={index} data={row} />
             ))}
         </Grid>

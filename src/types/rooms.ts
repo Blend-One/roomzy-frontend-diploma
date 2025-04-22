@@ -101,7 +101,7 @@ export interface IViewRoom {
   lat: number;
   lon: number;
   roomType: City;
-  roomSections: RoomSection[];
+  roomSections: RoomViewSection[];
   roomImages: RoomImage[];
   district: City;
   city: City;
@@ -110,4 +110,17 @@ export interface IViewRoom {
 export interface IUpdateRoomStatus {
   roomId: string;
   status: ERoomStatus;
+}
+
+export interface RoomViewSection {
+  floorNumber: number;
+  id: string;
+  roomSectionType: City;
+  sectionAttributeValues: SectionViewAttributeValue[];
+}
+
+export interface SectionViewAttributeValue {
+  id: string;
+  characteristic: City;
+  attribute: City;
 }
