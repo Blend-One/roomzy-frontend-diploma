@@ -6,14 +6,14 @@ import AddIcon from "@mui/icons-material/Add";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { useGetRoomPersonalQuery } from "../../../services/rooms";
+import { useGetRoomModerationsQuery } from "../../../services/rooms";
 import { getTableData } from "./getTableData";
 import NoData from "../../../components/NoData";
 
-const MyPublications = () => {
+const Moderations = () => {
   const { t } = useTranslation("space");
   const navigate = useNavigate();
-  const { data } = useGetRoomPersonalQuery({
+  const { data } = useGetRoomModerationsQuery({
     page: 1,
     limit: 100,
   });
@@ -80,4 +80,4 @@ const MyPublications = () => {
   );
 };
 
-export default MyPublications;
+export default Moderations;

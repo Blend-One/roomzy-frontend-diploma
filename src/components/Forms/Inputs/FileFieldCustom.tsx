@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Box, Typography, IconButton } from "@mui/material";
 import { Image, Close } from "@mui/icons-material";
@@ -70,24 +70,18 @@ const FileFieldCustom: React.FC<FileFieldProps> = ({ name }) => {
   >([]);
   const [isDragActive, setIsDragActive] = useState(false);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    const newFiles = acceptedFiles.map((file) => ({
-      id: URL.createObjectURL(file),
-      src: URL.createObjectURL(file),
-      file,
-    }));
-    setPreviews((prev) => [...prev, ...newFiles]);
-  }, []);
-
-  const removeFile = (id: string) => {
-    setPreviews((prev) => prev.filter((file) => file.id !== id));
-  };
-
   const { getRootProps, getInputProps } = useDropzone({
     accept: { "image/*": [] },
     maxSize: 5 * 1024 * 1024,
     maxFiles: 10,
-    onDrop,
+    onDrop: (acceptedFiles: File[]) => {
+      const newFiles = acceptedFiles.map((file) => ({
+        id: URL.createObjectURL(file),
+        src: URL.createObjectURL(file),
+        file,
+      }));
+      setPreviews((prev) => [...prev, ...newFiles]);
+    },
     onDragEnter: () => setIsDragActive(true),
     onDragLeave: () => setIsDragActive(false),
   });
@@ -99,44 +93,62 @@ const FileFieldCustom: React.FC<FileFieldProps> = ({ name }) => {
       rules={{
         required: "Нужно загрузить минимум 1 фото",
       }}
-      render={({ field: { onChange } }) => (
-        <Box
-          sx={{ border: "1px dashed gray", padding: 3, borderRadius: 2 }}
-          {...getRootProps()}
-        >
-          <input
-            {...getInputProps()}
-            onChange={(event) => {
-              const files = event.target.files ? [...event.target.files] : [];
-              onChange(files);
-              const newFiles = files.map((file) => ({
-                id: URL.createObjectURL(file),
-                src: URL.createObjectURL(file),
-                file,
-              }));
-              setPreviews((prev) => [...prev, ...newFiles]);
-            }}
-          />
-          <Typography variant="subtitle1" gutterBottom>
-            {isDragActive
-              ? "Отпустите фото для загрузки"
-              : "Перетащите фото сюда (максимум 10 файлов, 5 МБ каждое)"}
-          </Typography>
-          <IconButton component="span">
-            <Image fontSize="large" />
-          </IconButton>
-          {previews.length > 0 && (
-            <ImagePreviews previews={previews} onRemove={removeFile} />
-          )}
-          {errors[name] && (
-            <Typography color="error">
-              {typeof errors[name]?.message === "string"
-                ? errors[name]?.message
-                : ""}
+      render={({ field: { onChange, value = [] } }) => {
+        const handleDrop = (acceptedFiles: File[]) => {
+          const newFiles = acceptedFiles.map((file) => ({
+            id: URL.createObjectURL(file),
+            src: URL.createObjectURL(file),
+            file,
+          }));
+          setPreviews((prev) => [...prev, ...newFiles]);
+          onChange([...value, ...acceptedFiles]);
+        };
+
+        const handleRemove = (id: string) => {
+          const previewToRemove = previews.find((p) => p.id === id);
+          if (!previewToRemove) return;
+
+          setPreviews((prev) => prev.filter((p) => p.id !== id));
+
+          const updatedFiles = value.filter(
+            (file: File) => file !== previewToRemove.file
+          );
+          onChange(updatedFiles);
+        };
+
+        return (
+          <Box
+            sx={{ border: "1px dashed gray", padding: 3, borderRadius: 2 }}
+            {...getRootProps()}
+          >
+            <input
+              {...getInputProps()}
+              onChange={(event) => {
+                const files = event.target.files ? [...event.target.files] : [];
+                handleDrop(files);
+              }}
+            />
+            <Typography variant="subtitle1" gutterBottom>
+              {isDragActive
+                ? "Отпустите фото для загрузки"
+                : "Перетащите фото сюда (максимум 10 файлов, 5 МБ каждое)"}
             </Typography>
-          )}
-        </Box>
-      )}
+            <IconButton component="span">
+              <Image fontSize="large" />
+            </IconButton>
+            {previews.length > 0 && (
+              <ImagePreviews previews={previews} onRemove={handleRemove} />
+            )}
+            {errors[name] && (
+              <Typography color="error">
+                {typeof errors[name]?.message === "string"
+                  ? errors[name]?.message
+                  : ""}
+              </Typography>
+            )}
+          </Box>
+        );
+      }}
     />
   );
 };

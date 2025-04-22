@@ -1,7 +1,7 @@
 import { Button, Grid2 as Grid, Paper } from "@mui/material";
 import Page from "../../components/Page";
 import { useGetRoomsListQuery } from "../../services/rooms";
-import SpaceCard from "../../components/Space/SpaceCard";
+import RoomCard from "../../components/Room/RoomCard";
 import NoData from "../../components/NoData";
 import CitiesField from "../../components/Forms/Custom/CitiesField";
 import { FormProvider, useForm } from "react-hook-form";
@@ -64,14 +64,24 @@ const Main = () => {
     }
     if (filteredData.priceFrom || filteredData.priceTo) {
       PAYLOAD.priceRange = JSON.stringify({
-        min: filteredData.priceFrom ?? "",
-        max: filteredData.priceTo ?? "",
+        min: filteredData.priceFrom ?? 0,
+        max: filteredData.priceTo ?? 0,
       });
     }
-    if (filteredData.squareFrom || filteredData.squareTo) {
+    if (filteredData.squareFrom) {
       PAYLOAD.square = JSON.stringify({
-        min: filteredData.squareFrom ?? "",
-        max: filteredData.squareTo ?? "",
+        min: Number(filteredData.squareFrom),
+      });
+    }
+    if (filteredData.squareTo) {
+      PAYLOAD.square = JSON.stringify({
+        max: Number(filteredData.squareTo),
+      });
+    }
+    if (filteredData.squareFrom && filteredData.squareTo) {
+      PAYLOAD.square = JSON.stringify({
+        min: Number(filteredData.squareFrom),
+        max: Number(filteredData.squareTo),
       });
     }
     if (filteredData.isCommercial === "YES") {
@@ -172,7 +182,7 @@ const Main = () => {
         {data &&
           data.map((row) => (
             <Grid key={row.id} size={{ xs: 12, md: 6, lg: 4, xl: 3 }}>
-              <SpaceCard data={row} />
+              <RoomCard data={row} />
             </Grid>
           ))}
       </Grid>

@@ -5,6 +5,7 @@ export interface ITable {
 
 interface ITableRow {
   data: ITableCell[];
+  clickAction?: () => void;
 }
 
 interface ITableCell {
