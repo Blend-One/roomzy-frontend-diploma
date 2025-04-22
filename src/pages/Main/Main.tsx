@@ -1,7 +1,7 @@
 import { Button, Grid2 as Grid, Paper } from "@mui/material";
 import Page from "../../components/Page";
 import { useGetRoomsListQuery } from "../../services/rooms";
-import RoomCard from "../../components/Space/SpaceCard";
+import RoomCard from "../../components/Room/RoomCard";
 import NoData from "../../components/NoData";
 import CitiesField from "../../components/Forms/Custom/CitiesField";
 import { FormProvider, useForm } from "react-hook-form";

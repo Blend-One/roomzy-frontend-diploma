@@ -20,6 +20,7 @@ import FileFieldCustom from "../../../components/Forms/Inputs/FileFieldCustom";
 import { useCallback, useEffect, useState } from "react";
 import RoomTypes from "../../../components/Forms/Custom/RoomTypes";
 import SectionsBlock from "./SectionsBlock";
+import { getSections } from "./tools/getSections";
 
 const DEFAULT_MAP_DATA: IMapReturnData = {
   coords: [43.23751463756601, 76.90362260589355],
@@ -136,17 +137,21 @@ const PublicationCreate = () => {
     if (data.sections.length !== 0) {
       data.sections[0].floorNumber = 1;
     }
-    console.log(data);
 
-    data.sections = transformData(data.sections as unknown as Floor[]);
+    const PAYLOAD = {
+      ...data,
+      sections: getSections(transformData(data.sections as unknown as Floor[])),
+    };
 
-    Object.keys(data).forEach((key) => {
-      if (key === "files" && Array.isArray(data.files)) {
-        Array.from(data.files).forEach((file) => {
+    Object.keys(PAYLOAD).forEach((key) => {
+      if (key === "files" && Array.isArray(PAYLOAD.files)) {
+        Array.from(PAYLOAD.files).forEach((file) => {
           formData.append("files", file);
         });
+      } else if (key === "sections") {
+        formData.append(key, JSON.stringify(PAYLOAD.sections));
       } else {
-        formData.append(key, data[key as keyof ICreateRoom] as string);
+        formData.append(key, PAYLOAD[key as keyof ICreateRoom] as string);
       }
     });
 
