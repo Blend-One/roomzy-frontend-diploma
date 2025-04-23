@@ -1,4 +1,4 @@
-import { Stack, SxProps, Theme } from "@mui/material";
+import { Stack, SxProps, Theme, useMediaQuery } from "@mui/material";
 import UserBlock from "./UserBlock";
 import LogoBlock from "./LogoBlock";
 
@@ -10,10 +10,14 @@ const headerSx: SxProps<Theme> = (theme) => ({
 });
 
 const Header = () => {
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
+
   return (
     <Stack component={"header"} sx={headerSx} direction="row" spacing={2}>
       <LogoBlock />
-      <UserBlock />
+      <UserBlock isMobile={isMobile} />
     </Stack>
   );
 };
