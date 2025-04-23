@@ -9,6 +9,7 @@ import LazyMyPublications from "../pages/Account/MyPublications";
 import LazyMyRentals from "../pages/Account/MyRentals";
 import LazyPublicationCreate from "../pages/Publication/PublicationCreate";
 import LazyModerations from "../pages/Account/Moderations";
+import LazyRent from "../pages/Rent";
 
 interface IBaseRoute {
   element: React.FunctionComponent<object>;
@@ -54,6 +55,11 @@ const PATHS: Array<IRoute> = [
         allowedRoles: [ERoles.MANAGER],
       },
     ],
+  },
+  {
+    path: "/rent/:id",
+    element: LazyRent,
+    allowedRoles: [ERoles.USER],
   },
   {
     path: "/publications/:id",
