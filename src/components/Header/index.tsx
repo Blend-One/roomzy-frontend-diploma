@@ -7,6 +7,9 @@ const headerSx: SxProps<Theme> = (theme) => ({
   backgroundColor: "primary.light",
   alignItems: "center",
   padding: theme.spacing(2, 8),
+  [theme.breakpoints.down("sm")]: {
+    padding: theme.spacing(2, 2),
+  }
 });
 
 const Header = () => {
