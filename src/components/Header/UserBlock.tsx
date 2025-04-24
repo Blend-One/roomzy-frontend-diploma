@@ -21,8 +21,10 @@ import { getUserFullNameOrEmail } from "../../utils/user";
 import LanguageSwitcher from "../LanguageSwitcher";
 import CustomTitle from "../common/CustomTitle";
 import { useState } from "react";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 
 const iconStyle = { color: "white", width: "25px", height: "25px" };
 
@@ -38,15 +40,43 @@ const UserBlock = ({ isMobile }: { isMobile: boolean }) => {
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
+
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 300 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <MailIcon />
+              <AccountCircleIcon />
             </ListItemIcon>
-            <ListItemText primary={"asdfgh"} />
+            <ListItemText primary={t("I18N_USER_PROFILE")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <SupervisorAccountIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("I18N_USER_MY_RENTALS")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <MapsHomeWorkIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("I18N_USER_MY_ADS")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <LanguageSwitcher nav />
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("I18N_USER_LOGOUT")} />
           </ListItemButton>
         </ListItem>
       </List>
