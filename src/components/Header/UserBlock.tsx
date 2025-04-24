@@ -34,6 +34,10 @@ const UserBlock = ({ isMobile }: { isMobile: boolean }) => {
   const navigate = useNavigate();
   const handleLogout = () => logout();
   const handleLoginNavigate = () => navigate("/login");
+  const handlePublicationsNavigate = () => navigate("/account/publications");
+  const handleRentalsNavigate = () => navigate("/account/rentals");
+  const handleProfileNavigate = () => navigate("/account");
+
   const { isAuthenticated, data } = useUserData();
 
   const [open, setOpen] = useState(false);
@@ -43,43 +47,60 @@ const UserBlock = ({ isMobile }: { isMobile: boolean }) => {
 
   const DrawerList = (
     <Box sx={{ width: 300 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("I18N_USER_PROFILE")} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <SupervisorAccountIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("I18N_USER_MY_RENTALS")} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <MapsHomeWorkIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("I18N_USER_MY_ADS")} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <LanguageSwitcher nav />
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("I18N_USER_LOGOUT")} />
-          </ListItemButton>
-        </ListItem>
-      </List>
+      {!isAuthenticated && (
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleLoginNavigate}>
+              <ListItemIcon>
+                <LoginIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("I18N_USER_LOGIN")} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <LanguageSwitcher nav />
+          </ListItem>
+        </List>
+      )}
+      {isAuthenticated && (
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleProfileNavigate}>
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("I18N_USER_PROFILE")} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleRentalsNavigate}>
+              <ListItemIcon>
+                <SupervisorAccountIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("I18N_USER_MY_RENTALS")} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handlePublicationsNavigate}>
+              <ListItemIcon>
+                <MapsHomeWorkIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("I18N_USER_MY_ADS")} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <LanguageSwitcher nav />
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={handleLogout}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("I18N_USER_LOGOUT")} />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      )}
       <Divider />
     </Box>
   );

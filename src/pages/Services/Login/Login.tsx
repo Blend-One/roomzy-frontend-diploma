@@ -98,7 +98,7 @@ const Login = () => {
               loading={isLoading}
               variant="contained"
             >
-              {t("I18N_LOGIN")}
+              {t("I18N_USER_LOGIN")}
             </Button>
             <Button onClick={handleRegister} variant="text">
               {t("I18N_USER_SIGNUP")}

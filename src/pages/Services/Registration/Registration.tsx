@@ -76,7 +76,7 @@ const Registration = () => {
               {t("I18N_SIGNUP_BUTTON")}
             </Button>
             <Button onClick={handleLogin} variant="text">
-              {t("I18N_LOGIN")}
+              {t("I18N_USER_LOGIN")}
             </Button>
           </AuthBox>
         </AuthContainer>
