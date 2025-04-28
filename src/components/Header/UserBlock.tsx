@@ -46,7 +46,7 @@ const UserBlock = ({ isMobile }: { isMobile: boolean }) => {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 300 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box sx={{ width: 300, mt: 1 }} role="presentation" onClick={toggleDrawer(false)}>
       {!isAuthenticated && (
         <List>
           <ListItem disablePadding>
@@ -111,7 +111,7 @@ const UserBlock = ({ isMobile }: { isMobile: boolean }) => {
         <IconButton aria-label="menu" onClick={toggleDrawer(true)}>
           <MenuIcon fontSize="large" sx={{ color: "white" }} />
         </IconButton>
-        <Drawer open={open} onClose={toggleDrawer(false)}>
+        <Drawer open={open} anchor="right"  onClose={toggleDrawer(false)}>
           {DrawerList}
         </Drawer>
       </>
