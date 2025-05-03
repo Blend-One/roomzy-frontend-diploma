@@ -21,7 +21,6 @@ import {
 } from "@mui/icons-material";
 import LockIcon from "@mui/icons-material/Lock";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import { useNavigate } from "react-router";
 import { IViewRoom } from "../../types/rooms";
 import { getRentTypeCompare } from "../../utils/compare";
@@ -140,14 +139,6 @@ const RoomCard: FC<{ data: IViewRoom; onlyInfo?: boolean }> = ({
             <IconText
               icon={<ApartmentIcon sx={{ color: "teal" }} />}
               text={data.roomType.name}
-            />
-          )}
-          {data.roomSections?.length > 0 && (
-            <IconText
-              icon={<MapsHomeWorkIcon sx={{ color: "grey" }} />}
-              text={t("I18N_SPACE_SECTIONS_COUNT", {
-                count: data.roomSections.length,
-              })}
             />
           )}
           {data.hasDeposit && (
