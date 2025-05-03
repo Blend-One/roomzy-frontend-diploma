@@ -12,10 +12,10 @@ const PageContainer = styled(Stack, {
   flexGrow: 1,
   flexShrink: 1,
   overflowY: "auto",
-  padding: withPadding ? "0 10%" : undefined,
+  padding: withPadding ? "0 5%" : undefined,
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(2, 2),
-  }
+  },
 }));
 
 const Page = ({ withPadding, children }: PropsWithChildren<TPageProps>) => (
