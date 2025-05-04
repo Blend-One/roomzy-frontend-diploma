@@ -8,7 +8,8 @@ export const getTableData = (
     header: [{ name: "Название" }],
     body: data.map((roomType) => ({
       data: [{ name: roomType.name }],
-      clickAction: () => handleNavigate(`/account/room-type/${roomType.id}`),
+      clickAction: () =>
+        handleNavigate(`/account/room-types/${roomType.id}/edit`),
     })),
   };
 };

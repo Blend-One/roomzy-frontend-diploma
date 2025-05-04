@@ -12,6 +12,7 @@ import LazyModerations from "../pages/Account/Moderations";
 import LazyRent from "../pages/Rent";
 import LazyRoomTypes from "../pages/Account/RoomTypes";
 import LazyRoomTypesCreate from "../pages/Account/RoomTypes/RoomTypesCreate";
+import LazyRoomTypesEdit from "../pages/Account/RoomTypes/RoomTypesEdit";
 
 interface IBaseRoute {
   element: React.FunctionComponent<object>;
@@ -67,13 +68,8 @@ const PATHS: Array<IRoute> = [
         allowedRoles: [ERoles.MANAGER],
       },
       {
-        path: "/account/room-types/:id",
-        element: LazyRoomTypes,
-        allowedRoles: [ERoles.MANAGER],
-      },
-      {
         path: "/account/room-types/:id/edit",
-        element: LazyRoomTypes,
+        element: LazyRoomTypesEdit,
         allowedRoles: [ERoles.MANAGER],
       },
     ],

@@ -24,7 +24,7 @@ const LogoBlock = () => {
   return (
     <>
       <LogoBox direction={"row"} onClick={() => navigate("/")}>
-        <img style={logoIconStyle} src="/public/favicon.svg" alt="logo-icon" />
+        <img style={logoIconStyle} src="/favicon.svg" alt="logo-icon" />
         <Logo variant="h1">Roomzy</Logo>
       </LogoBox>
     </>

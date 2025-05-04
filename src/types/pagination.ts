@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 export interface IPaginatedList<T> {
-  pages: number;
+  totalCount: number;
   data: Array<T>;
 }
 

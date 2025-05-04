@@ -1,7 +1,8 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
-import { IBaseSearchParams } from "../types/pagination";
+import { IBaseSearchParams, IPaginatedList } from "../types/pagination";
 import { ICreateRoomTypes, IRoomTypes } from "../types/roomTypes";
+import transformPagination from "./tools/transformPagination";
 
 const ENDPOINT = `/room_types`;
 
@@ -9,7 +10,10 @@ const roomTypesApi = createApi({
   reducerPath: "roomTypesApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getRoomTypesList: builder.query<IRoomTypes[], IBaseSearchParams>({
+    getRoomTypesList: builder.query<
+      IPaginatedList<IRoomTypes>,
+      IBaseSearchParams
+    >({
       query: (data: IBaseSearchParams) => {
         const queryParams = new URLSearchParams(Object.entries(data));
         return {
@@ -17,8 +21,9 @@ const roomTypesApi = createApi({
           method: "GET",
         };
       },
+      transformResponse: transformPagination,
     }),
-    getRoomTypesById: builder.query<IRoomTypes, string>({
+    getRoomTypesById: builder.query<ICreateRoomTypes, string>({
       query: (id: string) => {
         return {
           url: `${ENDPOINT}/${id}`,
@@ -35,10 +40,26 @@ const roomTypesApi = createApi({
         };
       },
     }),
+    updateRoomTypes: builder.mutation<
+      IRoomTypes,
+      { id: string; data: ICreateRoomTypes }
+    >({
+      query: ({ id, data }) => {
+        return {
+          url: `${ENDPOINT}/${id}`,
+          method: "PATCH",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetRoomTypesListQuery, useCreateRoomTypesMutation } =
-  roomTypesApi;
+export const {
+  useGetRoomTypesListQuery,
+  useCreateRoomTypesMutation,
+  useUpdateRoomTypesMutation,
+  useGetRoomTypesByIdQuery,
+} = roomTypesApi;
 
 export default roomTypesApi;

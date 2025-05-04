@@ -1,14 +1,16 @@
 import Paper from "@mui/material/Paper";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AccountIcon from "@mui/icons-material/AccountCircle";
 import PublicationsIcon from "@mui/icons-material/Description";
 import RentalsIcon from "@mui/icons-material/LocalOffer";
 import GavelIcon from "@mui/icons-material/Gavel";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+import BedroomParentIcon from "@mui/icons-material/BedroomParent";
 
 import useHasRole from "../hooks/useHasRole";
 import AppConfig from "../config";
@@ -36,7 +38,7 @@ const AccountMenu = () => {
           </MenuItem>
           <MenuItem onClick={() => navigate("/account/room-types")}>
             <ListItemIcon>
-              <GavelIcon />
+              <BedroomParentIcon />
             </ListItemIcon>
             <ListItemText>{t("I18N_NAV_ROOM_TYPES")}</ListItemText>
           </MenuItem>

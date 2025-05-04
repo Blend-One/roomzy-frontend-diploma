@@ -1,8 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
-import { IPaginatedList, IBaseSearchParams } from "../types/pagination";
+import { IBaseSearchParams } from "../types/pagination";
 import { IDictionary, IDictionaryListWithId } from "../types/dictionaries";
-import { dictionariesIdListMock } from "./mock/dictionaries";
 
 const ENDPOINT = "/dictionaries";
 
@@ -41,15 +40,5 @@ export const {
   useGetDistrictsByCityIdListQuery,
   // useGetDictionariesByIdListQuery
 } = dictionariesApi;
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-export const useGetDictionariesByIdListQuery = (
-  _data: IDictionaryListWithId
-): IPaginatedList<IDictionary> => {
-  return {
-    pages: 1,
-    data: dictionariesIdListMock,
-  };
-};
 
 export default dictionariesApi;

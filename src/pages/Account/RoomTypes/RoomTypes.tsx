@@ -19,13 +19,13 @@ const RoomTypes = () => {
   });
 
   const tableData = useMemo(() => {
-    if (data?.length) {
-      return getTableData(data, navigate);
+    if (data?.data.length) {
+      return getTableData(data.data, navigate);
     }
     return null;
   }, [data, navigate]);
 
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (
@@ -60,13 +60,13 @@ const RoomTypes = () => {
           </Stack>
           <Stack flexGrow={1} spacing={2}>
             {!tableData && <NoData />}
-            {tableData && (
+            {tableData && data && (
               <>
                 <BasicTable data={tableData} />
                 <TablePagination
                   component="div"
-                  count={100}
-                  page={page}
+                  count={data.totalCount + 1}
+                  page={page - 1}
                   onPageChange={handleChangePage}
                   rowsPerPage={rowsPerPage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
