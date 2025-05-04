@@ -10,8 +10,8 @@ import { getTableData } from "./getTableData";
 import NoData from "../../../components/NoData";
 import { useGetRoomTypesListQuery } from "../../../services/roomTypes";
 
-const MyPublications = () => {
-  const { t } = useTranslation("space");
+const RoomTypes = () => {
+  const { t } = useTranslation("account");
   const navigate = useNavigate();
   const { data } = useGetRoomTypesListQuery({
     page: 1,
@@ -42,7 +42,7 @@ const MyPublications = () => {
     setPage(0);
   };
 
-  const handleCreatePublication = () => navigate("/publications/create");
+  const handleCreatePublication = () => navigate("/account/room-types/create");
 
   return (
     <Page withPadding>
@@ -55,7 +55,7 @@ const MyPublications = () => {
               startIcon={<AddIcon />}
               variant="contained"
             >
-              {t("I18N_SPACE_CREATE_PUBLICATION")}
+              {t("I18N_CREATE_ROOM_TYPES")}
             </Button>
           </Stack>
           <Stack flexGrow={1} spacing={2}>
@@ -80,4 +80,4 @@ const MyPublications = () => {
   );
 };
 
-export default MyPublications;
+export default RoomTypes;

@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
 import { IBaseSearchParams } from "../types/pagination";
-import { IRoomTypes } from "../types/roomTypes";
+import { ICreateRoomTypes, IRoomTypes } from "../types/roomTypes";
 
 const ENDPOINT = `/room_types`;
 
@@ -18,9 +18,27 @@ const roomTypesApi = createApi({
         };
       },
     }),
+    getRoomTypesById: builder.query<IRoomTypes, string>({
+      query: (id: string) => {
+        return {
+          url: `${ENDPOINT}/${id}`,
+          method: "GET",
+        };
+      },
+    }),
+    createRoomTypes: builder.mutation<IRoomTypes, ICreateRoomTypes>({
+      query: (data: ICreateRoomTypes) => {
+        return {
+          url: `${ENDPOINT}`,
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetRoomTypesListQuery } = roomTypesApi;
+export const { useGetRoomTypesListQuery, useCreateRoomTypesMutation } =
+  roomTypesApi;
 
 export default roomTypesApi;

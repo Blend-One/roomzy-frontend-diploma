@@ -6,6 +6,7 @@ import { Stack } from "@mui/material";
 import { useNavigate } from "react-router";
 
 type FormSectionProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: SubmitHandler<any>;
   isLoading: boolean;
   formId: string;
