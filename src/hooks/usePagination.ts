@@ -1,7 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { IPaginatedList } from "../types/pagination";
 
-
+// TODO: Implement a better pagination
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const usePagination = <T>(data: IPaginatedList<T>) => {
   
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
@@ -10,10 +11,11 @@ const usePagination = <T>(data: IPaginatedList<T>) => {
   const [prevSize, setPrevSize] = useState<number>(10);
   const [totalPages, setTotalPages] = useState<number>(1);
 
-  useEffect(() => {
-    setTotalPages(data?.pages || 1);
-  }, [data?.pages]);
-
+  // useEffect(() => {
+  //   setTotalPages(data?.pages || 1);
+  // }, [data?.pages]);
+  console.log(data);
+  
   useEffect(() => {
     if (itemsPerPage !== prevSize) {
       setPrevSize(itemsPerPage);
