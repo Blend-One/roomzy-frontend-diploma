@@ -1,5 +1,5 @@
 {
-  "I18N_SPACE_PRICE": "Цена: {{price}} ₸ / {{type}}",
+  "I18N_SPACE_PRICE": "Цена: {{price}} / {{type}}",
   "I18N_SPACE_ADDRESS": "Адрес",
   "I18N_SPACE_NEED_DEPOSIT": "Нужен депозит",
   "I18N_SPACE_FLOORS": "Этажи {{floors}}",
