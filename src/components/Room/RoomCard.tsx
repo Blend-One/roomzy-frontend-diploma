@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, JSX } from "react";
 import {
   Card,
   CardContent,
@@ -11,17 +11,22 @@ import {
   SxProps,
   Theme,
 } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import BusinessIcon from "@mui/icons-material/Business";
-import HomeIcon from "@mui/icons-material/Home";
-import SecurityIcon from "@mui/icons-material/Security";
-import SquareFootIcon from "@mui/icons-material/SquareFoot";
+import {
+  LocationOn as LocationOnIcon,
+  AttachMoney as AttachMoneyIcon,
+  Business as BusinessIcon,
+  Home as HomeIcon,
+  Security as SecurityIcon,
+  SquareFoot as SquareFootIcon,
+} from "@mui/icons-material";
+import LockIcon from "@mui/icons-material/Lock";
+import ApartmentIcon from "@mui/icons-material/Apartment";
 import { useNavigate } from "react-router";
-import { ICreateRoom } from "../../types/rooms";
+import { IViewRoom } from "../../types/rooms";
 import { getRentTypeCompare } from "../../utils/compare";
 import { useTranslation } from "react-i18next";
 import { getRoomImageLink } from "../../utils/images";
+import { getPriceCurrency } from "../../utils/common";
 
 const StyledCard = styled(Card)({
   transition: "0.3s",
@@ -32,11 +37,12 @@ const StyledCard = styled(Card)({
   height: "100%",
 });
 
-const сardMediaSx: SxProps<Theme> = {
+const cardMediaSx: SxProps<Theme> = {
   width: "100%",
   height: 200,
-  borderTopLeftRadius: 2,
-  borderTopRightRadius: 2,
+  borderTopLeftRadius: 8,
+  borderTopRightRadius: 8,
+  objectFit: "cover",
 };
 
 const StyledCardContent = styled(CardContent)({
@@ -46,86 +52,124 @@ const StyledCardContent = styled(CardContent)({
   justifyContent: "space-between",
 });
 
-const StyledTypography = styled(Typography)({
-  display: "flex",
-  alignItems: "center",
-  gap: 1,
-});
+export const IconText: FC<{ icon: JSX.Element; text: string }> = ({
+  icon,
+  text,
+}) => (
+  <Typography
+    variant="body2"
+    color="text.primary"
+    display="flex"
+    alignItems="center"
+    gap={1}
+  >
+    {icon}
+    {text}
+  </Typography>
+);
 
 const StyledButton = styled(Button)({
   fontWeight: "bold",
   width: "100%",
 });
 
-const RoomCard: FC<{ data: ICreateRoom }> = ({ data }) => {
+const RoomCard: FC<{ data: IViewRoom; onlyInfo?: boolean }> = ({
+  data,
+  onlyInfo = false,
+}) => {
   const navigate = useNavigate();
   const { t } = useTranslation(["space", "components"]);
+
   const handleNavigate = () => navigate(`publications/${data.id}`);
+
+  const priceFormatted = t("I18N_SPACE_PRICE", {
+    price: getPriceCurrency(+data.price),
+    type: getRentTypeCompare(data.priceUnit),
+  });
+
+  const location = `${data.city?.name ?? ""}, ${data.district?.name ?? ""}, ${
+    data.street
+  }, ${data.building}`;
+
+  const imageUrl = getRoomImageLink(data.roomImages[0]?.id ?? "");
 
   return (
     <StyledCard>
       <CardMedia
-         sx={сardMediaSx}
-         component="img"
-         image={getRoomImageLink(data.roomImages[0].id ?? "") }
-         alt={data.title}
-       />
+        sx={cardMediaSx}
+        component="img"
+        image={imageUrl}
+        alt={data.title}
+        onError={(e) => {
+          (e.target as HTMLImageElement).src = "/images/room-placeholder.jpg";
+        }}
+      />
       <StyledCardContent>
         <Stack spacing={1}>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="div"
-            sx={{ fontWeight: "bold" }}
-          >
+          <Typography variant="h6" fontWeight="bold">
             {data.title}
           </Typography>
-          <StyledTypography variant="body1" color="text.primary">
-            <AttachMoneyIcon sx={{ color: "green" }} />
-            {t("I18N_SPACE_PRICE", {
-              price: data.price,
-              type: getRentTypeCompare(data.priceUnit),
-            })}
-          </StyledTypography>
-          <StyledTypography variant="body2" color="text.secondary">
-            <LocationOnIcon sx={{ color: "red" }} />
-            {data.street},{data.building}
-          </StyledTypography>
-          <StyledTypography variant="body2" color="text.primary">
-            {data.isCommercial ? (
-              <>
+          <IconText
+            icon={<AttachMoneyIcon sx={{ color: "green" }} />}
+            text={priceFormatted}
+          />
+          <IconText
+            icon={<LocationOnIcon sx={{ color: "red" }} />}
+            text={location}
+          />
+          <IconText
+            icon={
+              data.isCommercial ? (
                 <BusinessIcon sx={{ color: "blue" }} />
-                {t("I18N_SPACE_COMMERCE")}
-              </>
-            ) : (
-              <>
+              ) : (
                 <HomeIcon sx={{ color: "green" }} />
-                {t("I18N_SPACE_LIVING")}
-              </>
-            )}
-          </StyledTypography>
-          <StyledTypography variant="body2" color="text.primary">
-            <SquareFootIcon sx={{ color: "purple" }} />
-            {t("I18N_SPACE_SQUARE", { square: data.square })}
-          </StyledTypography>
-          {data.hasDeposit && (
-            <StyledTypography variant="body2" color="text.primary">
-              <SecurityIcon sx={{ color: "orange" }} />
-              {t("I18N_SPACE_NEED_DEPOSIT")}
-            </StyledTypography>
+              )
+            }
+            text={
+              data.isCommercial
+                ? t("I18N_SPACE_COMMERCE")
+                : t("I18N_SPACE_LIVING")
+            }
+          />
+          <IconText
+            icon={<SquareFootIcon sx={{ color: "purple" }} />}
+            text={t("I18N_SPACE_SQUARE", { square: data.square })}
+          />
+          {data.roomType?.name && (
+            <IconText
+              icon={<ApartmentIcon sx={{ color: "teal" }} />}
+              text={data.roomType.name}
+            />
           )}
+          {data.hasDeposit && (
+            <IconText
+              icon={<SecurityIcon sx={{ color: "orange" }} />}
+              text={t("I18N_SPACE_NEED_DEPOSIT")}
+            />
+          )}
+          <IconText
+            icon={
+              <LockIcon sx={{ color: data.physControl ? "green" : "grey" }} />
+            }
+            text={
+              data.physControl
+                ? t("I18N_SPACE_PHYS_CONTROL_ENABLED")
+                : t("I18N_SPACE_PHYS_CONTROL_DISABLED")
+            }
+          />
         </Stack>
       </StyledCardContent>
-      <CardActions>
-        <StyledButton
-          size="small"
-          variant="contained"
-          color="primary"
-          onClick={handleNavigate}
-        >
-          {t("I18N_SPACE_MORE")}
-        </StyledButton>
-      </CardActions>
+      {!onlyInfo && (
+        <CardActions>
+          <StyledButton
+            variant="contained"
+            color="primary"
+            onClick={handleNavigate}
+          >
+            {t("I18N_SPACE_MORE")}
+          </StyledButton>
+        </CardActions>
+      )}
     </StyledCard>
   );
 };

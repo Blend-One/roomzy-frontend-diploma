@@ -1,7 +1,7 @@
 import { Stack, styled, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 
-const Logo = styled(Typography)(({theme}) => ({
+const Logo = styled(Typography)(({ theme }) => ({
   fontSize: "2.5rem",
   fontWeight: "bold",
   color: theme.palette.primary.contrastText,
@@ -24,7 +24,7 @@ const LogoBlock = () => {
   return (
     <>
       <LogoBox direction={"row"} onClick={() => navigate("/")}>
-        <img style={logoIconStyle} src="../favicon.svg" alt="logo-icon" />
+        <img style={logoIconStyle} src="/favicon.svg" alt="logo-icon" />
         <Logo variant="h1">Roomzy</Logo>
       </LogoBox>
     </>

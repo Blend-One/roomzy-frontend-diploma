@@ -3,5 +3,8 @@
   "I18N_NAV_ACCOUNT": "Аккаунт",
   "I18N_NAV_PUBLICATIONS": "Мои объявления",
   "I18N_NAV_MODERATIONS": "Модерация",
+  "I18N_NAV_ROOM_TYPES": "Типы помещения",
+  "I18N_NAV_SECTIONS": "Типы комнат",
+  "I18N_NAV_ROOM_CHARACTERISTICS": "Характеристики комнат",
   "I18N_NAV_RENTALS": "Моя аренда"
 }

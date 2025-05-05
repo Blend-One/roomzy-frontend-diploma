@@ -21,6 +21,7 @@ import { useCallback, useEffect, useState } from "react";
 import RoomTypes from "../../../components/Forms/Custom/RoomTypes";
 import SectionsBlock from "./SectionsBlock";
 import { getSections } from "./tools/getSections";
+import { useNavigate } from "react-router";
 
 const DEFAULT_MAP_DATA: IMapReturnData = {
   coords: [43.23751463756601, 76.90362260589355],
@@ -79,8 +80,8 @@ function transformData(data: Floor[]): any {
 }
 
 const PublicationCreate = () => {
-  const [postRoom, { isLoading }] = useCreateRoomMutation();
-
+  const [postRoom, { isLoading, isSuccess }] = useCreateRoomMutation();
+  const navigate = useNavigate();
   const [mapData, setMapData] = useState<IMapReturnData>(DEFAULT_MAP_DATA);
 
   const updateMapData = useCallback((newData: IMapReturnData) => {
@@ -186,6 +187,12 @@ const PublicationCreate = () => {
     if (mapData.building) setValue("building", mapData.building);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapData]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/account/publications");
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <Stack sx={{ flexGrow: 1, px: 5 }}>

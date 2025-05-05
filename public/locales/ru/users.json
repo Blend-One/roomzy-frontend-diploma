@@ -10,5 +10,6 @@
   "I18N_USER_HELLO": "Привет, {{name}}",
   "I18N_USER_MY_RENTALS": "Моя аренда",
   "I18N_USER_MY_ADS": "Мои объявления",
-  "I18N_LOGIN": "Войти"
+  "I18N_USER_PROFILE": "Профиль",
+  "I18N_USER_LANGUAGE": "Язык"
 }

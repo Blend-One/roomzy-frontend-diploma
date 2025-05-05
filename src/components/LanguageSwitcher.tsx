@@ -2,7 +2,14 @@ import LanguageIcon from "@mui/icons-material/Language";
 import MenuItem from "@mui/material/MenuItem";
 import i18n from "../i18n";
 import { useState } from "react";
-import { IconButton, Menu } from "@mui/material";
+import {
+  IconButton,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+} from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 type Languages = "ru" | "en" | "kz";
 
@@ -26,9 +33,10 @@ const languages: Array<ILanguages> = [
   },
 ];
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({ nav }: { nav?: boolean }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { t } = useTranslation("users");
 
   const changeLanguage = (language: Languages) => {
     i18n.changeLanguage(language);
@@ -36,6 +44,7 @@ const LanguageSwitcher = () => {
   };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
@@ -45,9 +54,21 @@ const LanguageSwitcher = () => {
 
   return (
     <>
-      <IconButton aria-label="language-change" onClick={handleClick}>
-        <LanguageIcon sx={{ color: "white", width: "25px", height: "25px" }} />
-      </IconButton>
+      {nav && (
+        <ListItemButton onClick={handleClick}>
+          <ListItemIcon>
+            <LanguageIcon />
+          </ListItemIcon>
+          <ListItemText primary={t("I18N_USER_LANGUAGE")} />
+        </ListItemButton>
+      )}
+      {!nav && (
+        <IconButton aria-label="language-change" onClick={handleClick}>
+          <LanguageIcon
+            sx={{ color: "white", width: "25px", height: "25px" }}
+          />
+        </IconButton>
+      )}
       <Menu
         id="language-switcher-menu"
         aria-labelledby="language-switcher-button"
@@ -66,7 +87,8 @@ const LanguageSwitcher = () => {
         {languages.map((language, index) => (
           <MenuItem
             key={index}
-            onClick={() => {
+            onClick={(event) => {
+              event.stopPropagation();
               changeLanguage(language.language);
             }}
           >

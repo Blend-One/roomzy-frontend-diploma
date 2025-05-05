@@ -65,7 +65,7 @@ const Registration = () => {
                 icon={<ErrorOutlineIcon fontSize="inherit" />}
                 severity="error"
               >
-                {getResponseCompare((error as IResponseError).data.message)}
+                {getResponseCompare((error as IResponseError).data.message) ?? "Unexpected error"}
               </Alert>
             )}
             <Button
@@ -76,7 +76,7 @@ const Registration = () => {
               {t("I18N_SIGNUP_BUTTON")}
             </Button>
             <Button onClick={handleLogin} variant="text">
-              {t("I18N_LOGIN")}
+              {t("I18N_USER_LOGIN")}
             </Button>
           </AuthBox>
         </AuthContainer>

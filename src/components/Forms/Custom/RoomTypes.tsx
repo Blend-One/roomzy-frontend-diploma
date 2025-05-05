@@ -14,7 +14,10 @@ const RoomTypes: React.FC<IRoomTypesProps> = ({
     page: 1,
     limit: 10,
   });
-  const rooms = data?.map((item) => ({ value: item.id, title: item.name }));
+  const rooms = data?.data.map((item) => ({
+    value: item.id,
+    title: item.name,
+  }));
 
   return (
     <SelectFieldCustom

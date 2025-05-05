@@ -7,12 +7,15 @@ type TPageProps = {
 
 const PageContainer = styled(Stack, {
   shouldForwardProp: (prop) => prop !== "withPadding",
-})<{ withPadding?: boolean }>((props) => ({
+})<{ withPadding?: boolean }>(({ theme, withPadding }) => ({
   margin: 0,
   flexGrow: 1,
   flexShrink: 1,
   overflowY: "auto",
-  padding: props.withPadding ? "0 10%" : undefined,
+  padding: withPadding ? "0 5%" : undefined,
+  [theme.breakpoints.down("sm")]: {
+    padding: theme.spacing(2, 2),
+  },
 }));
 
 const Page = ({ withPadding, children }: PropsWithChildren<TPageProps>) => (

@@ -8,3 +8,10 @@ export interface SectionType {
   id: string;
   name: string;
 }
+
+export interface ICreateRoomTypes {
+  fallbackName: string;
+  ru: string;
+  kz: string;
+  sectionIds: string[];
+}

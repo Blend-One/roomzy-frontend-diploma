@@ -23,6 +23,7 @@ import { getRoomImageLink } from "../../utils/images";
 import AppConfig from "../../config";
 import useHasRole from "../../hooks/useHasRole";
 import { getSections, OutputSectionsView } from "./tools/getSections";
+import useUserData from "../../hooks/useUserData";
 
 const PublicationTitle = styled(Paper)(({ theme }) => ({
   fontSize: "1.5rem",
@@ -67,6 +68,7 @@ const Publication = () => {
   const { t } = useTranslation(["space", "components"]);
   const nanigate = useNavigate();
   const hasRole = useHasRole(AppConfig.ROLES.MANAGER);
+  const isAuth = useUserData();
   const [updateRoomStatus, { isSuccess }] = useUpdateRoomStatusMutation();
   const handleApprove = () =>
     updateRoomStatus({
@@ -84,6 +86,13 @@ const Publication = () => {
       status: AppConfig.ROOM_STATUS.IN_MODERATION,
     });
 
+  const handleRentNavigate = () => {
+    if (!isAuth.isAuthenticated) {
+      nanigate("/login");
+      return;
+    }
+    nanigate(`/rent/${id}`);
+  };
   const images = data?.roomImages.map((row) => ({
     original: getRoomImageLink(row.id),
     thumbnail: getRoomImageLink(row.id),
@@ -163,7 +172,9 @@ const Publication = () => {
                   </Typography>
                 )}
                 {data?.status === AppConfig.ROOM_STATUS.OPENED && (
-                  <Button variant="contained">{t("I18N_SPACE_RENT")}</Button>
+                  <Button onClick={handleRentNavigate} variant="contained">
+                    {t("I18N_SPACE_RENT")}
+                  </Button>
                 )}
                 {data?.status === AppConfig.ROOM_STATUS.IN_MODERATION &&
                   hasRole && (

@@ -14,7 +14,7 @@ export const roomsApi = createApi({
   reducerPath: "roomsApi",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getRoomsList: builder.query<ICreateRoom[], TRoomsSearchParams>({
+    getRoomsList: builder.query<IViewRoom[], TRoomsSearchParams>({
       query: (data: TRoomsSearchParams) => {
         const queryParams = new URLSearchParams(Object.entries(data));
         return {

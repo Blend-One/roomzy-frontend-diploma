@@ -8,6 +8,7 @@ export interface IUser {
   avatarImageUrl: null;
   email: string;
   phone: string;
+  status: string;
 }
 
 export interface IUserData extends IUser {

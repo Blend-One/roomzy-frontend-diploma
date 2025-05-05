@@ -9,5 +9,7 @@
   "I18N_SPACE_ADD_WIHSLIST": "Добавить в избранное",
   "I18N_SPACE_RENT": "Арендовать",
   "I18N_SPACE_CREATE_PUBLICATION": "Создать объявление",
+  "I18N_SPACE_PHYS_CONTROL_ENABLED": "Осмотр разрешен",
+  "I18N_SPACE_PHYS_CONTROL_DISABLED": "Осмотр запрещен",
   "I18N_SPACE_MORE": "Подробнее"
 }
