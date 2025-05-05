@@ -4,6 +4,8 @@ import { Dayjs } from "dayjs";
 import { Stack } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/ru";
+import "dayjs/locale/kk";
+import i18n from "../../../i18n";
 
 interface Props {
   name: string;
@@ -11,6 +13,7 @@ interface Props {
   required?: boolean;
   minDate?: Dayjs;
   maxDate?: Dayjs;
+  views?: Array<"day" | "month" | "year">;
   onOpen?: () => void;
 }
 
@@ -20,12 +23,16 @@ const DateFieldCustom: React.FC<Props> = ({
   minDate,
   maxDate,
   required,
+  views,
   onOpen,
 }) => {
   const { control } = useFormContext();
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"ru"}>
+    <LocalizationProvider
+      dateAdapter={AdapterDayjs}
+      adapterLocale={i18n.language ?? "ru"}
+    >
       <Stack direction="column" spacing={1} sx={{ width: "100%" }}>
         <Stack alignItems="center" fontWeight={500} id={name}>
           {label}
@@ -37,6 +44,8 @@ const DateFieldCustom: React.FC<Props> = ({
           render={({ field }) => (
             <DateCalendar
               {...field}
+              openTo={views?.[1]}
+              views={views}
               minDate={minDate}
               maxDate={maxDate}
               disablePast

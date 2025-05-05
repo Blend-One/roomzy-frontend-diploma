@@ -9,7 +9,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ICreateRent } from "../../types/rent";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { getPriceCurrency } from "../../utils/common";
+import { getPriceCurrency, getPriceUnit } from "../../utils/common";
 import ViewMap from "../../components/Map/ViewMap";
 
 const Rent = () => {
@@ -17,6 +17,7 @@ const Rent = () => {
   const { data, isError } = useGetRoomByIdQuery(id ?? "");
   const [price, setPrice] = useState<number>(0);
   const [dateCount, setDateCount] = useState<number>(0);
+  const [additionalInfo, setAdditionalInfo] = useState<string>("");
 
   const formMethods = useForm({
     defaultValues: {
@@ -30,28 +31,69 @@ const Rent = () => {
   const dateFrom = watch("dateFrom");
   const dateTo = watch("dateTo");
 
-  const onSubmit = async (data: {
+  const onSubmit = async (formData: {
     id: string;
     dateFrom: string | null;
     dateTo: string | null;
   }) => {
-    if (id) {
-      const rentData: ICreateRent = {
-        roomId: id,
-        issuedDate: dayjs(data.dateFrom).toISOString(),
-        dueDate: dayjs(data.dateTo).toISOString(),
-      };
-      console.log(rentData);
+    if (id && data) {
+      let rentData: ICreateRent
+
+      if (data.priceUnit === "PER_DAY") {
+        rentData = {
+          roomId: id,
+          issuedDate: dayjs(formData.dateFrom).toISOString(),
+          dueDate: dayjs(formData.dateTo).toISOString(),
+        };
+        console.log(rentData);
+      }
+      if (data.priceUnit === "PER_MONTH") {
+        const fromDate = dayjs(dateFrom).startOf("day");
+        const toDate = dayjs(dateTo).startOf("day");
+        const countGet = toDate.diff(fromDate, "month") + 1;
+        const startDate = dayjs(dateFrom).toISOString();
+        const endDate = dayjs(dateFrom).add(countGet, "month").toISOString();
+
+        rentData = {
+          roomId: id,
+          issuedDate: startDate,
+          dueDate: endDate,
+        };
+        console.log(rentData);
+      }
+      
     }
   };
 
   useEffect(() => {
     if (dateFrom && dateTo && data) {
-      const fromDate = dayjs(dateFrom).startOf("day");
-      const toDate = dayjs(dateTo).startOf("day");
-      const pricePerDay = (toDate.diff(fromDate, "day") + 1) * +data.price;
-      setPrice(pricePerDay);
-      setDateCount(toDate.diff(fromDate, "day") + 1);
+      if (data.priceUnit === "PER_DAY") {
+        const fromDate = dayjs(dateFrom).startOf("day");
+        const toDate = dayjs(dateTo).startOf("day");
+        const pricePerDay = (toDate.diff(fromDate, "day") + 1) * +data.price;
+        setPrice(pricePerDay);
+        setDateCount(toDate.diff(fromDate, "day") + 1);
+      }
+      if (data.priceUnit === "PER_MONTH") {
+        const fromDate = dayjs(dateFrom).startOf("day");
+        const toDate = dayjs(dateTo).startOf("day");
+        const countGet = toDate.diff(fromDate, "month") + 1;
+        const pricePerDay = countGet * +data.price;
+
+        const startDate = dayjs(dateFrom).format("DD.MM.YYYY");
+        const endDate = dayjs(dateFrom)
+          .add(countGet, "month")
+          .format("DD.MM.YYYY");
+
+        setPrice(pricePerDay);
+        setDateCount(countGet);
+
+        setAdditionalInfo(
+          `Аренда начнётся с ${startDate} и закончится ${endDate}!`
+        );
+        return;
+      }
+      setAdditionalInfo("");
     }
   }, [data, dateFrom, dateTo, formMethods]);
 
@@ -82,7 +124,26 @@ const Rent = () => {
               size={{ xs: 12, sm: 6 }}
             >
               <FormProvider {...formMethods}>
-                <DateRangeCustom />
+                {data.priceUnit === "PER_HOUR" && <DateRangeCustom />}
+                {data.priceUnit === "PER_DAY" && <DateRangeCustom />}
+                {data.priceUnit === "PER_MONTH" && <DateRangeCustom />}
+                {additionalInfo && (
+                  <Stack
+                    sx={{
+                      border: "1px solid #E0E0E0",
+                      borderRadius: "8px",
+                      padding: "16px",
+                    }}
+                    direction="row"
+                    justifyContent="space-around"
+                    alignItems="center"
+                    mt={2}
+                  >
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      {additionalInfo}
+                    </Stack>
+                  </Stack>
+                )}
                 <Stack
                   sx={{
                     border: "1px solid #E0E0E0",
@@ -98,7 +159,8 @@ const Rent = () => {
                     Цена: {getPriceCurrency(price)}
                   </Stack>
                   <Stack direction="row" spacing={1} alignItems="center">
-                    Количество: {dateCount}
+                    Количество: {dateCount}{" "}
+                    {getPriceUnit(data.priceUnit, dateCount)}
                   </Stack>
                 </Stack>
                 <Button

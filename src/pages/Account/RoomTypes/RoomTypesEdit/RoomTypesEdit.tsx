@@ -5,7 +5,10 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import FormContainer from "../../../../components/Forms/FormContainer";
 import TextFieldCustom from "../../../../components/Forms/Inputs/TextFieldCustom";
 import { ICreateRoomTypes } from "../../../../types/roomTypes";
-import { useGetRoomTypesByIdQuery, useUpdateRoomTypesMutation } from "../../../../services/roomTypes";
+import {
+  useGetRoomTypesByIdQuery,
+  useUpdateRoomTypesMutation,
+} from "../../../../services/roomTypes";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 
@@ -14,14 +17,13 @@ const defaultValues: ICreateRoomTypes = {
   ru: "",
   kz: "",
   sectionIds: [],
-}
+};
 
 const RoomTypesEdit = () => {
   const [postTypes, { isLoading, isSuccess }] = useUpdateRoomTypesMutation();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data } = useGetRoomTypesByIdQuery(id || "");
-
 
   const formMethods = useForm<ICreateRoomTypes>({
     defaultValues: defaultValues,
