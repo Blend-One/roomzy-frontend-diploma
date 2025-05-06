@@ -3,7 +3,7 @@ import DateFieldCustom from "./DateFieldCustom";
 import { useWatch } from "react-hook-form";
 import { useRef } from "react";
 
-const TimeRangeCustom: React.FC = () => {
+const MonthRangeCustom: React.FC = () => {
   const dateFrom = useWatch({ name: "dateFrom" });
   const dateTo = useWatch({ name: "dateTo" });
 
@@ -44,4 +44,4 @@ const TimeRangeCustom: React.FC = () => {
   );
 };
 
-export default TimeRangeCustom;
+export default MonthRangeCustom;

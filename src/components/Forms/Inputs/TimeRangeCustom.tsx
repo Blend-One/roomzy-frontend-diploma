@@ -1,14 +1,21 @@
 import { Stack } from "@mui/material";
 import DateFieldCustom from "./DateFieldCustom";
+import TimeFieldCustom from "./TimeFieldCustom";
+import NumberFieldCustom from "./NumberFieldCustom";
 import { useWatch } from "react-hook-form";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 
 const TimeRangeCustom: React.FC = () => {
+  const [disablePast, setDisablePast] = useState(false);
   const dateFrom = useWatch({ name: "dateFrom" });
-  const dateTo = useWatch({ name: "dateTo" });
 
-  const toPickerRef = useRef<{ focus: () => void } | null>(null);
-  const fromPickerRef = useRef<{ focus: () => void } | null>(null);
+  useEffect(() => {
+    if (dateFrom) {
+      const currentDate = new Date();
+      const selectedDate = new Date(dateFrom);
+      setDisablePast(selectedDate.getTime() < currentDate.getTime());
+    }
+  }, [dateFrom]);
 
   return (
     <Stack
@@ -21,23 +28,22 @@ const TimeRangeCustom: React.FC = () => {
         padding: "16px",
       }}
     >
-      <DateFieldCustom
-        required
-        name="dateFrom"
-        label="Дата заезда"
-        maxDate={dateTo || undefined}
-        onOpen={() => toPickerRef.current?.focus()}
-      />
-      <Stack direction="row" spacing={1} alignItems="center">
-        {String.fromCharCode(8211)}
+      <Stack flexGrow={1} direction="column" spacing={2} alignItems="center">
+        <DateFieldCustom required name="dateFrom" label="Дата заезда" />
       </Stack>
-      <DateFieldCustom
-        required
-        name="dateTo"
-        label="Дата выезда"
-        minDate={dateFrom || undefined}
-        onOpen={() => fromPickerRef.current?.focus()}
-      />
+      <Stack flexGrow={1} direction="column" spacing={2} alignItems="center">
+        <TimeFieldCustom
+          required
+          disablePast={disablePast}
+          name="timeFrom"
+          label="Время заезда"
+        />
+        <NumberFieldCustom
+          required
+          name={"numberHours"}
+          label={"Количество часов"}
+        />
+      </Stack>
     </Stack>
   );
 };

@@ -7,6 +7,7 @@ import sectionTypesApi from "../services/sectionTypes";
 import roomTypesApi from "../services/roomTypes";
 import attributesApi from "../services/attributes";
 import characteristicsApi from "../services/characteristics";
+import rentApi from "../services/rent";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     [roomTypesApi.reducerPath]: roomTypesApi.reducer,
     [attributesApi.reducerPath]: attributesApi.reducer,
     [characteristicsApi.reducerPath]: characteristicsApi.reducer,
+    [rentApi.reducerPath]: rentApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -27,6 +29,7 @@ export const store = configureStore({
       roomTypesApi.middleware,
       attributesApi.middleware,
       characteristicsApi.middleware,
+      rentApi.middleware,
       sectionTypesApi.middleware
     ),
 });
