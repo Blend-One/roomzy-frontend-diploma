@@ -8,7 +8,9 @@ import ClearIcon from "@mui/icons-material/Clear";
 
 export const getTableData = (
   data: IViewRent[],
-  handleNavigate: (id: string) => void
+  handleNavigate: (id: string) => void,
+  handleApproveRent: () => void,
+  handleRejectRent: () => void
 ): ITable => {
   return {
     header: [
@@ -35,7 +37,7 @@ export const getTableData = (
                     color="success"
                     onClick={(event) => {
                       event.stopPropagation();
-                      handleNavigate(`/rent/${rent.id}/requests`);
+                      handleApproveRent();
                     }}
                     sx={{
                       p: 0,
@@ -54,7 +56,7 @@ export const getTableData = (
                     color="error"
                     onClick={(event) => {
                       event.stopPropagation();
-                      handleNavigate(`/rent/${rent.id}/requests`);
+                      handleRejectRent();
                     }}
                     sx={{
                       p: 0,

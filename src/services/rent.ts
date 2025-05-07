@@ -1,6 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
-import { ICreateRent, ICreateRentResponse, IViewRent } from "../types/rent";
+import {
+  ICreateRent,
+  ICreateRentResponse,
+  IUpdateRentStatus,
+  IViewRent,
+} from "../types/rent";
 import { IBaseSearchParams } from "../types/pagination";
 
 const ENDPOINT = `/rents`;
@@ -44,6 +49,17 @@ export const rentApi = createApi({
       },
       transformResponse: () => testRentView,
     }),
+    updateRentStatus: builder.mutation<ICreateRentResponse, IUpdateRentStatus>({
+      query: (data: IUpdateRentStatus) => {
+        return {
+          url: `${ENDPOINT}/${data.role}/status/${data.id}`,
+          method: "PATCH",
+          body: {
+            status: data.status,
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -76,6 +92,7 @@ export const {
   useGetPersonalRentsListQuery,
   useGetRentsListByIdQuery,
   useGetRentByIdQuery,
+  useUpdateRentStatusMutation,
 } = rentApi;
 
 export default rentApi;

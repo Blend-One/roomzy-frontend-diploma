@@ -1,25 +1,42 @@
 import { Stack, TablePagination } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import NoData from "../../../../components/NoData";
 import Page from "../../../../components/Page";
 import BasicTable from "../../../../components/Table";
-import { useGetRentsListByIdQuery } from "../../../../services/rent";
+import {
+  useGetRentsListByIdQuery,
+  useUpdateRentStatusMutation,
+} from "../../../../services/rent";
 import AccountWrapperWidget from "../../../../widgets/AccountWrapperWidget";
 import { getTableData } from "./getTableData";
 
 const RentRequests = () => {
   const navigate = useNavigate();
-  const qwer = useParams();
+  const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const { data } = useGetRentsListByIdQuery(qwer.id ?? "");
+  const { data } = useGetRentsListByIdQuery(id ?? "");
+  const [updateRentStatus, { isSuccess }] = useUpdateRentStatusMutation();
 
   const tableData = useMemo(() => {
+    const handleApproveRent = async () => {
+      if (!id) return;
+      await updateRentStatus({
+        id,
+        status: "IN_SIGNING_PROCESS",
+        role: "landlord",
+      });
+    };
+    const handleRejectRent = async () => {
+      if (!id) return;
+      await updateRentStatus({ id, status: "REJECTED", role: "landlord" });
+    };
+
     if (data?.length) {
-      return getTableData(data, navigate);
+      return getTableData(data, navigate, handleApproveRent, handleRejectRent);
     }
     return null;
-  }, [data, navigate]);
+  }, [data, id, navigate, updateRentStatus]);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -37,6 +54,12 @@ const RentRequests = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/account/publications");
+    }
+  }, [isSuccess, navigate]);
 
   return (
     <Page withPadding>
