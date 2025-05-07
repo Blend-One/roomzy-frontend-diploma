@@ -6,6 +6,7 @@ import {
   TableCell,
   TableBody,
   styled,
+  alpha,
 } from "@mui/material";
 import { FC } from "react";
 import { ITable } from "./types";
@@ -33,7 +34,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: theme.palette.action.selected,
   },
   "&:hover": {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: alpha(theme.palette.primary.main, 0.5),
     cursor: "pointer",
   },
   width: "100%",
@@ -61,7 +62,15 @@ const BasicTable: FC<{ data: ITable }> = ({ data }) => {
           {data.body.map((row, index) => (
             <StyledTableRow onClick={row.clickAction} key={index}>
               {row.data.map((cell, i) => (
-                <StyledTableCell key={i}>{cell.name}</StyledTableCell>
+                <StyledTableCell
+                  key={i}
+                  sx={{
+                    width: cell.width,
+                    textAlign: cell.render ? "center" : "initial",
+                  }}
+                >
+                  {cell.render ? cell.render() : cell.name}
+                </StyledTableCell>
               ))}
             </StyledTableRow>
           ))}

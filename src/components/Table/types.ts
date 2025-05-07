@@ -10,4 +10,6 @@ interface ITableRow {
 
 interface ITableCell {
   name: string | number;
+  width?: string | number;
+  render?: () => React.ReactNode;
 }
