@@ -25,7 +25,7 @@ export const getTableData = (
         { name: dayjs(rent.dueDate).format("DD.MM.YYYY HH:mm") },
         { name: getRoomStatusCompare(rent.rentStatus) },
       ],
-      clickAction: () => handleNavigate(`/rent/${rent.id}`),
+      clickAction: () => handleNavigate(`/rent/${rent.id}/status`),
     })),
   };
 };
