@@ -1,36 +1,44 @@
-import Page from "../../../components/Page";
-import AccountWrapperWidget from "../../../widgets/AccountWrapperWidget";
-import BasicTable from "../../../components/Table";
 import { Stack, TablePagination } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router";
-import NoData from "../../../components/NoData";
+import { useNavigate, useParams, useSearchParams } from "react-router";
+import NoData from "../../../../components/NoData";
+import Page from "../../../../components/Page";
+import BasicTable from "../../../../components/Table";
 import {
-  useGetPersonalRentsListQuery,
+  useGetRentsListByIdQuery,
   useUpdateRentStatusMutation,
-} from "../../../services/rent";
+} from "../../../../services/rent";
+import AccountWrapperWidget from "../../../../widgets/AccountWrapperWidget";
 import { getTableData } from "./getTableData";
 
-const MyRentals = () => {
+const RentRequests = () => {
   const navigate = useNavigate();
-  const { data, refetch } = useGetPersonalRentsListQuery({
-    page: 1,
-    limit: 100,
-  });
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const { data } = useGetRentsListByIdQuery(id ?? "");
   const [updateRentStatus, { isSuccess }] = useUpdateRentStatusMutation();
 
   const tableData = useMemo(() => {
-    const handleRejectRent = async (id: string) => {
-      await updateRentStatus({ id, status: "CLOSED", role: "renter" });
+    const handleApproveRent = async () => {
+      if (!id) return;
+      await updateRentStatus({
+        id,
+        status: "IN_SIGNING_PROCESS",
+        role: "landlord",
+      });
+    };
+    const handleRejectRent = async () => {
+      if (!id) return;
+      await updateRentStatus({ id, status: "REJECTED", role: "landlord" });
     };
 
     if (data?.length) {
-      return getTableData(data, navigate, handleRejectRent);
+      return getTableData(data, navigate, handleApproveRent, handleRejectRent);
     }
     return null;
-  }, [data, navigate, updateRentStatus]);
+  }, [data, id, navigate, updateRentStatus]);
 
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (
@@ -49,14 +57,21 @@ const MyRentals = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      refetch();
+      navigate("/account/publications");
     }
-  }, [isSuccess, refetch, navigate]);
+  }, [isSuccess, navigate]);
 
   return (
     <Page withPadding>
       <AccountWrapperWidget>
         <Stack flexGrow={1} spacing={3}>
+          {searchParams.get("roomName") && (
+            <Stack direction="row" spacing={2}>
+              <Stack flexGrow={1} sx={{ fontSize: "1.5rem" }}>
+                Заявки арендаторов для {searchParams.get("roomName")}
+              </Stack>
+            </Stack>
+          )}
           <Stack flexGrow={1} spacing={2}>
             {!tableData && <NoData />}
             {tableData && (
@@ -79,4 +94,4 @@ const MyRentals = () => {
   );
 };
 
-export default MyRentals;
+export default RentRequests;

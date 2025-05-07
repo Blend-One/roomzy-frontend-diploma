@@ -7,8 +7,8 @@ import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { useGetRoomPersonalQuery } from "../../../services/rooms";
-import { getTableData } from "./getTableData";
 import NoData from "../../../components/NoData";
+import { getTableData } from "./getTableData";
 
 const MyPublications = () => {
   const { t } = useTranslation("space");
@@ -25,7 +25,7 @@ const MyPublications = () => {
     return null;
   }, [data, navigate]);
 
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (

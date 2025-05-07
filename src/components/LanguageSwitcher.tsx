@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-type Languages = "ru" | "en" | "kz";
+type Languages = "ru" | "en" | "kk";
 
 interface ILanguages {
   language: Languages;
@@ -24,7 +24,7 @@ const languages: Array<ILanguages> = [
     name: "Русский",
   },
   {
-    language: "kz",
+    language: "kk",
     name: "Қазақша",
   },
   {

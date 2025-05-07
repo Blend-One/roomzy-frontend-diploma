@@ -88,7 +88,7 @@ export interface IViewRoom {
   userId: string;
   status: string;
   price: string;
-  priceUnit: string;
+  priceUnit: EPaymentType;
   physControl: boolean;
   physControlInstructions: string;
   accessInstructions: string;
