@@ -4,7 +4,7 @@ export interface ICreateRent {
   dueDate: string;
 }
 
-export interface IViewRent {
+export interface ICreateRentResponse {
   id: string;
   roomId: string;
   userId: string;
@@ -13,4 +13,32 @@ export interface IViewRent {
   issuedDate: string;
   dueDate: string;
   paymentDate: null;
+}
+
+export interface IViewRent {
+  id: string;
+  roomId: string;
+  userId: string;
+  rentStatus: string;
+  issuedDate: Date;
+  dueDate: Date;
+  totalPrice: string;
+  paymentDate: null;
+  room: Room;
+  user: User;
+}
+
+export interface Room {
+  price: string;
+  priceUnit: string;
+  hasDeposit: boolean;
+  status: string;
+  title: string;
+}
+
+export interface User {
+  id: string;
+  email: string;
+  firstName: null;
+  secondName: null;
 }
