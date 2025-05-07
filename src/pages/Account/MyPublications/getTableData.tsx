@@ -1,8 +1,8 @@
 import { IconButton, Tooltip } from "@mui/material";
+import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import { ITable } from "../../../components/Table/types";
 import { IViewRoom } from "../../../types/rooms";
 import { getRoomStatusCompare } from "../../../utils/compare";
-import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import { getPriceCurrency } from "../../../utils/common";
 
 export const getTableData = (
@@ -32,7 +32,9 @@ export const getTableData = (
                 color="default"
                 onClick={(event) => {
                   event.stopPropagation();
-                  handleNavigate(`/rent/${room.id}/status`);
+                  handleNavigate(
+                    `/rent/${room.id}/requests?roomName=${room.title}`
+                  );
                 }}
                 sx={{
                   p: 0,

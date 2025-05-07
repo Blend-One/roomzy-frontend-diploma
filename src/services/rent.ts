@@ -27,9 +27,55 @@ export const rentApi = createApi({
         };
       },
     }),
+    getRentsListById: builder.query<IViewRent[], string>({
+      query: (id: string) => {
+        return {
+          url: `${ENDPOINT}/${id}`,
+          method: "GET",
+        };
+      },
+    }),
+    getRentById: builder.query<IViewRent, string>({
+      query: (id: string) => {
+        return {
+          url: `${ENDPOINT}/${id}`,
+          method: "GET",
+        };
+      },
+      transformResponse: () => testRentView,
+    }),
   }),
 });
 
-export const { useCreateRentMutation, useGetPersonalRentsListQuery } = rentApi;
+const testRentView: IViewRent = {
+  id: "342e0b5e-ed83-420c-9c3c-858378608ddf",
+  roomId: "1d170ac8-d78f-4115-a5e3-8562b4d009fd",
+  userId: "71930311-aae2-47a6-b1a7-a62d6e9869c8",
+  rentStatus: "OPENED",
+  issuedDate: "2025-05-10T05:00:00.000Z",
+  dueDate: "2025-05-10T15:00:00.000Z",
+  totalPrice: "0",
+  paymentDate: null,
+  room: {
+    price: "180000",
+    priceUnit: "PER_HOUR",
+    hasDeposit: false,
+    status: "OPENED",
+    title: "Особняк",
+  },
+  user: {
+    id: "71930311-aae2-47a6-b1a7-a62d6e9869c8",
+    email: "kaziev.daniel@gmail.com",
+    firstName: null,
+    secondName: null,
+  },
+};
+
+export const {
+  useCreateRentMutation,
+  useGetPersonalRentsListQuery,
+  useGetRentsListByIdQuery,
+  useGetRentByIdQuery,
+} = rentApi;
 
 export default rentApi;

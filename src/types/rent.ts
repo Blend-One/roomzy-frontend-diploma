@@ -20,8 +20,8 @@ export interface IViewRent {
   roomId: string;
   userId: string;
   rentStatus: string;
-  issuedDate: Date;
-  dueDate: Date;
+  issuedDate: string;
+  dueDate: string;
   totalPrice: string;
   paymentDate: null;
   room: Room;

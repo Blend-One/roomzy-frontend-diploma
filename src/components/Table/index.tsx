@@ -6,7 +6,6 @@ import {
   TableCell,
   TableBody,
   styled,
-  alpha,
 } from "@mui/material";
 import { FC } from "react";
 import { ITable } from "./types";
@@ -34,7 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     backgroundColor: theme.palette.action.selected,
   },
   "&:hover": {
-    backgroundColor: alpha(theme.palette.primary.main, 0.5),
+    backgroundColor: "white",
     cursor: "pointer",
   },
   width: "100%",
