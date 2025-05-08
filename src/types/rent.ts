@@ -19,7 +19,7 @@ export interface ICreateRentResponse {
   id: string;
   roomId: string;
   userId: string;
-  rentStatus: string;
+  rentStatus: RentStatus;
   totalPrice: number;
   issuedDate: string;
   dueDate: string;
@@ -30,7 +30,7 @@ export interface IViewRent {
   id: string;
   roomId: string;
   userId: string;
-  rentStatus: string;
+  rentStatus: RentStatus;
   issuedDate: string;
   dueDate: string;
   totalPrice: string;

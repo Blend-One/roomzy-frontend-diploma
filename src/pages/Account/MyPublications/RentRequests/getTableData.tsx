@@ -5,6 +5,7 @@ import { IViewRent } from "../../../../types/rent";
 import { getPriceCurrency } from "../../../../utils/common";
 import DoneIcon from "@mui/icons-material/Done";
 import ClearIcon from "@mui/icons-material/Clear";
+import { getRoomStatusCompare } from "../../../../utils/compare";
 
 export const getTableData = (
   data: IViewRent[],
@@ -18,6 +19,7 @@ export const getTableData = (
       { name: "Сумма" },
       { name: "Начало аренды" },
       { name: "Конец аренды" },
+      { name: "Статус" },
       { name: "Действия" },
     ],
     body: data.map((rent) => ({
@@ -26,6 +28,7 @@ export const getTableData = (
         { name: `${getPriceCurrency(+rent.totalPrice)}` },
         { name: dayjs(rent.issuedDate).format("DD.MM.YYYY HH:mm") },
         { name: dayjs(rent.dueDate).format("DD.MM.YYYY HH:mm") },
+        { name: getRoomStatusCompare(rent.rentStatus) },
         {
           name: "",
           width: 70,

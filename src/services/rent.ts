@@ -59,6 +59,17 @@ export const rentApi = createApi({
         };
       },
     }),
+    getInstructions: builder.query<
+      { instructions: string },
+      { rentId: string; type: "access" | "phys_control" }
+    >({
+      query: (data: { rentId: string; type: "access" | "phys_control" }) => {
+        return {
+          url: `${ENDPOINT}/${data.rentId}/instructions/${data.type}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -68,6 +79,7 @@ export const {
   useGetRentsListByIdQuery,
   useGetRentByIdQuery,
   useUpdateRentStatusMutation,
+  useGetInstructionsQuery,
 } = rentApi;
 
 export default rentApi;
