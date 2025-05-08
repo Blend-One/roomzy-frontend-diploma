@@ -21,6 +21,8 @@ import { getPriceCurrency, getPriceUnit } from "../../../utils/common";
 import i18n from "../../../i18n";
 import Loader from "../../../components/Loader";
 import useUserData from "../../../hooks/useUserData";
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 const InfoBlock = ({
   icon,
@@ -175,7 +177,7 @@ const ControlRent = () => {
             <Grid container size={{ xs: 12 }}>
               <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
                 <InfoBlock
-                  icon={<Home color="action" />}
+                  icon={<VpnKeyIcon color="action" />}
                   title="Инструкции для доступа к помещения"
                 >
                   {!access ||
@@ -189,7 +191,7 @@ const ControlRent = () => {
               </Grid>
               <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
                 <InfoBlock
-                  icon={<Home color="action" />}
+                  icon={<RemoveRedEyeIcon color="action" />}
                   title="Инструкции для осмотра помещения"
                 >
                   {!phys_control ||
