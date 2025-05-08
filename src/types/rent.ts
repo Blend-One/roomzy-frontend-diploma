@@ -1,3 +1,5 @@
+import { EPaymentType } from "./rooms";
+
 export type RentStatus =
   | "OPENED"
   | "PENDING"
@@ -39,7 +41,7 @@ export interface IViewRent {
 
 export interface Room {
   price: string;
-  priceUnit: string;
+  priceUnit: EPaymentType;
   hasDeposit: boolean;
   status: string;
   title: string;
