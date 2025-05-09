@@ -3,6 +3,7 @@ import Page from "../../../components/Page";
 import {
   useGetInstructionsQuery,
   useGetRentByIdQuery,
+  useUpdateRentStatusMutation,
 } from "../../../services/rent";
 import {
   Grid2 as Grid,
@@ -24,6 +25,8 @@ import useUserData from "../../../hooks/useUserData";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import DocumentDowload from "./DocumentDowload";
+import SignButton from "../../../components/SignButton";
+import { useEffect } from "react";
 
 const InfoBlock = ({
   icon,
@@ -45,17 +48,35 @@ const InfoBlock = ({
 
 const ControlRent = () => {
   const { id } = useParams();
-  const { data: rent } = useGetRentByIdQuery(id ?? "");
+  const { data: rent, refetch } = useGetRentByIdQuery(id ?? "");
   i18n.loadNamespaces("components");
   const { data: user } = useUserData();
-  const { data: access } = useGetInstructionsQuery({
+  const [updateRentStatus, { isSuccess }] = useUpdateRentStatusMutation();
+  const { data: access, isSuccess: isSuccessAccess } = useGetInstructionsQuery({
     rentId: id ?? "",
     type: "access",
   });
-  const { data: phys_control } = useGetInstructionsQuery({
-    rentId: id ?? "",
-    type: "phys_control",
-  });
+  const { data: phys_control, isSuccess: isSuccessPhys } =
+    useGetInstructionsQuery({
+      rentId: id ?? "",
+      type: "phys_control",
+    });
+
+  const handleRejectRentByLandlord = async () => {
+    if (rent) {
+      await updateRentStatus({
+        id: rent.id,
+        status: "CLOSED",
+        role: "landlord",
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      refetch();
+    }
+  }, [isSuccess, refetch]);
 
   return (
     <Page>
@@ -168,52 +189,58 @@ const ControlRent = () => {
                     label={getRoomStatusCompare(rent.rentStatus)}
                     color="primary"
                     variant="outlined"
-                    sx={{ mt: 1 }}
+                    sx={{ mt: 1, fontWeight: 500 }}
                   />
                 </Stack>
               </InfoBlock>
             </Grid>
             <Grid container size={{ xs: 12 }}>
-              <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
-                <InfoBlock
-                  icon={<VpnKeyIcon color="action" />}
-                  title="Инструкции для доступа к помещения"
-                >
-                  {!access ||
-                    (access.instructions.length === 0 && (
-                      <Typography align="center">
-                        Инструкции не доступны
-                      </Typography>
-                    ))}
-                  {access && <Typography>{access.instructions}</Typography>}
-                </InfoBlock>
-              </Grid>
-              <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
-                <InfoBlock
-                  icon={<RemoveRedEyeIcon color="action" />}
-                  title="Инструкции для осмотра помещения"
-                >
-                  {!phys_control ||
-                    (phys_control.instructions.length === 0 && (
-                      <Typography align="center">
-                        Инструкции не доступны
-                      </Typography>
-                    ))}
-                  {phys_control && (
-                    <Typography>{phys_control.instructions}</Typography>
-                  )}
-                </InfoBlock>
-              </Grid>
+              {isSuccessAccess && (
+                <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
+                  <InfoBlock
+                    icon={<VpnKeyIcon color="action" />}
+                    title="Инструкции для доступа к помещения"
+                  >
+                    {!access ||
+                      (access.instructions.length === 0 && (
+                        <Typography align="center">
+                          Инструкции не доступны
+                        </Typography>
+                      ))}
+                    {access && <Typography>{access.instructions}</Typography>}
+                  </InfoBlock>
+                </Grid>
+              )}
+              {isSuccessPhys && (
+                <Grid size={{ xs: 12, md: 6 }} sx={{ display: "flex" }}>
+                  <InfoBlock
+                    icon={<RemoveRedEyeIcon color="action" />}
+                    title="Инструкции для осмотра помещения"
+                  >
+                    {!phys_control ||
+                      (phys_control.instructions.length === 0 && (
+                        <Typography align="center">
+                          Инструкции не доступны
+                        </Typography>
+                      ))}
+                    {phys_control && (
+                      <Typography>{phys_control.instructions}</Typography>
+                    )}
+                  </InfoBlock>
+                </Grid>
+              )}
             </Grid>
 
             {rent.userId !== user?.id &&
               rent.rentStatus === "IN_SIGNING_PROCESS" && (
                 <Grid size={{ xs: 12 }}>
                   <Stack direction="row" justifyContent="flex-end" spacing={2}>
-                    <Button variant="contained" color="primary">
-                      Подписать договор
-                    </Button>
-                    <Button variant="outlined" color="error">
+                    <SignButton rentId={rent.id} />
+                    <Button
+                      onClick={handleRejectRentByLandlord}
+                      variant="outlined"
+                      color="error"
+                    >
                       Отменить аренду
                     </Button>
                   </Stack>

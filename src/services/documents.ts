@@ -25,10 +25,24 @@ export const documentsApi = createApi({
         };
       },
     }),
+    postDocument: builder.mutation<void, { documentId: string; cms: string }>({
+      query: (data) => {
+        return {
+          url: `${ENDPOINT}/sign/${data.documentId}`,
+          method: "POST",
+          body: {
+            cms: data.cms,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetDocumentByRentIdQuery, useDownloadDocumentByIdMutation } =
-  documentsApi;
+export const {
+  useGetDocumentByRentIdQuery,
+  useDownloadDocumentByIdMutation,
+  usePostDocumentMutation,
+} = documentsApi;
 
 export default documentsApi;

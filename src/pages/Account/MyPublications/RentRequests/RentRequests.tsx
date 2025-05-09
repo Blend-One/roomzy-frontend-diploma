@@ -57,7 +57,7 @@ const RentRequests = () => {
     if (isSuccess) {
       refetch();
     }
-  }, [isSuccess, navigate, refetch]);
+  }, [isSuccess, refetch]);
 
   return (
     <Page withPadding>
