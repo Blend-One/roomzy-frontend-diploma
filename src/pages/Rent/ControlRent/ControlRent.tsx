@@ -27,6 +27,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import DocumentDowload from "./DocumentDowload";
 import SignButton from "../../../components/SignButton";
 import { useEffect } from "react";
+import { useGetDocumentByRentIdQuery } from "../../../services/documents";
 
 const InfoBlock = ({
   icon,
@@ -47,15 +48,21 @@ const InfoBlock = ({
 );
 
 const ControlRent = () => {
+  i18n.loadNamespaces("components");
   const { id } = useParams();
   const { data: rent, refetch } = useGetRentByIdQuery(id ?? "");
-  i18n.loadNamespaces("components");
   const { data: user } = useUserData();
   const [updateRentStatus, { isSuccess }] = useUpdateRentStatusMutation();
+  const { data: doc } = useGetDocumentByRentIdQuery(
+    { rentId: rent?.id ?? "" },
+    { skip: !rent?.id }
+  );
+
   const { data: access, isSuccess: isSuccessAccess } = useGetInstructionsQuery({
     rentId: id ?? "",
     type: "access",
   });
+
   const { data: phys_control, isSuccess: isSuccessPhys } =
     useGetInstructionsQuery({
       rentId: id ?? "",
@@ -68,6 +75,15 @@ const ControlRent = () => {
         id: rent.id,
         status: "CLOSED",
         role: "landlord",
+      });
+    }
+  };
+  const handleRejectRentByRenter = async () => {
+    if (rent) {
+      await updateRentStatus({
+        id: rent.id,
+        status: "CLOSED",
+        role: "renter",
       });
     }
   };
@@ -232,12 +248,31 @@ const ControlRent = () => {
             </Grid>
 
             {rent.userId !== user?.id &&
-              rent.rentStatus === "IN_SIGNING_PROCESS" && (
+              rent.rentStatus === "IN_SIGNING_PROCESS" &&
+              doc &&
+              doc.status === "CREATED" && (
                 <Grid size={{ xs: 12 }}>
                   <Stack direction="row" justifyContent="flex-end" spacing={2}>
                     <SignButton rentId={rent.id} />
                     <Button
                       onClick={handleRejectRentByLandlord}
+                      variant="outlined"
+                      color="error"
+                    >
+                      Отменить аренду
+                    </Button>
+                  </Stack>
+                </Grid>
+              )}
+            {rent.userId === user?.id &&
+              rent.rentStatus === "IN_SIGNING_PROCESS" &&
+              doc &&
+              doc.status === "SIGNED_BY_LANDLORD" && (
+                <Grid size={{ xs: 12 }}>
+                  <Stack direction="row" justifyContent="flex-end" spacing={2}>
+                    <SignButton rentId={rent.id} />
+                    <Button
+                      onClick={handleRejectRentByRenter}
                       variant="outlined"
                       color="error"
                     >

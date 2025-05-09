@@ -2,7 +2,7 @@ export interface IDocument {
   id: string;
   xml: string;
   base64Xml: string;
-  status: string;
+  status: "CREATED" | "SIGNED_BY_LANDLORD" | "SIGNED";
   rentId: string;
   createdDate: string;
   landlordCommonName: string;

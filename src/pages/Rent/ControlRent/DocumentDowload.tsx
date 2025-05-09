@@ -6,7 +6,7 @@ import {
 } from "../../../services/documents";
 
 const Document = ({ rentId }: { rentId: string }) => {
-  const { data } = useGetDocumentByRentIdQuery({ rentId });
+  const { data, isSuccess } = useGetDocumentByRentIdQuery({ rentId });
   const [downloadDoc, { isLoading }] = useDownloadDocumentByIdMutation();
 
   function downloadPdf() {
@@ -34,6 +34,7 @@ const Document = ({ rentId }: { rentId: string }) => {
       sx={{ borderRadius: 1 }}
       variant="outlined"
       loading={isLoading}
+      disabled={!isSuccess}
       onClick={downloadPdf}
     >
       Скачать
