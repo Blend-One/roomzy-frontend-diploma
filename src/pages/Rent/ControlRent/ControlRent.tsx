@@ -21,8 +21,9 @@ import { getPriceCurrency, getPriceUnit } from "../../../utils/common";
 import i18n from "../../../i18n";
 import Loader from "../../../components/Loader";
 import useUserData from "../../../hooks/useUserData";
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import DocumentDowload from "./DocumentDowload";
 
 const InfoBlock = ({
   icon,
@@ -149,9 +150,7 @@ const ControlRent = () => {
                     >
                       Договор
                     </Typography>
-                    <Button sx={{ borderRadius: 1 }} variant="outlined">
-                      Скачать
-                    </Button>
+                    <DocumentDowload rentId={rent.id} />
                   </Grid>
                 </Grid>
 
@@ -206,6 +205,7 @@ const ControlRent = () => {
                 </InfoBlock>
               </Grid>
             </Grid>
+
             {rent.userId !== user?.id &&
               rent.rentStatus === "IN_SIGNING_PROCESS" && (
                 <Grid size={{ xs: 12 }}>
