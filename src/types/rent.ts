@@ -59,3 +59,7 @@ export interface IUpdateRentStatus {
   status: RentStatus;
   role: "landlord" | "renter";
 }
+
+export interface ICreateCheckoutResponse {
+  sessionUrl: string;
+}

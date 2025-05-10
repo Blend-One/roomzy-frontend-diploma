@@ -1,6 +1,7 @@
-import { useParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 import Page from "../../../components/Page";
 import {
+  useCreateCheckoutMutation,
   useGetInstructionsQuery,
   useGetRentByIdQuery,
   useUpdateRentStatusMutation,
@@ -14,6 +15,7 @@ import {
   Button,
   Stack,
   Divider,
+  Alert,
 } from "@mui/material";
 import { AccessTime, Home, Person } from "@mui/icons-material";
 import dayjs from "dayjs";
@@ -50,6 +52,7 @@ const InfoBlock = ({
 const ControlRent = () => {
   i18n.loadNamespaces("components");
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const { data: rent, refetch } = useGetRentByIdQuery(id ?? "");
   const { data: user } = useUserData();
   const [updateRentStatus, { isSuccess }] = useUpdateRentStatusMutation();
@@ -57,6 +60,7 @@ const ControlRent = () => {
     { rentId: rent?.id ?? "" },
     { skip: !rent?.id }
   );
+  const [postCheckout, { isLoading }] = useCreateCheckoutMutation();
 
   const { data: access, isSuccess: isSuccessAccess } = useGetInstructionsQuery({
     rentId: id ?? "",
@@ -88,6 +92,19 @@ const ControlRent = () => {
     }
   };
 
+  const handleCreateCheckout = async () => {
+    if (rent) {
+      await postCheckout({ rentId: rent.id })
+        .unwrap()
+        .then((response) => {
+          window.location.href = response.sessionUrl;
+        })
+        .catch((error) => {
+          console.error("Ошибка при создании ссылки оплаты:", error);
+        });
+    }
+  };
+
   useEffect(() => {
     if (isSuccess) {
       refetch();
@@ -99,6 +116,27 @@ const ControlRent = () => {
       {!rent && <Loader />}
       {rent && (
         <Box p={{ xs: 2, md: 4 }}>
+          <Stack mb={2}>
+            {searchParams.get("payStatus")?.toUpperCase() === "OK" && (
+              <Alert
+                variant="outlined"
+                severity="success"
+                sx={{ fontWeight: 500, fontSize: "16px" }}
+              >
+                Оплата прошла успешно!
+              </Alert>
+            )}
+            {searchParams.get("payStatus")?.toUpperCase() === "FAILED" && (
+              <Alert
+                variant="outlined"
+                severity="error"
+                sx={{ fontWeight: 500, fontSize: "16px" }}
+              >
+                Оплата не удалась. Пожалуйста, попробуйте ещё раз или свяжитесь
+                с поддержкой.
+              </Alert>
+            )}
+          </Stack>
           <Typography variant="h4" gutterBottom>
             Статус аренды для {rent.room.title}
           </Typography>
@@ -281,6 +319,20 @@ const ControlRent = () => {
                   </Stack>
                 </Grid>
               )}
+            {rent.userId === user?.id && rent.rentStatus === "PENDING" && (
+              <Grid size={{ xs: 12 }}>
+                <Stack direction="row" justifyContent="flex-end" spacing={2}>
+                  <Button
+                    onClick={handleCreateCheckout}
+                    variant="contained"
+                    loading={isLoading}
+                    color="primary"
+                  >
+                    Оплатить
+                  </Button>
+                </Stack>
+              </Grid>
+            )}
           </Grid>
         </Box>
       )}

@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
 import {
+  ICreateCheckoutResponse,
   ICreateRent,
   ICreateRentResponse,
   IUpdateRentStatus,
@@ -70,6 +71,17 @@ export const rentApi = createApi({
         };
       },
     }),
+    createCheckout: builder.mutation<
+      ICreateCheckoutResponse,
+      { rentId: string }
+    >({
+      query: (data) => {
+        return {
+          url: `${ENDPOINT}/create_checkout/${data.rentId}`,
+          method: "POST",
+        };
+      },
+    }),
   }),
 });
 
@@ -80,6 +92,7 @@ export const {
   useGetRentByIdQuery,
   useUpdateRentStatusMutation,
   useGetInstructionsQuery,
+  useCreateCheckoutMutation,
 } = rentApi;
 
 export default rentApi;
