@@ -36,7 +36,7 @@ export const getTableData = (
             <Tooltip title="Отменить заявку">
               <span>
                 <IconButton
-                  disabled={rent.rentStatus !== "OPENED"}
+                  disabled={rent.rentStatus !== "2OPENED"}
                   color="error"
                   onClick={(event) => {
                     event.stopPropagation();

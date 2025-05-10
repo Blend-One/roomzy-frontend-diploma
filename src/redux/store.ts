@@ -9,6 +9,7 @@ import attributesApi from "../services/attributes";
 import characteristicsApi from "../services/characteristics";
 import rentApi from "../services/rent";
 import documentsApi from "../services/documents";
+import rentIssues from "../services/rentIssues";
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     [attributesApi.reducerPath]: attributesApi.reducer,
     [characteristicsApi.reducerPath]: characteristicsApi.reducer,
     [documentsApi.reducerPath]: documentsApi.reducer,
+    [rentIssues.reducerPath]: rentIssues.reducer,
     [rentApi.reducerPath]: rentApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -35,6 +37,7 @@ export const store = configureStore({
       characteristicsApi.middleware,
       rentApi.middleware,
       documentsApi.middleware,
+      rentIssues.middleware,
       sectionTypesApi.middleware
     ),
 });

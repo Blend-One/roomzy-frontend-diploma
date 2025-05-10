@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import Page from "../../../components/Page";
 import {
   useCreateCheckoutMutation,
@@ -52,6 +52,7 @@ const InfoBlock = ({
 const ControlRent = () => {
   i18n.loadNamespaces("components");
   const { id } = useParams();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { data: rent, refetch } = useGetRentByIdQuery(id ?? "");
   const { data: user } = useUserData();
@@ -102,6 +103,12 @@ const ControlRent = () => {
         .catch((error) => {
           console.error("Ошибка при создании ссылки оплаты:", error);
         });
+    }
+  };
+
+  const handleNavigateIssues = async () => {
+    if (rent) {
+      navigate(`/rent/${rent.id}/issues`);
     }
   };
 
@@ -329,6 +336,19 @@ const ControlRent = () => {
                     color="primary"
                   >
                     Оплатить
+                  </Button>
+                </Stack>
+              </Grid>
+            )}
+            {rent.rentStatus === "7PAID" && (
+              <Grid size={{ xs: 12 }}>
+                <Stack direction="row" justifyContent="flex-end" spacing={2}>
+                  <Button
+                    onClick={handleNavigateIssues}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Спорные моменты
                   </Button>
                 </Stack>
               </Grid>
