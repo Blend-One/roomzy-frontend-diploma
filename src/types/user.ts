@@ -18,6 +18,7 @@ export interface IUserData extends IUser {
 
 export interface IAuthState {
   isAuthenticated: boolean;
+  isRefreshing: boolean;
   redirectPath: string | null;
   data: ITokenData | null;
 }

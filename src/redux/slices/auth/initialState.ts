@@ -14,6 +14,7 @@ const getInitialState = (): IAuthState => {
     return {
       isAuthenticated: true,
       redirectPath: null,
+      isRefreshing: false,
       data: tokenData,
     };
   }
@@ -24,6 +25,7 @@ const getInitialState = (): IAuthState => {
   return {
     isAuthenticated: false,
     redirectPath: null,
+    isRefreshing: false,
     data: null,
   };
 };

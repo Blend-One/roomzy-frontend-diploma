@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
 import {
+  ICreateCheckoutResponse,
   ICreateRent,
   ICreateRentResponse,
   IUpdateRentStatus,
@@ -43,11 +44,10 @@ export const rentApi = createApi({
     getRentById: builder.query<IViewRent, string>({
       query: (id: string) => {
         return {
-          url: `${ENDPOINT}/${id}`,
+          url: `${ENDPOINT}/single/${id}`,
           method: "GET",
         };
       },
-      transformResponse: () => testRentView,
     }),
     updateRentStatus: builder.mutation<ICreateRentResponse, IUpdateRentStatus>({
       query: (data: IUpdateRentStatus) => {
@@ -60,32 +60,30 @@ export const rentApi = createApi({
         };
       },
     }),
+    getInstructions: builder.query<
+      { instructions: string },
+      { rentId: string; type: "access" | "phys_control" }
+    >({
+      query: (data: { rentId: string; type: "access" | "phys_control" }) => {
+        return {
+          url: `${ENDPOINT}/${data.rentId}/instructions/${data.type}`,
+          method: "GET",
+        };
+      },
+    }),
+    createCheckout: builder.mutation<
+      ICreateCheckoutResponse,
+      { rentId: string }
+    >({
+      query: (data) => {
+        return {
+          url: `${ENDPOINT}/create_checkout/${data.rentId}`,
+          method: "POST",
+        };
+      },
+    }),
   }),
 });
-
-const testRentView: IViewRent = {
-  id: "342e0b5e-ed83-420c-9c3c-858378608ddf",
-  roomId: "1d170ac8-d78f-4115-a5e3-8562b4d009fd",
-  userId: "71930311-aae2-47a6-b1a7-a62d6e9869c8",
-  rentStatus: "OPENED",
-  issuedDate: "2025-05-10T05:00:00.000Z",
-  dueDate: "2025-05-10T15:00:00.000Z",
-  totalPrice: "0",
-  paymentDate: null,
-  room: {
-    price: "180000",
-    priceUnit: "PER_HOUR",
-    hasDeposit: false,
-    status: "OPENED",
-    title: "Особняк",
-  },
-  user: {
-    id: "71930311-aae2-47a6-b1a7-a62d6e9869c8",
-    email: "kaziev.daniel@gmail.com",
-    firstName: null,
-    secondName: null,
-  },
-};
 
 export const {
   useCreateRentMutation,
@@ -93,6 +91,8 @@ export const {
   useGetRentsListByIdQuery,
   useGetRentByIdQuery,
   useUpdateRentStatusMutation,
+  useGetInstructionsQuery,
+  useCreateCheckoutMutation,
 } = rentApi;
 
 export default rentApi;

@@ -1,12 +1,15 @@
+import { EPaymentType } from "./rooms";
+
 export type RentStatus =
-  | "OPENED"
-  | "PENDING"
-  | "PAID"
-  | "REJECTED"
-  | "CLOSED"
-  | "ISSUES_ON_CHECK"
-  | "ISSUES_REJECTED"
-  | "IN_SIGNING_PROCESS";
+  | "2OPENED"
+  | "4PENDING"
+  | "7PAID"
+  | "1REJECTED"
+  | "0CLOSED"
+  | "5ISSUES_ON_CHECK"
+  | "6ISSUES_REJECTED"
+  | "3IN_SIGNING_PROCESS";
+
 export interface ICreateRent {
   roomId: string;
   issuedDate: string;
@@ -17,7 +20,7 @@ export interface ICreateRentResponse {
   id: string;
   roomId: string;
   userId: string;
-  rentStatus: string;
+  rentStatus: RentStatus;
   totalPrice: number;
   issuedDate: string;
   dueDate: string;
@@ -28,7 +31,7 @@ export interface IViewRent {
   id: string;
   roomId: string;
   userId: string;
-  rentStatus: string;
+  rentStatus: RentStatus;
   issuedDate: string;
   dueDate: string;
   totalPrice: string;
@@ -39,7 +42,7 @@ export interface IViewRent {
 
 export interface Room {
   price: string;
-  priceUnit: string;
+  priceUnit: EPaymentType;
   hasDeposit: boolean;
   status: string;
   title: string;
@@ -56,4 +59,8 @@ export interface IUpdateRentStatus {
   id: string;
   status: RentStatus;
   role: "landlord" | "renter";
+}
+
+export interface ICreateCheckoutResponse {
+  sessionUrl: string;
 }

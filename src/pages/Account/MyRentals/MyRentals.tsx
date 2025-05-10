@@ -21,7 +21,7 @@ const MyRentals = () => {
 
   const tableData = useMemo(() => {
     const handleRejectRent = async (id: string) => {
-      await updateRentStatus({ id, status: "CLOSED", role: "renter" });
+      await updateRentStatus({ id, status: "0CLOSED", role: "renter" });
     };
 
     if (data?.length) {
