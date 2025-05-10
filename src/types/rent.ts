@@ -1,14 +1,15 @@
 import { EPaymentType } from "./rooms";
 
 export type RentStatus =
-  | "OPENED"
-  | "PENDING"
-  | "PAID"
-  | "REJECTED"
-  | "CLOSED"
-  | "ISSUES_ON_CHECK"
-  | "ISSUES_REJECTED"
-  | "IN_SIGNING_PROCESS";
+  | "2OPENED"
+  | "4PENDING"
+  | "7PAID"
+  | "1REJECTED"
+  | "0CLOSED"
+  | "5ISSUES_ON_CHECK"
+  | "6ISSUES_REJECTED"
+  | "3IN_SIGNING_PROCESS";
+
 export interface ICreateRent {
   roomId: string;
   issuedDate: string;

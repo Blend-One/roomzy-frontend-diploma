@@ -77,7 +77,7 @@ const ControlRent = () => {
     if (rent) {
       await updateRentStatus({
         id: rent.id,
-        status: "CLOSED",
+        status: "0CLOSED",
         role: "landlord",
       });
     }
@@ -86,7 +86,7 @@ const ControlRent = () => {
     if (rent) {
       await updateRentStatus({
         id: rent.id,
-        status: "CLOSED",
+        status: "0CLOSED",
         role: "renter",
       });
     }
@@ -286,7 +286,7 @@ const ControlRent = () => {
             </Grid>
 
             {rent.userId !== user?.id &&
-              rent.rentStatus === "IN_SIGNING_PROCESS" &&
+              rent.rentStatus === "3IN_SIGNING_PROCESS" &&
               doc &&
               doc.status === "CREATED" && (
                 <Grid size={{ xs: 12 }}>
@@ -303,7 +303,7 @@ const ControlRent = () => {
                 </Grid>
               )}
             {rent.userId === user?.id &&
-              rent.rentStatus === "IN_SIGNING_PROCESS" &&
+              rent.rentStatus === "3IN_SIGNING_PROCESS" &&
               doc &&
               doc.status === "SIGNED_BY_LANDLORD" && (
                 <Grid size={{ xs: 12 }}>
@@ -319,7 +319,7 @@ const ControlRent = () => {
                   </Stack>
                 </Grid>
               )}
-            {rent.userId === user?.id && rent.rentStatus === "PENDING" && (
+            {rent.userId === user?.id && rent.rentStatus === "4PENDING" && (
               <Grid size={{ xs: 12 }}>
                 <Stack direction="row" justifyContent="flex-end" spacing={2}>
                   <Button
