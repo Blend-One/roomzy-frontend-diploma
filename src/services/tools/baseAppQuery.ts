@@ -32,7 +32,8 @@ const baseAppQueryWithReauth: BaseQueryFn<
 
   if (result.error && result.error.status === 401) {
     const isRefreshing = api.getState() as { auth: { isRefreshing: boolean } };
-    if (isRefreshing) {
+
+    if (isRefreshing.auth.isRefreshing) {
       return result;
     }
     api.dispatch({ type: "auth/setIsRefreshing", payload: true });

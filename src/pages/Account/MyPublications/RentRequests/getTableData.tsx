@@ -34,7 +34,7 @@ export const getTableData = (
           width: 70,
           render: () => (
             <Stack spacing={2} direction={"row"}>
-              {rent.rentStatus === "OPENED" && (
+              {rent.rentStatus === "2OPENED" && (
                 <>
                   <Stack flexGrow={1}>
                     <Tooltip title="Одобрить аренду">

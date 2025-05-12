@@ -15,7 +15,7 @@ import LazyRoomTypesCreate from "../pages/Account/RoomTypes/RoomTypesCreate";
 import LazyRoomTypesEdit from "../pages/Account/RoomTypes/RoomTypesEdit";
 import LazyControlRent from "../pages/Rent/ControlRent";
 import LazyRentRequests from "../pages/Account/MyPublications/RentRequests";
-import LazyRentIssues from "../pages/Rent/RentIssues";
+import LazyRentIssues from "../pages/Account/MyPublications/RentIssues";
 
 interface IBaseRoute {
   element: React.FunctionComponent<object>;

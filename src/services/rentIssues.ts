@@ -16,9 +16,20 @@ export const rentIssues = createApi({
         };
       },
     }),
+    getRentIssuesByRoomIdList: builder.query<IRentIssues[], { rentId: string }>(
+      {
+        query: (data) => {
+          return {
+            url: `${ENDPOINT}/rooms/${data.rentId}`,
+            method: "GET",
+          };
+        },
+      }
+    ),
   }),
 });
 
-export const { useGetRentIssuesListQuery } = rentIssues;
+export const { useGetRentIssuesListQuery, useGetRentIssuesByRoomIdListQuery } =
+  rentIssues;
 
 export default rentIssues;

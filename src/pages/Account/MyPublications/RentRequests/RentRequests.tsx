@@ -22,12 +22,12 @@ const RentRequests = () => {
     const handleApproveRent = async (id: string) => {
       await updateRentStatus({
         id,
-        status: "IN_SIGNING_PROCESS",
+        status: "3IN_SIGNING_PROCESS",
         role: "landlord",
       });
     };
     const handleRejectRent = async (id: string) => {
-      await updateRentStatus({ id, status: "REJECTED", role: "landlord" });
+      await updateRentStatus({ id, status: "1REJECTED", role: "landlord" });
     };
 
     if (data?.length) {
