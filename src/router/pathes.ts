@@ -17,6 +17,7 @@ import LazyControlRent from "../pages/Rent/ControlRent";
 import LazyRentRequests from "../pages/Account/MyPublications/RentRequests";
 import LazyRentIssues from "../pages/Account/MyPublications/RentIssues";
 import LazyCreateRentIssues from "../pages/Rent/CreateRentIssues";
+import LazyRentIssuesLandlord from "../pages/Account/MyRentals/RentIssues";
 
 interface IBaseRoute {
   element: React.FunctionComponent<object>;
@@ -91,6 +92,11 @@ const PATHS: Array<IRoute> = [
   {
     path: "/rent/:id/issues",
     element: LazyRentIssues,
+    allowedRoles: [ERoles.USER],
+  },
+  {
+    path: "/rent/:id/landlord/issues",
+    element: LazyRentIssuesLandlord,
     allowedRoles: [ERoles.USER],
   },
   {

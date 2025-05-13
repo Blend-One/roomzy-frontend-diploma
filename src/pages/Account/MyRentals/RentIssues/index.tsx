@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
 import Loader from "../../../../components/Loader";
 
-const RentIssues = React.lazy(() => import("./RentIssues"));
+const RentIssuesLandlord = React.lazy(() => import("./RentIssues"));
 
-const LazyRenterIssues = () => (
+const LazyRentIssuesLandlord = () => (
   <Suspense fallback={<Loader />}>
-    <RentIssues />
+    <RentIssuesLandlord />
   </Suspense>
 );
 
-export default LazyRenterIssues;
+export default LazyRentIssuesLandlord;

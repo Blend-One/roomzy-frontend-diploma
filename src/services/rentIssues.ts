@@ -8,10 +8,10 @@ export const rentIssues = createApi({
   reducerPath: "rentIssues",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getRentIssuesList: builder.query<IRentIssues[], { rentId: string }>({
+    getRentIssuesList: builder.query<IRentIssues[], { rentId: string}>({
       query: (data) => {
         return {
-          url: `${ENDPOINT}/rents/${data.rentId}`,
+          url: `${ENDPOINT}/rooms/${data.rentId}`,
           method: "GET",
         };
       },

@@ -58,7 +58,7 @@ export const getTableData = (
                     color="error"
                     onClick={(event) => {
                       event.stopPropagation();
-                      handleNavigate(`/rent/${room.id}/issues`);
+                      handleNavigate(`/rent/${room.id}/landlord/issues`);
                     }}
                     sx={{
                       p: 0,
