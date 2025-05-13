@@ -27,6 +27,24 @@ const RentIssues = () => {
               </Card>
             </Grid2>
           ))}
+                {/* <Grid2 size={{ xs: 12 }}>
+                  <Stack direction="row" justifyContent="flex-end" spacing={2}>
+                    <Button
+                      onClick={handleRejectRentByLandlord}
+                      variant="outlined"
+                      color="error"
+                    >
+                      Одобрить
+                    </Button>
+                    <Button
+                      onClick={handleRejectRentByLandlord}
+                      variant="outlined"
+                      color="error"
+                    >
+                      Отклонить
+                    </Button>
+                  </Stack>
+                </Grid2> */}
         </Grid2>
       )}
     </Page>

@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseAppQuery from "./tools/baseAppQuery";
-import { IRentIssues } from "../types/rentIssues";
+import { IModerationsIssues, IRentIssues } from "../types/rentIssues";
 
 const ENDPOINT = `/controversial_issues`;
 
@@ -37,6 +37,16 @@ export const rentIssues = createApi({
         },
       }
     ),
+    getModerations: builder.query<IModerationsIssues[], void>(
+      {
+        query: () => {
+          return {
+            url: `${ENDPOINT}/moderation?page=1&limit=100`,
+            method: "GET",
+          };
+        },
+      }
+    ),
   }),
 });
 
@@ -44,6 +54,7 @@ export const {
   useGetRentIssuesListQuery,
   useGetRentIssuesByRoomIdListQuery,
   usePostIssuesMutation,
+  useGetModerationsQuery
 } = rentIssues;
 
 export default rentIssues;

@@ -11,6 +11,7 @@ import PublicationsIcon from "@mui/icons-material/Description";
 import RentalsIcon from "@mui/icons-material/LocalOffer";
 import GavelIcon from "@mui/icons-material/Gavel";
 import BedroomParentIcon from "@mui/icons-material/BedroomParent";
+import SingleBedIcon from '@mui/icons-material/SingleBed';
 
 import useHasRole from "../hooks/useHasRole";
 import AppConfig from "../config";
@@ -42,7 +43,13 @@ const AccountMenu = () => {
             </ListItemIcon>
             <ListItemText>{t("I18N_NAV_ROOM_TYPES")}</ListItemText>
           </MenuItem>
-          <MenuItem onClick={() => navigate("/account/sections")}>
+          <MenuItem onClick={() => navigate("/account/photo/moderations")}>
+            <ListItemIcon>
+              <SingleBedIcon />
+            </ListItemIcon>
+            <ListItemText>{t("Модерация помещения")}</ListItemText>
+          </MenuItem>
+          {/* <MenuItem onClick={() => navigate("/account/sections")}>
             <ListItemIcon>
               <GavelIcon />
             </ListItemIcon>
@@ -53,7 +60,7 @@ const AccountMenu = () => {
               <GavelIcon />
             </ListItemIcon>
             <ListItemText>{t("I18N_NAV_ROOM_CHARACTERISTICS")}</ListItemText>
-          </MenuItem>
+          </MenuItem> */}
         </MenuList>
       </Paper>
     );
