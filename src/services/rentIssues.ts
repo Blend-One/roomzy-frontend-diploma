@@ -20,8 +20,19 @@ export const rentIssues = createApi({
       {
         query: (data) => {
           return {
-            url: `${ENDPOINT}/rooms/${data.rentId}`,
+            url: `${ENDPOINT}/rents/${data.rentId}`,
             method: "GET",
+          };
+        },
+      }
+    ),
+    postIssues: builder.mutation<IRentIssues[], { data: FormData; id: string }>(
+      {
+        query: (data) => {
+          return {
+            url: `${ENDPOINT}/${data.id}`,
+            method: "POST",
+            body: data.data,
           };
         },
       }
@@ -29,7 +40,10 @@ export const rentIssues = createApi({
   }),
 });
 
-export const { useGetRentIssuesListQuery, useGetRentIssuesByRoomIdListQuery } =
-  rentIssues;
+export const {
+  useGetRentIssuesListQuery,
+  useGetRentIssuesByRoomIdListQuery,
+  usePostIssuesMutation,
+} = rentIssues;
 
 export default rentIssues;

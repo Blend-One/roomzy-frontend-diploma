@@ -30,6 +30,7 @@ import DocumentDowload from "./DocumentDowload";
 import SignButton from "../../../components/SignButton";
 import { useEffect } from "react";
 import { useGetDocumentByRentIdQuery } from "../../../services/documents";
+import AddIcon from "@mui/icons-material/Add";
 
 const InfoBlock = ({
   icon,
@@ -108,7 +109,7 @@ const ControlRent = () => {
 
   const handleNavigateIssues = async () => {
     if (rent) {
-      navigate(`/rent/${rent.id}/issues`);
+      navigate(`/rent/${rent.id}/create-issues`);
     }
   };
 
@@ -144,10 +145,25 @@ const ControlRent = () => {
               </Alert>
             )}
           </Stack>
-          <Typography variant="h4" gutterBottom>
-            Статус аренды для {rent.room.title}
-          </Typography>
-
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Typography variant="h4" mb={2}>
+              Статус аренды для {rent.room.title}
+            </Typography>
+            {rent.rentStatus === "7PAID" && (
+              <Button
+                endIcon={<AddIcon />}
+                onClick={handleNavigateIssues}
+                variant="contained"
+                color="primary"
+              >
+                Добавить спорные моменты
+              </Button>
+            )}
+          </Stack>
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, md: 6 }}>
               <InfoBlock icon={<Person color="action" />} title="Арендатор">
@@ -336,19 +352,6 @@ const ControlRent = () => {
                     color="primary"
                   >
                     Оплатить
-                  </Button>
-                </Stack>
-              </Grid>
-            )}
-            {rent.rentStatus === "7PAID" && (
-              <Grid size={{ xs: 12 }}>
-                <Stack direction="row" justifyContent="flex-end" spacing={2}>
-                  <Button
-                    onClick={handleNavigateIssues}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Спорные моменты
                   </Button>
                 </Stack>
               </Grid>
