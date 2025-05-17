@@ -24,7 +24,8 @@
   "I18N_ROOM_PENDING": "Ожидает оплаты",
   "I18N_ROOM_PAID": "Оплачено",
   "I18N_ROOM_CLOSED": "Отклонено",
-  "I18N_ROOM_ISSUES_ON_CHECK": "Проблемы на проверке",
+  "I18N_ROOM_ISSUES_ON_CHECK": "Проверка фотографий",
   "I18N_ROOM_ISSUES_REJECTED": "Проблемы отклонены",
+  "I18N_ROOM_RENTED": "Арендуется",
   "I18N_ROOM_IN_SIGNING_PROCESS": "В процессе подписания"
 }

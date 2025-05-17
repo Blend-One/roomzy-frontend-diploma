@@ -5,6 +5,8 @@ import { getRoomStatusCompare } from "../../../utils/compare";
 import Tooltip from "@mui/material/Tooltip/Tooltip";
 import IconButton from "@mui/material/IconButton/IconButton";
 import ClearIcon from "@mui/icons-material/Clear";
+import { Stack } from "@mui/material";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 export const getTableData = (
   data: IViewRent[],
@@ -33,26 +35,49 @@ export const getTableData = (
           name: "",
           width: 70,
           render: () => (
-            <Tooltip title="Отменить заявку">
-              <span>
-                <IconButton
-                  disabled={rent.rentStatus !== "OPENED"}
-                  color="error"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    handleRejectRent(rent.id);
-                  }}
-                  sx={{
-                    p: 0,
-                    margin: 0,
-                    alignContent: "center",
-                    color: "primary.white",
-                  }}
-                >
-                  <ClearIcon sx={{ width: "35px", height: "35px" }} />
-                </IconButton>
-              </span>
-            </Tooltip>
+            <Stack spacing={2} direction={"row"}>
+              <Stack flexGrow={1}>
+                <Tooltip title="Спорные моменты">
+                  <IconButton
+                    color="error"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleNavigate(`/rent/${rent.id}/issues`);
+                    }}
+                    sx={{
+                      p: 0,
+                      margin: 0,
+                      alignContent: "center",
+                      color: "primary.white",
+                    }}
+                  >
+                    <ErrorOutlineIcon sx={{ width: "35px", height: "35px" }} />
+                  </IconButton>
+                </Tooltip>
+              </Stack>
+              <Stack flexGrow={1}>
+                <Tooltip title="Отменить заявку">
+                  <span>
+                    <IconButton
+                      disabled={rent.rentStatus !== "2OPENED"}
+                      color="error"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleRejectRent(rent.id);
+                      }}
+                      sx={{
+                        p: 0,
+                        margin: 0,
+                        alignContent: "center",
+                        color: "primary.white",
+                      }}
+                    >
+                      <ClearIcon sx={{ width: "35px", height: "35px" }} />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              </Stack>
+            </Stack>
           ),
         },
       ],

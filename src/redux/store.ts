@@ -8,6 +8,8 @@ import roomTypesApi from "../services/roomTypes";
 import attributesApi from "../services/attributes";
 import characteristicsApi from "../services/characteristics";
 import rentApi from "../services/rent";
+import documentsApi from "../services/documents";
+import rentIssues from "../services/rentIssues";
 
 export const store = configureStore({
   reducer: {
@@ -19,10 +21,14 @@ export const store = configureStore({
     [roomTypesApi.reducerPath]: roomTypesApi.reducer,
     [attributesApi.reducerPath]: attributesApi.reducer,
     [characteristicsApi.reducerPath]: characteristicsApi.reducer,
+    [documentsApi.reducerPath]: documentsApi.reducer,
+    [rentIssues.reducerPath]: rentIssues.reducer,
     [rentApi.reducerPath]: rentApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(
       tokenApi.middleware,
       roomsApi.middleware,
       dictionariesApi.middleware,
@@ -30,6 +36,8 @@ export const store = configureStore({
       attributesApi.middleware,
       characteristicsApi.middleware,
       rentApi.middleware,
+      documentsApi.middleware,
+      rentIssues.middleware,
       sectionTypesApi.middleware
     ),
 });

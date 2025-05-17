@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { SxProps, TextField, Theme } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -8,12 +8,14 @@ interface ITextFieldCustomProps {
   autoFocus?: boolean;
   required?: boolean;
   multiline?: boolean;
+  sx?: SxProps<Theme>;
   type?: React.InputHTMLAttributes<unknown>["type"];
 }
 
 const TextFieldCustom: React.FC<ITextFieldCustomProps> = ({
   name,
   label,
+  sx,
   required = false,
   autoFocus = false,
   multiline = false,
@@ -35,6 +37,7 @@ const TextFieldCustom: React.FC<ITextFieldCustomProps> = ({
       }}
       render={({ field }) => (
         <TextField
+          sx={sx}
           {...field}
           label={label}
           required={required}

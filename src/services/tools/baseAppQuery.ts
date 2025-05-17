@@ -31,6 +31,13 @@ const baseAppQueryWithReauth: BaseQueryFn<
   let result = await baseAppQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
+    const isRefreshing = api.getState() as { auth: { isRefreshing: boolean } };
+
+    if (isRefreshing.auth.isRefreshing) {
+      return result;
+    }
+    api.dispatch({ type: "auth/setIsRefreshing", payload: true });
+
     const refreshResult = await baseAppQuery(
       {
         url: "/users/refresh",
@@ -42,6 +49,7 @@ const baseAppQueryWithReauth: BaseQueryFn<
 
     if (refreshResult.error && result.error.status === 401) {
       api.dispatch(clearTokenState());
+      api.dispatch({ type: "auth/setIsRefreshing", payload: false });
       return refreshResult;
     }
 
@@ -53,6 +61,7 @@ const baseAppQueryWithReauth: BaseQueryFn<
     } else {
       api.dispatch(clearTokenState());
     }
+    api.dispatch({ type: "auth/setIsRefreshing", payload: false });
   }
   return result;
 };

@@ -15,28 +15,26 @@ const RentRequests = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const { data } = useGetRentsListByIdQuery(id ?? "");
+  const { data, refetch } = useGetRentsListByIdQuery(id ?? "");
   const [updateRentStatus, { isSuccess }] = useUpdateRentStatusMutation();
 
   const tableData = useMemo(() => {
-    const handleApproveRent = async () => {
-      if (!id) return;
+    const handleApproveRent = async (id: string) => {
       await updateRentStatus({
         id,
-        status: "IN_SIGNING_PROCESS",
+        status: "3IN_SIGNING_PROCESS",
         role: "landlord",
       });
     };
-    const handleRejectRent = async () => {
-      if (!id) return;
-      await updateRentStatus({ id, status: "REJECTED", role: "landlord" });
+    const handleRejectRent = async (id: string) => {
+      await updateRentStatus({ id, status: "1REJECTED", role: "landlord" });
     };
 
     if (data?.length) {
       return getTableData(data, navigate, handleApproveRent, handleRejectRent);
     }
     return null;
-  }, [data, id, navigate, updateRentStatus]);
+  }, [data, navigate, updateRentStatus]);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -57,9 +55,9 @@ const RentRequests = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/account/publications");
+      refetch();
     }
-  }, [isSuccess, navigate]);
+  }, [isSuccess, refetch]);
 
   return (
     <Page withPadding>

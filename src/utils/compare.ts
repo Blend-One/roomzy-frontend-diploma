@@ -15,6 +15,6 @@ export function getRentTypeCompare(label: keyof typeof priceUnit): string {
   return getCompare(priceUnit, label);
 }
 
-export function getRoomStatusCompare(label: keyof typeof priceUnit): string {
+export function getRoomStatusCompare(label: keyof typeof roomStatus): string {
   return getCompare(roomStatus, label);
 }
