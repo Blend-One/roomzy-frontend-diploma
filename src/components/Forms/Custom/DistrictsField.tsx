@@ -26,7 +26,7 @@ const DistrictsField: React.FC<IDistrictsFieldProps> = ({
 
   useEffect(() => {
     methods.setValue("districtId", "");
-  }, [city]);
+  }, [city, methods]);
 
   const districts = useMemo(
     () => data?.map((item) => ({ value: item.id, title: item.name })),

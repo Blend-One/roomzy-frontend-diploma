@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { IPaginatedList } from "../types/pagination";
 
 // TODO: Implement a better pagination
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 const usePagination = <T>(data: IPaginatedList<T>) => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [pageNumber, setPageNumber] = useState<number>(1);
