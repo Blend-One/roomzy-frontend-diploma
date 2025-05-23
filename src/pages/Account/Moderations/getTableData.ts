@@ -3,7 +3,7 @@ import { getRoomStatusCompare } from "../../../utils/compare";
 
 export const getTableData = (
   data: IViewRoom[],
-  handleNavigate: (id: string) => void
+  handleNavigate: (id: string) => void,
 ) => {
   return {
     header: [

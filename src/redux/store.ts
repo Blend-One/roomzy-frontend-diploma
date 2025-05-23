@@ -38,6 +38,6 @@ export const store = configureStore({
       rentApi.middleware,
       documentsApi.middleware,
       rentIssues.middleware,
-      sectionTypesApi.middleware
+      sectionTypesApi.middleware,
     ),
 });

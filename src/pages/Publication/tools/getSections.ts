@@ -38,7 +38,10 @@ export function getSections(data: InputItem[]): OutputSectionsView[] {
       {
         sectionId: string;
         sectionName: string;
-        sectionData: { characteristicId: string; attributeId: string }[];
+        sectionData: {
+          characteristicId: string;
+          attributeId: string;
+        }[];
       }
     >
   >();

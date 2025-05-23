@@ -15,7 +15,11 @@ const AccountWrapperWidget: FC<PropsWithChildren> = ({ children }) => {
         </Grid>
         <Grid
           size={{ sm: 9 }}
-          sx={{ display: "flex", flexDirection: "column", minHeight: 0 }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: 0,
+          }}
         >
           {children || <NoData />}
         </Grid>

@@ -149,7 +149,11 @@ const RoomCard: FC<{ data: IViewRoom; onlyInfo?: boolean }> = ({
           )}
           <IconText
             icon={
-              <LockIcon sx={{ color: data.physControl ? "green" : "grey" }} />
+              <LockIcon
+                sx={{
+                  color: data.physControl ? "green" : "grey",
+                }}
+              />
             }
             text={
               data.physControl

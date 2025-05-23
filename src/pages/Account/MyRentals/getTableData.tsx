@@ -11,7 +11,7 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 export const getTableData = (
   data: IViewRent[],
   handleNavigate: (id: string) => void,
-  handleRejectRent: (id: string) => void
+  handleRejectRent: (id: string) => void,
 ) => {
   return {
     header: [
@@ -51,7 +51,12 @@ export const getTableData = (
                       color: "primary.white",
                     }}
                   >
-                    <ErrorOutlineIcon sx={{ width: "35px", height: "35px" }} />
+                    <ErrorOutlineIcon
+                      sx={{
+                        width: "35px",
+                        height: "35px",
+                      }}
+                    />
                   </IconButton>
                 </Tooltip>
               </Stack>
@@ -72,7 +77,12 @@ export const getTableData = (
                         color: "primary.white",
                       }}
                     >
-                      <ClearIcon sx={{ width: "35px", height: "35px" }} />
+                      <ClearIcon
+                        sx={{
+                          width: "35px",
+                          height: "35px",
+                        }}
+                      />
                     </IconButton>
                   </span>
                 </Tooltip>

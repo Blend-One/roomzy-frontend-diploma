@@ -65,7 +65,8 @@ const Registration = () => {
                 icon={<ErrorOutlineIcon fontSize="inherit" />}
                 severity="error"
               >
-                {getResponseCompare((error as IResponseError).data.message) ?? "Unexpected error"}
+                {getResponseCompare((error as IResponseError).data.message) ??
+                  "Unexpected error"}
               </Alert>
             )}
             <Button

@@ -2,7 +2,7 @@ import { IRoomTypes } from "../../../types/roomTypes";
 
 export const getTableData = (
   data: IRoomTypes[],
-  handleNavigate: (id: string) => void
+  handleNavigate: (id: string) => void,
 ) => {
   return {
     header: [{ name: "Название" }],

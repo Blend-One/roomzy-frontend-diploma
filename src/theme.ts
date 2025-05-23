@@ -24,7 +24,7 @@ const theme = createTheme(
     },
     cssVariables: true,
   },
-  ruRU
+  ruRU,
 );
 
 export default theme;

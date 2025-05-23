@@ -24,5 +24,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </YMaps>
       </Provider>
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

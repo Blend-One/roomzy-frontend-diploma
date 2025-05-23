@@ -111,14 +111,18 @@ const FileFieldCustom: React.FC<FileFieldProps> = ({ name }) => {
           setPreviews((prev) => prev.filter((p) => p.id !== id));
 
           const updatedFiles = value.filter(
-            (file: File) => file !== previewToRemove.file
+            (file: File) => file !== previewToRemove.file,
           );
           onChange(updatedFiles);
         };
 
         return (
           <Box
-            sx={{ border: "1px dashed gray", padding: 3, borderRadius: 2 }}
+            sx={{
+              border: "1px dashed gray",
+              padding: 3,
+              borderRadius: 2,
+            }}
             {...getRootProps()}
           >
             <input

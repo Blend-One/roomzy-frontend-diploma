@@ -9,12 +9,12 @@ const headerSx: SxProps<Theme> = (theme) => ({
   padding: theme.spacing(2, 8),
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(2, 2),
-  }
+  },
 });
 
 const Header = () => {
   const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("md")
+    theme.breakpoints.down("md"),
   );
 
   return (

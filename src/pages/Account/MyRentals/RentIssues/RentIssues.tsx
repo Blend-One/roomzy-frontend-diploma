@@ -13,9 +13,13 @@ const RentIssues = () => {
         <Grid2 marginTop={6} spacing={2} container>
           {data.map((row) => (
             <Grid2 key={row.id}>
-              <Card >
+              <Card>
                 <CardMedia
-                  sx={{ width: "500px", height: "300px", objectFit: "cover" }}
+                  sx={{
+                    width: "500px",
+                    height: "300px",
+                    objectFit: "cover",
+                  }}
                   image={`https://roomzy.danielkaziev.com/api/images/rooms/controversial_issues/${row.imageId}`}
                   title={row.id}
                 />
@@ -27,7 +31,7 @@ const RentIssues = () => {
               </Card>
             </Grid2>
           ))}
-                {/* <Grid2 size={{ xs: 12 }}>
+          {/* <Grid2 size={{ xs: 12 }}>
                   <Stack direction="row" justifyContent="flex-end" spacing={2}>
                     <Button
                       onClick={handleRejectRentByLandlord}

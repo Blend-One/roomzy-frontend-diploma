@@ -146,7 +146,9 @@ const Publication = () => {
                   Локация: {data?.city.name}, {data?.district.name}
                 </Typography>
                 <Typography>
-                  {t("I18N_SPACE_SQUARE", { square: data?.square })}
+                  {t("I18N_SPACE_SQUARE", {
+                    square: data?.square,
+                  })}
                 </Typography>
                 {/* TODO: GET floors number */}
                 {/* <Typography>
