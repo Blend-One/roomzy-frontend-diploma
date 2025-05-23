@@ -24,7 +24,7 @@ export const dictionariesApi = createApi({
     >({
       query: ({ cityId, ...data }: IDictionaryListWithId) => {
         const queryParams = new URLSearchParams(
-          Object.entries(data) as string[][]
+          Object.entries(data) as string[][],
         );
         return {
           url: `${ENDPOINT}/districts/${cityId}?${queryParams.toString()}`,

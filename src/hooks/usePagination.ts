@@ -4,7 +4,6 @@ import { IPaginatedList } from "../types/pagination";
 // TODO: Implement a better pagination
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const usePagination = <T>(data: IPaginatedList<T>) => {
-  
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [pageNumber, setPageNumber] = useState<number>(1);
 
@@ -15,7 +14,7 @@ const usePagination = <T>(data: IPaginatedList<T>) => {
   //   setTotalPages(data?.pages || 1);
   // }, [data?.pages]);
   console.log(data);
-  
+
   useEffect(() => {
     if (itemsPerPage !== prevSize) {
       setPrevSize(itemsPerPage);
@@ -27,9 +26,7 @@ const usePagination = <T>(data: IPaginatedList<T>) => {
     setPageNumber(newPage + 1);
   };
 
-  const handleChangeRowsPerPage = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
     setItemsPerPage(+event.target.value);
     setTotalPages(1);
     setPageNumber(1);

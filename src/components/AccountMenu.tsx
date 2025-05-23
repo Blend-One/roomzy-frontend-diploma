@@ -11,7 +11,7 @@ import PublicationsIcon from "@mui/icons-material/Description";
 import RentalsIcon from "@mui/icons-material/LocalOffer";
 import GavelIcon from "@mui/icons-material/Gavel";
 import BedroomParentIcon from "@mui/icons-material/BedroomParent";
-import SingleBedIcon from '@mui/icons-material/SingleBed';
+import SingleBedIcon from "@mui/icons-material/SingleBed";
 
 import useHasRole from "../hooks/useHasRole";
 import AppConfig from "../config";

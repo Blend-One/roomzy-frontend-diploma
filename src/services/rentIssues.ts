@@ -8,7 +8,7 @@ export const rentIssues = createApi({
   reducerPath: "rentIssues",
   baseQuery: baseAppQuery,
   endpoints: (builder) => ({
-    getRentIssuesList: builder.query<IRentIssues[], { rentId: string}>({
+    getRentIssuesList: builder.query<IRentIssues[], { rentId: string }>({
       query: (data) => {
         return {
           url: `${ENDPOINT}/rooms/${data.rentId}`,
@@ -24,7 +24,7 @@ export const rentIssues = createApi({
             method: "GET",
           };
         },
-      }
+      },
     ),
     postIssues: builder.mutation<IRentIssues[], { data: FormData; id: string }>(
       {
@@ -35,18 +35,16 @@ export const rentIssues = createApi({
             body: data.data,
           };
         },
-      }
+      },
     ),
-    getModerations: builder.query<IModerationsIssues[], void>(
-      {
-        query: () => {
-          return {
-            url: `${ENDPOINT}/moderation?page=1&limit=100`,
-            method: "GET",
-          };
-        },
-      }
-    ),
+    getModerations: builder.query<IModerationsIssues[], void>({
+      query: () => {
+        return {
+          url: `${ENDPOINT}/moderation?page=1&limit=100`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -54,7 +52,7 @@ export const {
   useGetRentIssuesListQuery,
   useGetRentIssuesByRoomIdListQuery,
   usePostIssuesMutation,
-  useGetModerationsQuery
+  useGetModerationsQuery,
 } = rentIssues;
 
 export default rentIssues;

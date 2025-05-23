@@ -11,7 +11,7 @@ export const getTableData = (
   data: IViewRent[],
   handleNavigate: (id: string) => void,
   handleApproveRent: (id: string) => void,
-  handleRejectRent: (id: string) => void
+  handleRejectRent: (id: string) => void,
 ): ITable => {
   return {
     header: [
@@ -51,7 +51,12 @@ export const getTableData = (
                           color: "primary.white",
                         }}
                       >
-                        <DoneIcon sx={{ width: "35px", height: "35px" }} />
+                        <DoneIcon
+                          sx={{
+                            width: "35px",
+                            height: "35px",
+                          }}
+                        />
                       </IconButton>
                     </Tooltip>
                   </Stack>
@@ -70,7 +75,12 @@ export const getTableData = (
                           color: "primary.white",
                         }}
                       >
-                        <ClearIcon sx={{ width: "35px", height: "35px" }} />
+                        <ClearIcon
+                          sx={{
+                            width: "35px",
+                            height: "35px",
+                          }}
+                        />
                       </IconButton>
                     </Tooltip>
                   </Stack>

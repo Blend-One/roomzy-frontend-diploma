@@ -21,7 +21,7 @@ const RouteAuthProvider = () => {
         },
       ]),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isAuthenticated]
+    [isAuthenticated],
   );
 
   useEffect(() => {

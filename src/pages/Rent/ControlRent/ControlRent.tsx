@@ -60,7 +60,7 @@ const ControlRent = () => {
   const [updateRentStatus, { isSuccess }] = useUpdateRentStatusMutation();
   const { data: doc } = useGetDocumentByRentIdQuery(
     { rentId: rent?.id ?? "" },
-    { skip: !rent?.id }
+    { skip: !rent?.id },
   );
   const [postCheckout, { isLoading }] = useCreateCheckoutMutation();
 

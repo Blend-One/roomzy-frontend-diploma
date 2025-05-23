@@ -109,7 +109,7 @@ const Rent = () => {
         setDateCount(countGet);
 
         setAdditionalInfo(
-          `Аренда начнётся с ${startDate} и закончится ${endDate}!`
+          `Аренда начнётся с ${startDate} и закончится ${endDate}!`,
         );
         return;
       }
@@ -129,8 +129,8 @@ const Rent = () => {
 
         setAdditionalInfo(
           `Аренда начнётся с ${fromDate.format(
-            "DD.MM.YYYY HH:mm"
-          )} и закончится ${toDate.format("DD.MM.YYYY HH:mm")}`
+            "DD.MM.YYYY HH:mm",
+          )} и закончится ${toDate.format("DD.MM.YYYY HH:mm")}`,
         );
       }
     }

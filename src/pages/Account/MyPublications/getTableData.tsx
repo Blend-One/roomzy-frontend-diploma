@@ -8,7 +8,7 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
 export const getTableData = (
   data: IViewRoom[],
-  handleNavigate: (id: string) => void
+  handleNavigate: (id: string) => void,
 ): ITable => {
   return {
     header: [
@@ -36,7 +36,7 @@ export const getTableData = (
                     onClick={(event) => {
                       event.stopPropagation();
                       handleNavigate(
-                        `/rent/${room.id}/requests?roomName=${room.title}`
+                        `/rent/${room.id}/requests?roomName=${room.title}`,
                       );
                     }}
                     sx={{
@@ -47,7 +47,10 @@ export const getTableData = (
                     }}
                   >
                     <SupervisedUserCircleIcon
-                      sx={{ width: "35px", height: "35px" }}
+                      sx={{
+                        width: "35px",
+                        height: "35px",
+                      }}
                     />
                   </IconButton>
                 </Tooltip>
@@ -67,7 +70,12 @@ export const getTableData = (
                       color: "primary.white",
                     }}
                   >
-                    <ErrorOutlineIcon sx={{ width: "35px", height: "35px" }} />
+                    <ErrorOutlineIcon
+                      sx={{
+                        width: "35px",
+                        height: "35px",
+                      }}
+                    />
                   </IconButton>
                 </Tooltip>
               </Stack>

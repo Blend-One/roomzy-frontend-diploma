@@ -21,7 +21,7 @@ const DistrictsField: React.FC<IDistrictsFieldProps> = ({
       page: 1,
       limit: 100,
     },
-    { skip: !city }
+    { skip: !city },
   );
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const DistrictsField: React.FC<IDistrictsFieldProps> = ({
 
   const districts = useMemo(
     () => data?.map((item) => ({ value: item.id, title: item.name })),
-    [data]
+    [data],
   );
 
   return (
