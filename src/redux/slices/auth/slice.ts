@@ -13,7 +13,7 @@ const clearTokenStateReducer = (state: IAuthState) => {
 
 const writeTokenReducer = (
   state: IAuthState,
-  { payload }: { payload: IToken }
+  { payload }: { payload: IToken },
 ) => {
   const token = getTokenData(payload.accessToken);
 
@@ -27,7 +27,7 @@ const writeTokenReducer = (
 
 const setRedirectPathReducer = (
   state: IAuthState,
-  action: PayloadAction<string | null>
+  action: PayloadAction<string | null>,
 ) => {
   state.redirectPath = action.payload;
 };
@@ -46,11 +46,11 @@ export const slice = createSlice({
       .addMatcher(tokenApi.endpoints.refresh.matchFulfilled, writeTokenReducer)
       .addMatcher(
         tokenApi.endpoints.registration.matchFulfilled,
-        writeTokenReducer
+        writeTokenReducer,
       )
       .addMatcher(
         tokenApi.endpoints.logout.matchFulfilled,
-        clearTokenStateReducer
+        clearTokenStateReducer,
       );
   },
 });

@@ -37,7 +37,7 @@ function handleGeoResult(result: IGeocodeResult) {
 }
 
 function parseAddress(
-  address: string
+  address: string,
 ): { street: string; building: string } | null {
   const match = address.match(/^(.+?),\s*([\dА-Яа-я\-/]+)$/);
   if (!match) return null;

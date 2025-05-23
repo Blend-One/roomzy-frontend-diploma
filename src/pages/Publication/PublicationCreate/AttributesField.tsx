@@ -17,10 +17,10 @@ const AttributesField: FC<ISectionsBlockProps> = ({ name, targetField }) => {
       page: 1,
       limit: 1000,
     },
-    { refetchOnMountOrArgChange: true }
+    { refetchOnMountOrArgChange: true },
   );
   const attributesList = attributes?.find(
-    (item) => item.id === data?.value
+    (item) => item.id === data?.value,
   )?.attributes;
 
   const attributesData = attributesList?.map((item) => ({

@@ -27,7 +27,11 @@ const RentRequests = () => {
       });
     };
     const handleRejectRent = async (id: string) => {
-      await updateRentStatus({ id, status: "1REJECTED", role: "landlord" });
+      await updateRentStatus({
+        id,
+        status: "1REJECTED",
+        role: "landlord",
+      });
     };
 
     if (data?.length) {
@@ -41,13 +45,13 @@ const RentRequests = () => {
 
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);

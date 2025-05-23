@@ -22,7 +22,7 @@ const Main = () => {
       limit: 10,
       ...params,
     },
-    { refetchOnMountOrArgChange: true }
+    { refetchOnMountOrArgChange: true },
   );
 
   const formMethods = useForm({
@@ -47,7 +47,7 @@ const Main = () => {
   const onSubmit = (data: { [s: string]: unknown } | ArrayLike<unknown>) => {
     const filteredData = Object.fromEntries(
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      Object.entries(data).filter(([_, value]) => value !== "")
+      Object.entries(data).filter(([_, value]) => value !== ""),
     );
     const PAYLOAD: typeof data = {};
     if (filteredData.title) {

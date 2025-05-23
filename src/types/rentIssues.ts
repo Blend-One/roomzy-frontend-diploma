@@ -1,6 +1,6 @@
 export interface IModerationsIssues {
   controversialIssues: IRentIssues[];
-  rentId:              string;
+  rentId: string;
 }
 export interface IRentIssues {
   id: string;

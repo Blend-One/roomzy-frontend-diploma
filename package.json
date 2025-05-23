@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"src/**/*.ts\" \"src/**/*.tsx\" --fix",
     "test": "jest",
-    "lint": "eslint .",
     "preview": "vite preview"
   },
   "jest": {
@@ -48,11 +49,12 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.19.0",
+    "eslint": "^9.27.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
     "jest": "^29.7.0",
+    "prettier": "^3.5.3",
     "ts-jest": "^29.3.4",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.22.0",

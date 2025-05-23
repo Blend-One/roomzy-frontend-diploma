@@ -71,6 +71,7 @@ export const rentApi = createApi({
         };
       },
     }),
+
     createCheckout: builder.mutation<
       ICreateCheckoutResponse,
       { rentId: string }

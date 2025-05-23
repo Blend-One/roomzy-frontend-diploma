@@ -31,7 +31,9 @@ const baseAppQueryWithReauth: BaseQueryFn<
   let result = await baseAppQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 401) {
-    const isRefreshing = api.getState() as { auth: { isRefreshing: boolean } };
+    const isRefreshing = api.getState() as {
+      auth: { isRefreshing: boolean };
+    };
 
     if (isRefreshing.auth.isRefreshing) {
       return result;
@@ -44,7 +46,7 @@ const baseAppQueryWithReauth: BaseQueryFn<
         method: "GET",
       },
       api,
-      extraOptions
+      extraOptions,
     );
 
     if (refreshResult.error && result.error.status === 401) {

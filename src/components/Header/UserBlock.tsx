@@ -46,7 +46,11 @@ const UserBlock = ({ isMobile }: { isMobile: boolean }) => {
   };
 
   const DrawerList = (
-    <Box sx={{ width: 300, mt: 1 }} role="presentation" onClick={toggleDrawer(false)}>
+    <Box
+      sx={{ width: 300, mt: 1 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+    >
       {!isAuthenticated && (
         <List>
           <ListItem disablePadding>
@@ -111,7 +115,7 @@ const UserBlock = ({ isMobile }: { isMobile: boolean }) => {
         <IconButton aria-label="menu" onClick={toggleDrawer(true)}>
           <MenuIcon fontSize="large" sx={{ color: "white" }} />
         </IconButton>
-        <Drawer open={open} anchor="right"  onClose={toggleDrawer(false)}>
+        <Drawer open={open} anchor="right" onClose={toggleDrawer(false)}>
           {DrawerList}
         </Drawer>
       </>
@@ -123,7 +127,9 @@ const UserBlock = ({ isMobile }: { isMobile: boolean }) => {
       {data && isAuthenticated && (
         <CustomTitle
           link="/account"
-          text={t("I18N_USER_HELLO", { name: getUserFullNameOrEmail(data) })}
+          text={t("I18N_USER_HELLO", {
+            name: getUserFullNameOrEmail(data),
+          })}
         />
       )}
       <LanguageSwitcher />
