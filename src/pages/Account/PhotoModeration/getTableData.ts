@@ -16,7 +16,7 @@ export const getTableData = (
           ),
         },
       ],
-      clickAction: () => handleNavigate(`/rent/${room.rentId}/issues`),
+      clickAction: () => handleNavigate(`/rent/${room.rentId}/moderator/issues`),
     })),
   };
 };
