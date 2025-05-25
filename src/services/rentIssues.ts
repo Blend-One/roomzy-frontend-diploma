@@ -16,6 +16,14 @@ export const rentIssues = createApi({
         };
       },
     }),
+    getRentIssuesModeratorList: builder.query<IRentIssues[], { rentId: string }>({
+      query: () => {
+        return {
+          url: `${ENDPOINT}/moderation`,
+          method: "GET",
+        };
+      },
+    }),
     getRentIssuesByRoomIdList: builder.query<IRentIssues[], { rentId: string }>(
       {
         query: (data) => {
@@ -52,6 +60,7 @@ export const {
   useGetRentIssuesListQuery,
   useGetRentIssuesByRoomIdListQuery,
   usePostIssuesMutation,
+  useGetRentIssuesModeratorListQuery,
   useGetModerationsQuery,
 } = rentIssues;
 

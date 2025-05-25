@@ -2,6 +2,7 @@ import { Card, CardContent, CardMedia, Grid2, Typography } from "@mui/material";
 import { useParams } from "react-router";
 import Page from "../../../../components/Page";
 import { useGetRentIssuesListQuery } from "../../../../services/rentIssues";
+import NoData from "../../../../components/NoData";
 
 const RentIssues = () => {
   const { id } = useParams();
@@ -9,6 +10,7 @@ const RentIssues = () => {
 
   return (
     <Page withPadding>
+      {!data && <NoData withBackButton/>}
       {data && (
         <Grid2 marginTop={6} spacing={2} container>
           {data.map((row) => (

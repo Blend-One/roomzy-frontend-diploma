@@ -1,12 +1,12 @@
 import { Card, CardContent, CardMedia, Grid2, Typography } from "@mui/material";
 import { useParams } from "react-router";
-import Page from "../../../../components/Page";
-import { useGetRentIssuesByRoomIdListQuery } from "../../../../services/rentIssues";
-import NoData from "../../../../components/NoData";
+import Page from "../../../components/Page";
+import { useGetRentIssuesModeratorListQuery } from "../../../services/rentIssues";
+import NoData from "../../../components/NoData";
 
-const RentIssues = () => {
+const ModerationsIssuse = () => {
   const { id } = useParams();
-  const { data } = useGetRentIssuesByRoomIdListQuery({ rentId: id ?? "" });
+  const { data } = useGetRentIssuesModeratorListQuery({ rentId: id ?? "" });
 
   return (
     <Page withPadding>
@@ -33,10 +33,28 @@ const RentIssues = () => {
               </Card>
             </Grid2>
           ))}
+          {/* <Grid2 size={{ xs: 12 }}>
+                  <Stack direction="row" justifyContent="flex-end" spacing={2}>
+                    <Button
+                      onClick={handleRejectRentByLandlord}
+                      variant="outlined"
+                      color="error"
+                    >
+                      Одобрить
+                    </Button>
+                    <Button
+                      onClick={handleRejectRentByLandlord}
+                      variant="outlined"
+                      color="error"
+                    >
+                      Отклонить
+                    </Button>
+                  </Stack>
+                </Grid2> */}
         </Grid2>
       )}
     </Page>
   );
 };
 
-export default RentIssues;
+export default ModerationsIssuse;
